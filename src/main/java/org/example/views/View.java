@@ -1,2 +1,4 @@
-package org.example.views;public class View {
+package org.example.views;
+
+public class View {
 }

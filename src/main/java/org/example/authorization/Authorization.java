@@ -1,2 +1,8 @@
-package org.example.autorization;public class Autorization {
+package org.example.authorization;
+
+public class Authorization {
+
+    public Authorization() {
+
+    }
 }
