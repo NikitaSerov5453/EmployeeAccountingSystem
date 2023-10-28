@@ -1,10 +1,15 @@
 package org.example.operations;
 
+import org.example.campaigns.Campaign;
+import org.example.files.Serialized;
+
 import java.util.Scanner;
 
 public class Menu {
 
     private final Scanner scanner = new Scanner(System.in);
+    Operation operation = new Operation();
+    Campaign campaign;
 
     public Menu() {
 
@@ -24,72 +29,58 @@ public class Menu {
                 2: Редактировать кампанию
                 3: Загрузить кампанию""");
         switch (scanner.nextInt()) {
-            case 1 -> System.out.println("Создать кампанию");
+            case 1 -> createCompanyMenu();
             case 2 -> System.out.println("Редактировать кампанию");
-            case 3 -> System.out.println("Загрузить кампанию");
+            case 3 -> {
+                loadCampaign("Campaign1996181658");
+                mainMenu();
+            }
             default -> def();
         }
     }
 
-    public void controlDepartmentMenu() {
-        System.out.println("""
-                1: Создать отдел
-                2: Редактировать отдел
-                2: Удалить отдел""");
-        switch (scanner.nextInt()) {
-            case 1 -> System.out.println("Создать отдел");
-            case 2 -> System.out.println("Редактировать отдел");
-            case 3 -> System.out.println("Удалить отдел");
-            default -> def();
-        }
-    }
 
-    public void controlPostMenu() {
-        System.out.println("""
-                 1: Создать должность
-                 2: Редактировать должность
-                 2: Удалить должность""");
-        switch (scanner.nextInt()) {
-            case 1 -> System.out.println("Создать должность");
-            case 2 -> System.out.println("Редактировать должность");
-            case 3 -> System.out.println("Удалить должность");
-            default -> def();
-        }
-    }
-
-    public void controlEmployeeMenu() {
-        System.out.println("""
-                1: Создать сотрдуника
-                2: Редактировать сотрдуика
-                3: Удалить сотрудника""");
-        switch (scanner.nextInt()) {
-            case 1 -> System.out.println("Создать сотрдуника");
-            case 2 -> System.out.println("Редактировать сотрдуика");
-            case 3 -> System.out.println("Удалить сотрудника");
-            default -> def();
-        }
-    }
 
     public void createCompanyMenu() {
-        System.out.println("Укажите название кампании");
-        //метод создания названия кампании
-        System.out.println("Ваша кампания создана!");
+        System.out.println("Введите название кампании:");
+        scanner.nextLine();
+        String campaignName = scanner.nextLine();
+        operation.createCompany(campaignName);
+        System.out.println("Ваша кампания: " + campaignName + " создана\n");
+        mainMenu();
+    }
+
+    public void loadCampaign(String file) {
+        Serialized.deserialized(file);
     }
 
     public void createDepartmentMenu() {
         System.out.println("Введите название отдела");
-        //метод создания названия отдела
-        System.out.println("Отдел создан");
+        scanner.nextLine();
+        String departmentName = scanner.nextLine();
+        operation.createDepartment(departmentName);
+        System.out.println("Отдел: " + departmentName + " создан\n");
+        mainMenu();
     }
 
     public void createPostMenu() {
-        System.out.println("Введите название должности");
-        //метод создания названия должности
-        System.out.println("Должность создана");
+        System.out.println("Введите название должности:");
+        scanner.nextLine();
+        String postName = scanner.nextLine();
+        operation.createPost(postName);
+        System.out.println("Должность: " + postName + " создана\n");
+        mainMenu();
     }
 
     public void createEmployeeMenu() {
-
+        System.out.println("Введите фамилию сотрдуника:");
+        String surname = scanner.next();
+        System.out.println("Введите имя сотрудника:");
+        String name = scanner.next();
+        System.out.println("Введите отчество сотрдуника:");
+        String patronymic = scanner.next();
+        operation.createEmployee(surname, name, patronymic);
+        mainMenu();
     }
 
     public void editEmployeeMenu() {
@@ -102,6 +93,17 @@ public class Menu {
                 6: Изменить должность
                 7: Изменить руководителя
                 8: Изменить зарплату""");
+        switch (scanner.nextInt()) {
+            case 1 -> editFCsMenu();
+            case 2 -> System.out.println("Изменить дату рождения");
+            case 3 -> System.out.println("Изменить пол");
+            case 4 -> System.out.println("Изменить номер телефона");
+            case 5 -> System.out.println("Изменить отдел");
+            case 6 -> System.out.println("Изменить должность");
+            case 7 -> System.out.println("Изменить руководителя");
+            case 8 -> System.out.println("Изменить зарплату");
+            default -> def();
+         }
     }
 
     private void editFCsMenu() {
@@ -109,9 +111,97 @@ public class Menu {
                 1: Изменить фамилию
                 2: Изменить имя
                 3: Изменить отчество""");
+        switch (scanner.nextInt()) {
+            case 1 -> System.out.println("Изменить фамилию");
+            case 2 -> System.out.println("Изменить имя");
+            case 3 -> System.out.println("Изменить отчество");
+            default -> def();
+        }
     }
 
+    private void mainMenu() {
+        System.out.println("""
+                1: Отделы
+                2: Должности
+                3: Сотрдуники
+                4: Отчеты
+                5: Закрыть программу""");
+        switch (scanner.nextInt()) {
+            case 1 -> departmentMenu();
+            case 2 -> postMenu();
+            case 3 -> employeeMenu();
+            case 4 -> reportMenu();
+            case 5 -> System.out.println("Пока!");
+            default -> def();
+        }
+    }
 
+    private void departmentMenu() {
+        System.out.println("""
+                1: Список отделов
+                2: Создать отдел
+                3: Редактировать отдел
+                4: Удалить отдел
+                5: Назад
+                """);
+        switch (scanner.nextInt()) {
+            case 1 -> System.out.println();
+            case 2 -> System.out.println("Создать отдел");
+            case 3 -> System.out.println("Редактировать отдел");
+            case 4 -> System.out.println("Удалить отдел");
+            case 5 -> mainMenu();
+            default -> def();
+        }
+    }
 
+    private void postMenu() {
+        System.out.println("""
+                1: Список должностей
+                2: Создать должность
+                3: Редактировать должность
+                4: Удалить должность
+                5: Назад
+                """);
+        switch (scanner.nextInt()) {
+            case 1 -> System.out.println("Список должностей");
+            case 2 -> System.out.println("Создать должность");
+            case 3 -> System.out.println("Редактировать должность");
+            case 4 -> System.out.println("Удалить должность");
+            case 5 -> mainMenu();
+            default -> def();
+        }
+    }
+    private void employeeMenu() {
+        System.out.println("""
+                1: Список сотрдуников
+                2: Создать сотрдуника
+                3: Редактировать сотрдуика
+                4: Удалить сотрудника
+                5: Назад""");
+        switch (scanner.nextInt()) {
+            case 1 -> System.out.println("Список сотрдуников");
+            case 2 -> createEmployeeMenu();
+            case 3 -> editEmployeeMenu();
+            case 4 -> System.out.println("Удалить сотрудника");
+            case 5 -> mainMenu();
+            default -> def();
+        }
+    }
 
+    private void reportMenu() {
+        System.out.println("""
+                1: Структура организации(Отдел, Руководитель)
+                2: Средняя зарплата(По органицации|По отделам)
+                3: Топ 10 самых дорогох сотрудников по ЗП
+                4: Топ 10 самых преданных сотрдуников по кол-ву лет в фирме
+                5: Назад""");
+        switch (scanner.nextInt()) {
+            case 1 -> System.out.println("Структура организации");
+            case 2 -> System.out.println("Средняя зарплата");
+            case 3 -> System.out.println("Топ 10 самых дорогох сотрудников");
+            case 4 -> System.out.println("Топ 10 самых преданных сотрдуников");
+            case 5 -> mainMenu();
+            default -> def();
+        }
+    }
 }

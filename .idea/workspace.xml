@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd20dbe1-f380-448a-9770-96bdb61e70e1" name="Changes" comment="">
+    <list default="true" id="fd20dbe1-f380-448a-9770-96bdb61e70e1" name="Changes" comment="1">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Campaign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/files/Serialized.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/authorization/Authorization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/authorization/Authorization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaign/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaign/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaign/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaign/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaign/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaign/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaign/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaign/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Department.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaign/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/files/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/files/File.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/humans/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/humans/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Operation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Search.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/views/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/views/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +48,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/dante5453/Downloads/file"
+    "last_opened_file_path": "C:/Users/dante5453/Downloads/PrFile",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -63,6 +63,14 @@
       <option name="presentableId" value="Default" />
       <updated>1696719239783</updated>
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1698233097357</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698233097358</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -75,5 +83,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>

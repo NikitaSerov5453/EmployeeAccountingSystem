@@ -1,4 +1,4 @@
-package org.example.campaign;
+package org.example.campaigns;
 
 import java.io.Serializable;
 

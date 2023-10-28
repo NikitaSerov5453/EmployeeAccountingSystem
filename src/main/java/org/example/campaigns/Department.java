@@ -1,4 +1,4 @@
-package org.example.campaign;
+package org.example.campaigns;
 
 import org.example.humans.Employee;
 
@@ -9,6 +9,8 @@ import java.util.List;
 public class Department implements Serializable {
 
     private String departmentName;
+
+    private Employee chief;
     private int departmentID;
     private final int numberCreation;
 
@@ -28,4 +30,21 @@ public class Department implements Serializable {
         Department.employee.add(employee);
     }
 
+    public Employee getChief() {
+        return chief;
+    }
+
+    public void setChief(Employee chief) {
+        this.chief = chief;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "departmentName='" + departmentName + '\'' +
+                ", chief=" + chief +
+                ", departmentID=" + departmentID +
+                ", numberCreation=" + numberCreation +
+                '}';
+    }
 }

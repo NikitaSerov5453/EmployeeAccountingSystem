@@ -1,7 +1,7 @@
 package org.example.humans;
 
-import org.example.campaign.Department;
-import org.example.campaign.Post;
+import org.example.campaigns.Department;
+import org.example.campaigns.Post;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,7 +11,6 @@ public class Employee implements Serializable {
     private String surname;
     private String name;
     private String patronymic;
-    private String FCs = surname + " " + name + " " + patronymic;
     private LocalDate dateOfBirth;
     private String gender;
     private String telephoneNumber;
@@ -20,15 +19,15 @@ public class Employee implements Serializable {
     private Employee chief;
     private LocalDate dateOfEmployment;
     private int salary;
-    private int employeeID;
-    private final int numberCreation;
+    private final  int employeeID;
+    private static int numberCreation;
 
     public Employee(String surname, String name, String patronymic) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
-        employeeID++;
-        this.numberCreation = employeeID;
+        numberCreation++;
+        this.employeeID = numberCreation;
     }
 
     public int getNumberCreation() {
@@ -57,14 +56,6 @@ public class Employee implements Serializable {
 
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
-    }
-
-    public String getFCs() {
-        return FCs;
-    }
-
-    public void setFCs(String FCs) {
-        this.FCs = FCs;
     }
 
     public LocalDate getDateOfBirth() {
@@ -129,5 +120,21 @@ public class Employee implements Serializable {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "\nFCs='" + surname + " " + name + " " + patronymic + '\'' +
+                "\ndateOfBirth=" + dateOfBirth +
+                "\ngender='" + gender + '\'' +
+                "\ntelephoneNumber='" + telephoneNumber + '\'' +
+                "\npost=" + post +
+                "\ndepartment=" + department +
+                "\nchief=" + chief +
+                "\ndateOfEmployment=" + dateOfEmployment +
+                "\nsalary=" + salary +
+                "\nemployeeID=" + employeeID +
+                "}\n";
     }
 }
