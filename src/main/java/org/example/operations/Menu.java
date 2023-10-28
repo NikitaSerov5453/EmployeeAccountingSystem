@@ -29,10 +29,15 @@ public class Menu {
                 2: Редактировать кампанию
                 3: Загрузить кампанию""");
         switch (scanner.nextInt()) {
-            case 1 -> createCompanyMenu();
-            case 2 -> System.out.println("Редактировать кампанию");
+            case 1 -> {
+                operation.createCompany();
+                mainMenu();
+            }
+            case 2 -> {
+                System.out.println("Редактировать кампанию");
+            }
             case 3 -> {
-                loadCampaign("Campaign1996181658");
+                operation.loadCampaign("1521645586");
                 mainMenu();
             }
             default -> def();
@@ -41,18 +46,9 @@ public class Menu {
 
 
 
-    public void createCompanyMenu() {
-        System.out.println("Введите название кампании:");
-        scanner.nextLine();
-        String campaignName = scanner.nextLine();
-        operation.createCompany(campaignName);
-        System.out.println("Ваша кампания: " + campaignName + " создана\n");
-        mainMenu();
-    }
 
-    public void loadCampaign(String file) {
-        Serialized.deserialized(file);
-    }
+
+
 
     public void createDepartmentMenu() {
         System.out.println("Введите название отдела");

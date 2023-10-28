@@ -4,11 +4,13 @@ import org.example.campaigns.Department;
 import org.example.campaigns.Post;
 import org.example.campaigns.Campaign;
 import org.example.files.File;
+import org.example.files.Serialized;
 import org.example.humans.Employee;
 
-public class Operation {
+import java.util.Scanner;
 
-    File file = new File();
+public class Operation {
+    private final Scanner scanner = new Scanner(System.in);
 
     public Operation() {
 
@@ -34,10 +36,16 @@ public class Operation {
         return new Post(namePost);
     }
 
-    public Campaign createCompany(String companyName) {
-        Campaign campaign = new Campaign(companyName);
-        file.setCampaign(campaign);
-        return campaign;
+    public void createCompany() {
+        System.out.println("Введите название кампании:");
+        String campaignName = scanner.nextLine();
+        Campaign campaign = new Campaign(campaignName);
+        Serialized.serialized(campaign, campaignName + campaign.hashCode());
+        System.out.println("Ваша кампания: " + campaignName + " создана\n");
+    }
+
+    public void loadCampaign(String file) {
+        Serialized.deserialized(file);
     }
 
 }
