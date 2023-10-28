@@ -19,7 +19,7 @@ public class Employee implements Serializable {
     private Employee chief;
     private LocalDate dateOfEmployment;
     private int salary;
-    private final  int employeeID;
+    private final int employeeID;
     private static int numberCreation;
 
     public Employee(String surname, String name, String patronymic) {
@@ -124,17 +124,17 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "\nFCs='" + surname + " " + name + " " + patronymic + '\'' +
-                "\ndateOfBirth=" + dateOfBirth +
-                "\ngender='" + gender + '\'' +
-                "\ntelephoneNumber='" + telephoneNumber + '\'' +
-                "\npost=" + post +
-                "\ndepartment=" + department +
-                "\nchief=" + chief +
-                "\ndateOfEmployment=" + dateOfEmployment +
-                "\nsalary=" + salary +
-                "\nemployeeID=" + employeeID +
-                "}\n";
+        return "\nСотрудник: " +
+                "\nФИО: " + surname + " " + name + " " + patronymic +
+                "\nДата рождения: " + dateOfBirth +
+                "\nПол: " + gender +
+                "\nНомер телефона: " + telephoneNumber +
+                "\nДолжность: " + post +
+                "\nОтдел: " + department +
+                "\nРуководитель: " + chief +
+                "\nДата трудоустройства: " + dateOfEmployment +
+                "\nЗаработная плата: " + salary +
+                "\nID Сотрдуника: " + employeeID +
+                "\n";
     }
 }

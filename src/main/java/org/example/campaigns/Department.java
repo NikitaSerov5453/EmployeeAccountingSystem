@@ -8,18 +8,18 @@ import java.util.List;
 
 public class Department implements Serializable {
 
-    private String departmentName;
+    private final String departmentName;
 
     private Employee chief;
-    private int departmentID;
-    private final int numberCreation;
+    private final int departmentID;
+    private static int numberCreation;
 
-    private static final List<Employee> employee = new ArrayList<>();
+    private final List<Employee> employee = new ArrayList<>();
 
     public Department(String departmentName) {
-        departmentID++;
+        numberCreation++;
         this.departmentName = departmentName;
-        this.numberCreation = departmentID;
+        this.departmentID = numberCreation;
     }
 
     public int getNumberCreation() {
@@ -27,7 +27,7 @@ public class Department implements Serializable {
     }
 
     public void setEmployee(Employee employee) {
-        Department.employee.add(employee);
+        this.employee.add(employee);
     }
 
     public Employee getChief() {
@@ -40,11 +40,8 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "departmentName='" + departmentName + '\'' +
-                ", chief=" + chief +
-                ", departmentID=" + departmentID +
-                ", numberCreation=" + numberCreation +
-                '}';
+        return "\nОтдел: " + departmentName +
+                "\nРуководитель: " + chief +
+                "\nНомер отдела: " + departmentID + '\n';
     }
 }

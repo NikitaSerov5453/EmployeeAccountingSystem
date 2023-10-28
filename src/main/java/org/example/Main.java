@@ -17,13 +17,18 @@ public class Main {
 //        System.out.println(employee1);
 //        System.out.println(employee2);
         Department department = new Department("Начальство");
+        Department department1 = new Department("Бугалтерия");
         Campaign campaign = new Campaign("Camp");
-        campaign.data.addDepartments((department));
+        campaign.data.addDepartments(department);
+        campaign.data.addDepartments(department1);
+        campaign.data.addEmployee(employee);
+        campaign.data.addEmployee(employee1);
+        campaign.data.addEmployee(employee2);
         Campaign campaign1;
         Serialized.serialized(campaign, "Campaign");
         campaign1 = (Campaign) Serialized.deserialized("Campaign");
 //        System.out.println(campaign1);
 //        System.out.println(campaign1.getDepartments());
-        System.out.println(campaign1.data.getDepartments().get(0).getChief());
+        System.out.println(campaign.data.getEmployee());
     }
 }
