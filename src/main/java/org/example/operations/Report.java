@@ -12,6 +12,14 @@ public class Report implements Serializable {
 
     }
 
+    public void posts() {
+
+    }
+
+    public void employees() {
+
+    }
+
     public void averageSalary() {
 
     }

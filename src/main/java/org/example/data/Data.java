@@ -1,8 +1,8 @@
 package org.example.data;
 
 import org.example.campaigns.Department;
+import org.example.campaigns.Employee;
 import org.example.campaigns.Post;
-import org.example.humans.Employee;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +20,10 @@ public class Data implements Serializable {
 
     public void addDepartments(Department department) {
         this.departments.add(department);
+    }
+
+    public void deleteDepartment(int index) {
+        this.departments.remove(index);
     }
 
     public List<Department> getDepartments() {

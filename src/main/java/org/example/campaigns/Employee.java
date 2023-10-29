@@ -1,7 +1,4 @@
-package org.example.humans;
-
-import org.example.campaigns.Department;
-import org.example.campaigns.Post;
+package org.example.campaigns;
 
 import java.io.Serializable;
 import java.time.LocalDate;

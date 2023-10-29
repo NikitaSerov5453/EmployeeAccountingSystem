@@ -1,18 +1,16 @@
 package org.example.campaigns;
 
-import org.example.humans.Employee;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Department implements Serializable {
 
-    private final String departmentName;
-
-    private Employee chief;
     private final int departmentID;
     private static int numberCreation;
+    private String departmentName;
+    private Employee chief;
+
 
     private final List<Employee> employee = new ArrayList<>();
 
@@ -22,8 +20,8 @@ public class Department implements Serializable {
         this.departmentID = numberCreation;
     }
 
-    public int getNumberCreation() {
-        return numberCreation;
+    public int getDepartmentID() {
+        return departmentID;
     }
 
     public void setEmployee(Employee employee) {
@@ -36,6 +34,14 @@ public class Department implements Serializable {
 
     public void setChief(Employee chief) {
         this.chief = chief;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     @Override
