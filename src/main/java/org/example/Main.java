@@ -1,10 +1,6 @@
 package org.example;
 
-import org.example.campaigns.Department;
-import org.example.campaigns.Campaign;
-import org.example.files.Serialized;
-import org.example.humans.Employee;
-import org.example.operations.Menu;
+import org.example.views.Menu;
 
 public class Main {
     public static void main(String[] args) {

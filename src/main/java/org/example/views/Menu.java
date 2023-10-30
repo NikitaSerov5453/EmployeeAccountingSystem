@@ -8,14 +8,63 @@ import java.util.Scanner;
 public class Menu {
 
     private final Scanner scanner = new Scanner(System.in);
-    Operation operation = new Operation();
-    OperationEmployee operationEmployee = new OperationEmployee();
-    OperationDepartment operationDepartment = new OperationDepartment();
-    OperationPost operationPost = new OperationPost();
-    Report report = new Report();
+    private Operation operation = new Operation();
+    private OperationEmployee operationEmployee;
+    private OperationDepartment operationDepartment;
+    private OperationPost operationPost;
+    private Report report = new Report();
+    private Search search = new Search();
+    private Campaign campaign;
+
+
+
 
     public Menu() {
 
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public void setOperationEmployee(OperationEmployee operationEmployee) {
+        this.operationEmployee = operationEmployee;
+    }
+
+    public void setOperationDepartment(OperationDepartment operationDepartment) {
+        this.operationDepartment = operationDepartment;
+    }
+
+    public void setOperationPost(OperationPost operationPost) {
+        this.operationPost = operationPost;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public void setSearch(Search search) {
+        this.search = search;
+    }
+
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public OperationEmployee getOperationEmployee() {
+        return operationEmployee;
+    }
+
+    public OperationDepartment getOperationDepartment() {
+        return operationDepartment;
+    }
+
+    public OperationPost getOperationPost() {
+        return operationPost;
     }
 
     public void start() {
@@ -164,10 +213,12 @@ public class Menu {
                 departmentMenu();
             }
             case 2 -> {
-                operationDepartment.createDepartmentMenu();
+                System.out.println("Введите название отдела");
+                operationDepartment.createDepartment(scanner.nextLine());
+                System.out.println("Отдел создан!");
                 departmentMenu();
             }
-            case 5 -> mainMenu();
+            case 3 -> mainMenu();
             default -> {
                 def();
                 departmentMenu();
@@ -182,8 +233,9 @@ public class Menu {
                 3: Назад""");
         switch (scanner.nextInt()) {
             case 1 -> {
-                operationDepartment.editDepartment();
-                departmentMenu();
+                System.out.println("Введите id отдела который хотите отредактировать:");
+                operationDepartment.setDepartment(campaign.data.getDepartments().get(search.searchIndexDepartment(campaign.data.getDepartments(), scanner.nextInt())));
+                editDepartment();
             }
             case 2 -> {
                 operationDepartment.deleteDepartment();
@@ -204,11 +256,17 @@ public class Menu {
                 3: Назад""");
         switch (scanner.nextInt()) {
             case 1 -> {
+                System.out.println("Введите название отдела:");
                 operationDepartment.editDepartmentName(scanner.nextLine());
-                System.out.println("Название отдела изменено");
+                System.out.println("Название отдела изменено!");
                 editDepartment();
             }
-            case 2 -> operationDepartment.editDepartmentChief();
+            case 2 -> {
+                System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:");
+                operationDepartment.editDepartmentChief(scanner.nextInt());
+                System.out.println("Новый руководитель назначен!");
+                editDepartment();
+            }
             case 3 -> departmentEditMenu();
             default -> {
                 def();

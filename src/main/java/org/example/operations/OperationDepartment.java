@@ -15,32 +15,37 @@ public class OperationDepartment {
 
     }
 
-    private void createDepartment(String nameDepartment) {
-        campaign.data.addDepartments(new Department(nameDepartment));
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public void createDepartment(String nameDepartment) {
+        Department department = new Department(nameDepartment);
+        campaign.data.addDepartments(department);
     }
 
     public void deleteDepartment() {
         campaign.data.deleteDepartment(this.department.getDepartmentID() - 1);
     }
 
-    public void editDepartment() {
-
-    }
-
     public void editDepartmentName(String name) {
         this.department.setDepartmentName(name);
     }
 
-    public void editDepartmentChief() {
-
+    public void editDepartmentChief(int newChiefEmployeeID) {
+        this.department.setChief(department.getEmployee().get(newChiefEmployeeID));
     }
 
-    public void createDepartmentMenu() {
-        System.out.println("Введите название отдела");
-        scanner.nextLine();
-        String departmentName = scanner.nextLine();
-        createDepartment(departmentName);
-        System.out.println("Отдел: " + departmentName + " создан\n");
-
-    }
 }

@@ -28,6 +28,10 @@ public class Department implements Serializable {
         this.employee.add(employee);
     }
 
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
     public Employee getChief() {
         return chief;
     }
