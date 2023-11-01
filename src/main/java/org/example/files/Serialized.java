@@ -2,7 +2,7 @@ package org.example.files;
 
 import java.io.*;
 
-public class Serialized {
+public class Serialized implements Serializable{
 
     public Serialized() {
 

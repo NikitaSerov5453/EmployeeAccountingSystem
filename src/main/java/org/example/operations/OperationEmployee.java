@@ -3,9 +3,10 @@ package org.example.operations;
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Employee;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class OperationEmployee {
+public class OperationEmployee implements Serializable {
     private final Scanner scanner = new Scanner(System.in);
     private Campaign campaign;
 
@@ -13,8 +14,17 @@ public class OperationEmployee {
 
     }
 
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
+    }
+
     private void createEmployee(String surname, String name, String patronymic) {
-        campaign.data.addEmployee(new Employee(surname, name, patronymic));
+        Employee employee = new Employee(surname, name, patronymic);
+        campaign.data.addEmployee(employee);
     }
 
     public void deleteEmployee() {

@@ -50,8 +50,9 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return "\nОтдел: " + departmentName +
-                "\nРуководитель: " + chief +
-                "\nНомер отдела: " + departmentID + '\n';
+        return "\nНомер отдела: " + departmentID +
+                " Отдел: " + departmentName +
+                " Руководитель: " + chief;
+
     }
 }

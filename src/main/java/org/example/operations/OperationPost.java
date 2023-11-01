@@ -3,14 +3,23 @@ package org.example.operations;
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Post;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class OperationPost {
+public class OperationPost implements Serializable {
     private final Scanner scanner = new Scanner(System.in);
     private Campaign campaign;
 
     public OperationPost() {
 
+    }
+
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
     }
 
     private void createPost(String namePost) {
@@ -27,7 +36,6 @@ public class OperationPost {
 
     public void createPostMenu() {
         System.out.println("Введите название должности:");
-        scanner.nextLine();
         String postName = scanner.nextLine();
         createPost(postName);
         System.out.println("Должность: " + postName + " создана\n");

@@ -3,17 +3,14 @@ package org.example.views;
 import org.example.campaigns.Campaign;
 import org.example.operations.*;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu implements Serializable {
 
     private final Scanner scanner = new Scanner(System.in);
     private Operation operation = new Operation();
-    private OperationEmployee operationEmployee;
-    private OperationDepartment operationDepartment;
-    private OperationPost operationPost;
-    private Report report = new Report();
-    private Search search = new Search();
+
     private Campaign campaign;
 
 
@@ -27,45 +24,10 @@ public class Menu {
         this.operation = operation;
     }
 
-    public void setOperationEmployee(OperationEmployee operationEmployee) {
-        this.operationEmployee = operationEmployee;
-    }
-
-    public void setOperationDepartment(OperationDepartment operationDepartment) {
-        this.operationDepartment = operationDepartment;
-    }
-
-    public void setOperationPost(OperationPost operationPost) {
-        this.operationPost = operationPost;
-    }
-
-    public void setReport(Report report) {
-        this.report = report;
-    }
-
-    public void setSearch(Search search) {
-        this.search = search;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
-    }
-
     public Operation getOperation() {
         return operation;
     }
 
-    public OperationEmployee getOperationEmployee() {
-        return operationEmployee;
-    }
-
-    public OperationDepartment getOperationDepartment() {
-        return operationDepartment;
-    }
-
-    public OperationPost getOperationPost() {
-        return operationPost;
-    }
 
     public void start() {
         controlCompanyMenu();
@@ -82,7 +44,7 @@ public class Menu {
                 3: Загрузить кампанию""");
         switch (scanner.nextInt()) {
             case 1 -> {
-                operation.createCompany();
+                this.campaign = operation.createCompany();
                 mainMenu();
             }
             case 2 -> {
@@ -115,35 +77,35 @@ public class Menu {
         switch (scanner.nextInt()) {
             case 1 -> editFCsMenu();
             case 2 -> {
-                operationEmployee.editDateOfBirth();
+                operation.getOperationEmployee().editDateOfBirth();
                 editEmployeeMenu();
             }
             case 3 -> {
-                operationEmployee.editGender();
+                operation.getOperationEmployee().editGender();
                 editEmployeeMenu();
             }
             case 4 -> {
-                operationEmployee.editTelephoneNumber();
+                operation.getOperationEmployee().editTelephoneNumber();
                 editEmployeeMenu();
             }
             case 5 -> {
-                operationEmployee.editDepartment();
+                operation.getOperationEmployee().editDepartment();
                 editEmployeeMenu();
             }
             case 6 -> {
-                operationEmployee.editPost();
+                operation.getOperationEmployee().editPost();
                 editEmployeeMenu();
             }
             case 7 -> {
-                operationEmployee.editChief();
+                operation.getOperationEmployee().editChief();
                 editEmployeeMenu();
             }
             case 8 -> {
-                operationEmployee.editSalary();
+                operation.getOperationEmployee().editSalary();
                 editEmployeeMenu();
             }
             case 9 -> {
-                operationEmployee.deleteEmployee();
+                operation.getOperationEmployee().deleteEmployee();
                 employeeMenu();
             }
 
@@ -162,15 +124,15 @@ public class Menu {
                 4: Назад""");
         switch (scanner.nextInt()) {
             case 1 -> {
-                operationEmployee.editSurname();
+                operation.getOperationEmployee().editSurname();
                 editFCsMenu();
             }
             case 2 -> {
-                operationEmployee.editName();
+                operation.getOperationEmployee().editName();
                 editFCsMenu();
             }
             case 3 -> {
-                operationEmployee.editPatronymic();
+                operation.getOperationEmployee().editPatronymic();
                 editFCsMenu();
             }
             case 4 -> editEmployeeMenu();
@@ -209,12 +171,13 @@ public class Menu {
                 """);
         switch (scanner.nextInt()) {
             case 1 -> {
-                report.departments();
+                operation.getReport().departments();
                 departmentMenu();
             }
             case 2 -> {
                 System.out.println("Введите название отдела");
-                operationDepartment.createDepartment(scanner.nextLine());
+                scanner.nextLine();
+                operation.getOperationDepartment().createDepartment(scanner.nextLine());
                 System.out.println("Отдел создан!");
                 departmentMenu();
             }
@@ -234,11 +197,11 @@ public class Menu {
         switch (scanner.nextInt()) {
             case 1 -> {
                 System.out.println("Введите id отдела который хотите отредактировать:");
-                operationDepartment.setDepartment(campaign.data.getDepartments().get(search.searchIndexDepartment(campaign.data.getDepartments(), scanner.nextInt())));
+                operation.getOperationDepartment().setDepartment(campaign.data.getDepartments().get(operation.getSearch().searchIndexDepartment(campaign.data.getDepartments(), scanner.nextInt())));
                 editDepartment();
             }
             case 2 -> {
-                operationDepartment.deleteDepartment();
+                operation.getOperationDepartment().deleteDepartment();
                 departmentMenu();
             }
             case 3 -> departmentMenu();
@@ -257,13 +220,13 @@ public class Menu {
         switch (scanner.nextInt()) {
             case 1 -> {
                 System.out.println("Введите название отдела:");
-                operationDepartment.editDepartmentName(scanner.nextLine());
+                operation.getOperationDepartment().editDepartmentName(scanner.nextLine());
                 System.out.println("Название отдела изменено!");
                 editDepartment();
             }
             case 2 -> {
                 System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:");
-                operationDepartment.editDepartmentChief(scanner.nextInt());
+                operation.getOperationDepartment().editDepartmentChief(scanner.nextInt());
                 System.out.println("Новый руководитель назначен!");
                 editDepartment();
             }
@@ -283,11 +246,11 @@ public class Menu {
                 """);
         switch (scanner.nextInt()) {
             case 1 -> {
-                report.posts();
+                operation.getReport().posts();
                 postMenu();
             }
             case 2 -> {
-                operationPost.createPostMenu();
+                operation.getOperationPost().createPostMenu();
                 postMenu();
             }
             case 3 -> mainMenu();
@@ -305,11 +268,11 @@ public class Menu {
                 3: Назад""");
         switch (scanner.nextInt()) {
             case 1 -> {
-                operationPost.editPost();
+                operation.getOperationPost().editPost();
                 postMenu();
             }
             case 2 -> {
-                operationPost.deletePost();
+                operation.getOperationPost().deletePost();
                 postMenu();
             }
             case 3 -> postMenu();
@@ -327,10 +290,11 @@ public class Menu {
                 3: Назад""");
         switch (scanner.nextInt()) {
             case 1 -> {
-                report.employees();
+                operation.getReport().employees();
+                employeeMenu();
             }
             case 2 -> {
-                operationEmployee.createEmployeeMenu();
+                operation.getOperationEmployee().createEmployeeMenu();
                 employeeMenu();
             }
             case 3 -> mainMenu();
@@ -348,11 +312,11 @@ public class Menu {
                 3: Назад""");
         switch (scanner.nextInt()) {
             case 1 -> {
-                operationEmployee.editEmployee();
+                operation.getOperationEmployee().editEmployee();
                 employeeMenu();
             }
             case 2 -> {
-                operationEmployee.deleteEmployee();
+                operation.getOperationEmployee().deleteEmployee();
                 employeeMenu();
             }
             case 3 -> postMenu();

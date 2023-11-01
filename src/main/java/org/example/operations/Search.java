@@ -1,13 +1,25 @@
 package org.example.operations;
 
+import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Search {
+public class Search implements Serializable {
+
+    private Campaign campaign;
 
     public Search() {
 
+    }
+
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
     }
 
     public void searchEmployeeFCs() {

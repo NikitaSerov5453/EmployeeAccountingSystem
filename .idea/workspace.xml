@@ -7,9 +7,15 @@
     <list default="true" id="fd20dbe1-f380-448a-9770-96bdb61e70e1" name="Changes" comment="1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Campaign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Campaign.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Department.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/files/Serialized.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/files/Serialized.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Operation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationEmployee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Report.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Search.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/views/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/views/Menu.java" afterDir="false" />
     </list>
@@ -104,5 +110,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
     <option name="LAST_COMMIT_MESSAGE" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.NotSerializableException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

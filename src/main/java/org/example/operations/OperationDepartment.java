@@ -3,9 +3,10 @@ package org.example.operations;
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class OperationDepartment {
+public class OperationDepartment implements Serializable {
     private final Scanner scanner = new Scanner(System.in);
     private Campaign campaign;
     private Department department;

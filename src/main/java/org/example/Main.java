@@ -1,8 +1,12 @@
 package org.example;
 
+import org.example.campaigns.Campaign;
+import org.example.data.Data;
 import org.example.views.Menu;
 
-public class Main {
+import java.io.Serializable;
+
+public class Main implements Serializable {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.start();

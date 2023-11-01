@@ -1,15 +1,20 @@
 package org.example.campaigns;
 
 import org.example.data.Data;
+import org.example.operations.*;
+
 import java.io.Serializable;
 
 public class Campaign implements Serializable {
 
     private String campaignName;
 
+
     public Campaign(String campaignName) {
         this.campaignName = campaignName;
     }
+
+
     public Data data = new Data();
 
     public String getCampaignName() {

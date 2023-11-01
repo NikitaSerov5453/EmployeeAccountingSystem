@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Post implements Serializable {
 
+    private final int postID;
+    private static int numberCreation;
     private String postName;
-    private int postID;
-    private final int numberCreation;
 
     public Post(String postName) {
-        postID++;
+        numberCreation++;
         this.postName = postName;
-        this.numberCreation = postID;
+        this.postID = numberCreation;
     }
 
     public int getNumberCreation() {
@@ -24,5 +24,11 @@ public class Post implements Serializable {
 
     public void setPostName(String postName) {
         this.postName = postName;
+    }
+
+    @Override
+    public String toString() {
+        return "\nID Должности: " + postID +
+                " Должность: " + postName;
     }
 }
