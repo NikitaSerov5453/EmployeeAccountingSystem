@@ -10,11 +10,7 @@ public class Menu implements Serializable {
 
     private final Scanner scanner = new Scanner(System.in);
     private Operation operation = new Operation();
-
     private Campaign campaign;
-
-
-
 
     public Menu() {
 
