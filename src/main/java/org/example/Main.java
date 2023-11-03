@@ -1,6 +1,9 @@
 package org.example;
 
 import org.example.campaigns.Campaign;
+import org.example.campaigns.Department;
+import org.example.campaigns.Employee;
+import org.example.campaigns.Gender;
 import org.example.data.Data;
 import org.example.views.Menu;
 
@@ -10,13 +13,23 @@ public class Main implements Serializable {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.start();
-//        Employee employee = new Employee("Serov","Nikita","Andreevic");
+//        Department department = new Department("Начальство");
 //        Employee employee1 = new Employee("1", "1", "1");
+//        Employee employee = new Employee("Serov","Nikita","Andreevic");
+//        employee.setGender(Gender.MALE);
+//
+//        System.out.println(employee);
+
+
+
+
+//        System.out.println(employee.getChief());
+
 //        Employee employee2 = new Employee("2", "2", "2");
 ////        System.out.println(employee);
 ////        System.out.println(employee1);
 ////        System.out.println(employee2);
-//        Department department = new Department("Начальство");
+
 //        Department department1 = new Department("Бугалтерия");
 //        Campaign campaign = new Campaign("Camp");
 //        campaign.data.addDepartments(department);
@@ -32,3 +45,7 @@ public class Main implements Serializable {
 //        System.out.println(campaign.data.getEmployee());
     }
 }
+
+/**
+ * Класс контекст
+ */

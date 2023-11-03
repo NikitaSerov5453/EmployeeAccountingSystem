@@ -1,5 +1,6 @@
 package org.example.campaigns;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -9,7 +10,7 @@ public class Employee implements Serializable {
     private String name;
     private String patronymic;
     private LocalDate dateOfBirth;
-    private String gender;
+    private Gender gender;
     private String telephoneNumber;
     private Post post;
     private Department department;
@@ -63,11 +64,11 @@ public class Employee implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
