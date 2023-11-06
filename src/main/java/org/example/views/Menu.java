@@ -1,9 +1,12 @@
 package org.example.views;
 
 import org.example.campaigns.Campaign;
+import org.example.campaigns.Employee;
 import org.example.operations.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Menu implements Serializable {
@@ -38,27 +41,25 @@ public class Menu implements Serializable {
                 1: Создать кампанию
                 2: Редактировать кампанию
                 3: Загрузить кампанию""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        this.campaign = operation.createCompany();
-                        mainMenu();
-                    }
-                    case 2 -> {
-                        operation.editCampaign();
-                    }
-                    case 3 -> {
-                        operation.loadCampaign("1521645586");
-                        mainMenu();
-                    }
-                    default -> {
-                        def();
-                        controlCompanyMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    this.campaign = operation.createCompany();
+                    mainMenu();
+                }
+                case 2 -> {
+                    operation.editCampaign();
+                }
+                case 3 -> {
+                    operation.loadCampaign("1521645586");
+                    mainMenu();
+                }
+                default -> {
+                    def();
+                    controlCompanyMenu();
                 }
             }
-        }).start();
+        }
     }
 
 
@@ -74,51 +75,48 @@ public class Menu implements Serializable {
                 7: Изменить руководителя
                 8: Изменить зарплату
                 9: Удалить сотрудника""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> editFCsMenu();
-                    case 2 -> {
-                        operation.getOperationEmployee().editDateOfBirth();
-                        editEmployeeMenu();
-                    }
-                    case 3 -> {
-                        operation.getOperationEmployee().editGender();
-                        editEmployeeMenu();
-                    }
-                    case 4 -> {
-                        operation.getOperationEmployee().editTelephoneNumber();
-                        editEmployeeMenu();
-                    }
-                    case 5 -> {
-                        operation.getOperationEmployee().editDepartment();
-                        editEmployeeMenu();
-                    }
-                    case 6 -> {
-                        operation.getOperationEmployee().editPost();
-                        editEmployeeMenu();
-                    }
-                    case 7 -> {
-                        operation.getOperationEmployee().editChief();
-                        editEmployeeMenu();
-                    }
-                    case 8 -> {
-                        operation.getOperationEmployee().editSalary();
-                        editEmployeeMenu();
-                    }
-                    case 9 -> {
-                        operation.getOperationEmployee().deleteEmployee();
-                        employeeMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> editFCsMenu();
+                case 2 -> {
+                    operation.editDateOfBirth();
+                    editEmployeeMenu();
+                }
+                case 3 -> {
+                    operation.editGender();
+                    editEmployeeMenu();
+                }
+                case 4 -> {
+                    operation.editTelephoneNumber();
+                    editEmployeeMenu();
+                }
+                case 5 -> {
+                    operation.editDepartment();
+                    editEmployeeMenu();
+                }
+                case 6 -> {
+                    operation.editPost();
+                    editEmployeeMenu();
+                }
+                case 7 -> {
+                    operation.editChief();
+                    editEmployeeMenu();
+                }
+                case 8 -> {
+                    operation.editSalary();
+                    editEmployeeMenu();
+                }
+                case 9 -> {
+                    operation.deleteEmployee();
+                    employeeMenu();
+                }
 
-                    default -> {
-                        def();
-                        editEmployeeMenu();
-                    }
+                default -> {
+                    def();
+                    editEmployeeMenu();
                 }
             }
-        }).start();
-
+        }
     }
 
     private void editFCsMenu() {
@@ -127,29 +125,27 @@ public class Menu implements Serializable {
                 2: Изменить имя
                 3: Изменить отчество
                 4: Назад""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        operation.getOperationEmployee().editSurname();
-                        editFCsMenu();
-                    }
-                    case 2 -> {
-                        operation.getOperationEmployee().editName();
-                        editFCsMenu();
-                    }
-                    case 3 -> {
-                        operation.getOperationEmployee().editPatronymic();
-                        editFCsMenu();
-                    }
-                    case 4 -> editEmployeeMenu();
-                    default -> {
-                        def();
-                        editFCsMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    operation.editSurname();
+                    editFCsMenu();
+                }
+                case 2 -> {
+                    operation.editName();
+                    editFCsMenu();
+                }
+                case 3 -> {
+                    operation.editPatronymic();
+                    editFCsMenu();
+                }
+                case 4 -> editEmployeeMenu();
+                default -> {
+                    def();
+                    editFCsMenu();
                 }
             }
-        }).start();
+        }
     }
 
     private void mainMenu() {
@@ -159,21 +155,19 @@ public class Menu implements Serializable {
                 3: Сотрдуники
                 4: Отчеты
                 5: Закрыть программу""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> departmentMenu();
-                    case 2 -> postMenu();
-                    case 3 -> employeeMenu();
-                    case 4 -> reportMenu();
-                    case 5 -> System.out.println("До свидания!");
-                    default -> {
-                        def();
-                        mainMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> departmentMenu();
+                case 2 -> postMenu();
+                case 3 -> employeeMenu();
+                case 4 -> reportMenu();
+                case 5 -> System.out.println("До свидания!");
+                default -> {
+                    def();
+                    mainMenu();
                 }
             }
-        }).start();
+        }
     }
 
     private void departmentMenu() {
@@ -182,28 +176,26 @@ public class Menu implements Serializable {
                 2: Создать отдел
                 3: Назад
                 """);
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        operation.getReport().departments();
-                        departmentMenu();
-                    }
-                    case 2 -> {
-                        System.out.println("Введите название отдела");
-                        scanner.nextLine();
-                        operation.getOperationDepartment().createDepartment(scanner.nextLine());
-                        System.out.println("Отдел создан!");
-                        departmentMenu();
-                    }
-                    case 3 -> mainMenu();
-                    default -> {
-                        def();
-                        departmentMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    operation.getReport().departments();
+                    departmentMenu();
+                }
+                case 2 -> {
+                    System.out.println("Введите название отдела");
+                    scanner.nextLine();
+                    operation.createDepartment(scanner.nextLine());
+                    System.out.println("Отдел создан!");
+                    departmentMenu();
+                }
+                case 3 -> mainMenu();
+                default -> {
+                    def();
+                    departmentMenu();
                 }
             }
-        }).start();
+        }
 
     }
 
@@ -212,27 +204,24 @@ public class Menu implements Serializable {
                 1: Редактировать отдел
                 2: Удалить отдел
                 3: Назад""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        System.out.println("Введите id отдела который хотите отредактировать:");
-                        operation.getOperationDepartment().setDepartment(campaign.data.getDepartments().get(operation.getSearch().searchIndexDepartment(campaign.data.getDepartments(), scanner.nextInt())));
-                        editDepartment();
-                    }
-                    case 2 -> {
-                        operation.getOperationDepartment().deleteDepartment();
-                        departmentMenu();
-                    }
-                    case 3 -> departmentMenu();
-                    default -> {
-                        def();
-                        departmentEditMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    System.out.println("Введите id отдела который хотите отредактировать:");
+                    operation.setDepartment(campaign.data.getDepartments().get(operation.getSearch().searchIndexDepartment(campaign.data.getDepartments(), scanner.nextInt())));
+                    editDepartment();
+                }
+                case 2 -> {
+                    operation.deleteDepartment();
+                    departmentMenu();
+                }
+                case 3 -> departmentMenu();
+                default -> {
+                    def();
+                    departmentEditMenu();
                 }
             }
-        }).start();
-
+        }
     }
 
     private void editDepartment() {
@@ -240,29 +229,27 @@ public class Menu implements Serializable {
                 1: Изменить название отдела
                 2: Изменить руководителя отдела
                 3: Назад""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        System.out.println("Введите название отдела:");
-                        operation.getOperationDepartment().editDepartmentName(scanner.nextLine());
-                        System.out.println("Название отдела изменено!");
-                        editDepartment();
-                    }
-                    case 2 -> {
-                        System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:");
-                        operation.getOperationDepartment().editDepartmentChief(scanner.nextInt());
-                        System.out.println("Новый руководитель назначен!");
-                        editDepartment();
-                    }
-                    case 3 -> departmentEditMenu();
-                    default -> {
-                        def();
-                        editDepartment();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    System.out.println("Введите название отдела:");
+                    operation.editDepartmentName(scanner.nextLine());
+                    System.out.println("Название отдела изменено!");
+                    editDepartment();
+                }
+                case 2 -> {
+                    System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:");
+                    operation.editDepartmentChief(scanner.nextInt());
+                    System.out.println("Новый руководитель назначен!");
+                    editDepartment();
+                }
+                case 3 -> departmentEditMenu();
+                default -> {
+                    def();
+                    editDepartment();
                 }
             }
-        }).start();
+        }
 
     }
 
@@ -272,25 +259,23 @@ public class Menu implements Serializable {
                 2: Создать должность
                 3: Назад
                 """);
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        operation.getReport().posts();
-                        postMenu();
-                    }
-                    case 2 -> {
-                        operation.getOperationPost().createPostMenu();
-                        postMenu();
-                    }
-                    case 3 -> mainMenu();
-                    default -> {
-                        def();
-                        postMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    operation.getReport().listPosts();
+                    postMenu();
+                }
+                case 2 -> {
+
+                    postMenu();
+                }
+                case 3 -> mainMenu();
+                default -> {
+                    def();
+                    postMenu();
                 }
             }
-        }).start();
+        }
     }
 
     private void postEditMenu() {
@@ -298,51 +283,51 @@ public class Menu implements Serializable {
                 1: Редактировать должность
                 2: Удалить должность
                 3: Назад""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        operation.getOperationPost().editPost();
-                        postMenu();
-                    }
-                    case 2 -> {
-                        operation.getOperationPost().deletePost();
-                        postMenu();
-                    }
-                    case 3 -> postMenu();
-                    default -> {
-                        def();
-                        postEditMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    operation.editPost();
+                    postMenu();
+                }
+                case 2 -> {
+                    operation.deletePost();
+                    postMenu();
+                }
+                case 3 -> postMenu();
+                default -> {
+                    def();
+                    postEditMenu();
                 }
             }
-        }).start();
+        }
     }
 
     private void employeeMenu() {
         System.out.println("""
                 1: Список сотрдуников
-                2: Создать сотрдуника
-                3: Назад""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        operation.getReport().employees();
-                        employeeMenu();
-                    }
-                    case 2 -> {
-                        operation.getOperationEmployee().createEmployeeMenu();
-                        employeeMenu();
-                    }
-                    case 3 -> mainMenu();
-                    default -> {
-                        def();
-                        employeeMenu();
-                    }
+                2: Поиск сотрдуника
+                3: Создать сотрдуника
+                4: Назад""");
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    operation.getReport().listEmployees();
+                    employeeMenu();
+                }
+                case 2 -> {
+                    searchEmployeeMenu();
+                }
+                case 3 -> {
+
+                    employeeMenu();
+                }
+                case 4 -> mainMenu();
+                default -> {
+                    def();
+                    employeeMenu();
                 }
             }
-        }).start();
+        }
 
     }
 
@@ -351,25 +336,23 @@ public class Menu implements Serializable {
                 1: Редактировать сотрдуника
                 2: Удалить сотрдуника
                 3: Назад""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> {
-                        operation.getOperationEmployee().editEmployee();
-                        employeeMenu();
-                    }
-                    case 2 -> {
-                        operation.getOperationEmployee().deleteEmployee();
-                        employeeMenu();
-                    }
-                    case 3 -> postMenu();
-                    default -> {
-                        def();
-                        employeeEditMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    operation.editEmployee();
+                    employeeMenu();
+                }
+                case 2 -> {
+                    operation.deleteEmployee();
+                    employeeMenu();
+                }
+                case 3 -> postMenu();
+                default -> {
+                    def();
+                    employeeEditMenu();
                 }
             }
-        }).start();
+        }
     }
 
     private void reportMenu() {
@@ -379,20 +362,83 @@ public class Menu implements Serializable {
                 3: Топ 10 самых дорогох сотрудников по ЗП
                 4: Топ 10 самых преданных сотрдуников по кол-ву лет в фирме
                 5: Назад""");
-        new Thread(() -> {
-            while (true) {
-                switch (scanner.nextInt()) {
-                    case 1 -> System.out.println("Структура организации");
-                    case 2 -> System.out.println("Средняя зарплата");
-                    case 3 -> System.out.println("Топ 10 самых дорогох сотрудников");
-                    case 4 -> System.out.println("Топ 10 самых преданных сотрдуников");
-                    case 5 -> mainMenu();
-                    default -> {
-                        def();
-                        reportMenu();
-                    }
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    System.out.println("Структура организации");
+                }
+                case 2 -> {
+                    System.out.println("Средняя зарплата");
+                }
+                case 3 -> {
+                    System.out.println("Топ 10 самых дорогох сотрудников");
+                }
+                case 4 -> {
+                    System.out.println("Топ 10 самых преданных сотрдуников");
+                }
+                case 5 -> mainMenu();
+                default -> {
+                    def();
+                    reportMenu();
                 }
             }
-        }).start();
+        }
     }
+
+    private void searchEmployeeMenu() {
+        System.out.println("""
+                Поиск сотрдуника
+                1: Поиск по id
+                2: Поиск по ФИО
+                3: Поиск по должности
+                4: Поиск по отделу
+                5: Поиск по руководителю
+                6: Назад""");
+        while (true) {
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    System.out.println("Введите id сотрдуника");
+                    int id = scanner.nextInt();
+                    try {
+                        operation.setEmployee(operation.getSearch().searchEmployeeID(id));
+                        employeeEditMenu();
+                    } catch (NullPointerException e) {
+                        System.out.println("Сотрдуник с id: " + id + " не найден");
+                        searchEmployeeMenu();
+                    }
+                }
+                case 2 -> {
+                    System.out.println("Введите ФИО сотрдуника");
+                    String FCs = scanner.nextLine();
+                    try {
+                        operation.setEmployee(operation.takeEmployee(operation.getSearch().searchEmployeeFCs(FCs)));
+                        employeeEditMenu();
+                    } catch (NullPointerException e) {
+                        System.out.println("Сотрдуник с ФИО: " + FCs + " не найден");
+                        searchEmployeeMenu();
+                    }
+                }
+                case 3 -> {
+                    System.out.println("Введите должность сотрдуника");
+                    String post = scanner.nextLine();
+                    try {
+                        operation.getSearch().searchEmployeePost(post);
+                    } catch (NullPointerException e) {
+                        System.out.println("Должность: " + post + " не найдена");
+                        searchEmployeeMenu();
+                    }
+                }
+                case 4 -> {
+                    operation.getSearch().searchEmployeeDepartment();
+                }
+                case 5 -> {
+                    operation.getSearch().searchEmployeeChief();
+                }
+                case 6 -> employeeMenu();
+                default -> def();
+            }
+        }
+    }
+
+
 }

@@ -28,8 +28,8 @@ public class Employee implements Serializable {
         this.employeeID = numberCreation;
     }
 
-    public int getNumberCreation() {
-        return numberCreation;
+    public int getEmployeeID() {
+        return employeeID;
     }
 
     public String getSurname() {

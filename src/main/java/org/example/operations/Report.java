@@ -26,11 +26,11 @@ public class Report implements Serializable {
         System.out.println(this.campaign.data.getDepartments());
     }
 
-    public void posts() {
+    public void listPosts() {
         System.out.println(this.campaign.data.getPosts());
     }
 
-    public void employees() {
+    public void listEmployees() {
         System.out.println(this.campaign.data.getEmployee());
     }
 

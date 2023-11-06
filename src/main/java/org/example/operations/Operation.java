@@ -6,21 +6,36 @@ import org.example.campaigns.Campaign;
 import org.example.files.Serialized;
 import org.example.campaigns.Employee;
 import org.example.views.Menu;
+import org.example.views.View;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Operation {
     private final Scanner scanner = new Scanner(System.in);
-
-    private OperationEmployee operationEmployee = new OperationEmployee();
-    private OperationDepartment operationDepartment = new OperationDepartment();
-    private OperationPost operationPost = new OperationPost();
     private Report report = new Report();
     private Search search = new Search();
+
+    private View view = new View();
+
+    private Department department;
     private Campaign campaign;
+    private Employee employee;
 
     public Operation() {
 
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Search getSearch() {
@@ -29,34 +44,6 @@ public class Operation {
 
     public void setSearch(Search search) {
         this.search = search;
-    }
-
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    public OperationEmployee getOperationEmployee() {
-        return operationEmployee;
-    }
-
-    public void setOperationEmployee(OperationEmployee operationEmployee) {
-        this.operationEmployee = operationEmployee;
-    }
-
-    public OperationDepartment getOperationDepartment() {
-        return operationDepartment;
-    }
-
-    public void setOperationDepartment(OperationDepartment operationDepartment) {
-        this.operationDepartment = operationDepartment;
-    }
-
-    public OperationPost getOperationPost() {
-        return operationPost;
-    }
-
-    public void setOperationPost(OperationPost operationPost) {
-        this.operationPost = operationPost;
     }
 
     public Report getReport() {
@@ -79,9 +66,6 @@ public class Operation {
         System.out.println("Введите название кампании:");
         String campaignName = scanner.nextLine();
         this.campaign = new Campaign(campaignName);
-        operationDepartment.setCampaign(campaign);
-        operationEmployee.setCampaign(campaign);
-        operationPost.setCampaign(campaign);
         report.setCampaign(campaign);
         search.setCampaign(campaign);
         Serialized.serialized(campaign, campaignName + campaign.hashCode());
@@ -96,5 +80,107 @@ public class Operation {
     public void editCampaign() {
 
     }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public void createDepartment(String nameDepartment) {
+        Department department = new Department(nameDepartment);
+        campaign.data.addDepartments(department);
+    }
+
+    public void deleteDepartment() {
+        campaign.data.deleteDepartment(this.department.getDepartmentID() - 1);
+    }
+
+    public void editDepartmentName(String name) {
+        this.department.setDepartmentName(name);
+    }
+
+    public void editDepartmentChief(int newChiefEmployeeID) {
+        this.department.setChief(department.getEmployee().get(newChiefEmployeeID));
+    }
+
+    private void createEmployee(String surname, String name, String patronymic) {
+        Employee employee = new Employee(surname, name, patronymic);
+        campaign.data.addEmployee(employee);
+    }
+
+    public void deleteEmployee() {
+
+    }
+
+    public void editEmployee() {
+
+    }
+
+    public void editSurname() {
+
+    }
+
+    public void editName() {
+
+    }
+
+    public void editPatronymic() {
+
+    }
+
+    public void editDateOfBirth() {
+
+    }
+
+    public void editGender() {
+
+    }
+
+    public void editTelephoneNumber() {
+
+    }
+
+    public void editDepartment() {
+
+    }
+
+    public void editPost() {
+
+    }
+
+    public void editChief() {
+
+    }
+
+    public void editSalary() {
+
+    }
+
+    private void createPost(String namePost) {
+        campaign.data.addPosts(new Post(namePost));
+    }
+
+    public void deletePost() {
+
+    }
+
+    public Employee takeEmployee(HashSet<Employee> employees) {
+        System.out.println("Выберете нужного сотрдуника:");
+        view.printHashSet(employees);
+        int id = scanner.nextInt();
+        int counter = 1;
+        for (Employee employee : employees) {
+            if (counter == id) {
+                return employee;
+            } else {
+                counter++;
+            }
+        }
+        return null;
+    }
+
 
 }
