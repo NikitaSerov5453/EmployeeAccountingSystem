@@ -42,14 +42,14 @@ public class Search implements Serializable {
 
 
 
-    public void searchEmployeePost(String postName) {
-        String[] strings = postName.split(" ");
+    public HashSet<Post> searchEmployeePost(String postName) {
         HashSet<Post> posts = new HashSet<>();
         for (int i = 0; i < campaign.data.getPosts().size(); i++) {
-            for (int j = 0; j <strings.length; j++) {
-
+            if (campaign.data.getPosts().get(i).getPostName().contains(postName)) {
+                posts.add(campaign.data.getPosts().get(i));
             }
         }
+        return posts;
     }
 
     public void searchEmployeeDepartment() {

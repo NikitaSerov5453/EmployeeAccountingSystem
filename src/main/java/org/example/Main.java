@@ -1,18 +1,18 @@
 package org.example;
 
-import org.example.campaigns.Campaign;
-import org.example.campaigns.Department;
-import org.example.campaigns.Employee;
-import org.example.campaigns.Gender;
+import org.example.campaigns.*;
 import org.example.data.Data;
+import org.example.operations.Search;
 import org.example.views.Menu;
+import org.example.views.View;
 
 import java.io.Serializable;
 
 public class Main implements Serializable {
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.start();
+//        Menu menu = new Menu();
+//        menu.start();
+
 //        Department department = new Department("Начальство");
 //        Employee employee1 = new Employee("1", "1", "1");
 //        Employee employee = new Employee("Serov","Nikita","Andreevic");
