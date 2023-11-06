@@ -182,5 +182,4 @@ public class Operation {
         return null;
     }
 
-
 }

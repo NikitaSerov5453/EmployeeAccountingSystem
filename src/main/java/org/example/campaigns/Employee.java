@@ -3,8 +3,9 @@ package org.example.campaigns;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Comparator;
 
-public class Employee implements Serializable {
+public class Employee implements Serializable, Comparable{
 
     private String surname;
     private String name;
@@ -134,5 +135,12 @@ public class Employee implements Serializable {
                 "\nЗаработная плата: " + salary +
                 "\nID Сотрдуника: " + employeeID +
                 "\n";
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return Comparator.comparing(Employee::getSalary)
+                .thenComparing(Employee::getDateOfEmployment).compare(this, (Employee) o);
     }
 }

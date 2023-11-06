@@ -357,7 +357,7 @@ public class Menu implements Serializable {
 
     private void reportMenu() {
         System.out.println("""
-                1: Структура организации(Отдел, Руководитель)
+                1: Структура организации(Отдел|Руководитель)
                 2: Средняя зарплата(По органицации|По отделам)
                 3: Топ 10 самых дорогох сотрудников по ЗП
                 4: Топ 10 самых преданных сотрдуников по кол-ву лет в фирме
@@ -365,16 +365,21 @@ public class Menu implements Serializable {
         while (true) {
             switch (scanner.nextInt()) {
                 case 1 -> {
-                    System.out.println("Структура организации");
+                    operation.getReport().companyStructure();
+                    break;
                 }
                 case 2 -> {
-                    System.out.println("Средняя зарплата");
+                    operation.getReport().averageSalaryCompany();
+                    operation.getReport().averageSalaryDepartments();
+                    reportMenu();
                 }
                 case 3 -> {
-                    System.out.println("Топ 10 самых дорогох сотрудников");
+                    operation.getReport().topExpensiveEmployee();
+                    reportMenu();
                 }
                 case 4 -> {
-                    System.out.println("Топ 10 самых преданных сотрдуников");
+                    operation.getReport().topDevoteesEmployee();
+                    reportMenu();
                 }
                 case 5 -> mainMenu();
                 default -> {
