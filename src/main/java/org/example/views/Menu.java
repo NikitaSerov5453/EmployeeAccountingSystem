@@ -414,7 +414,7 @@ public class Menu implements Serializable {
                         operation.setEmployee(operation.takeEmployee(operation.getSearch().searchEmployeeFCs(FCs)));
                         employeeEditMenu();
                     } catch (NullPointerException e) {
-                        System.out.println("Сотрдуник с ФИО: " + FCs + " не найден");
+                        System.out.println("Сотрдуник: " + FCs + " не найден");
                         searchEmployeeMenu();
                     }
                 }
@@ -429,16 +429,28 @@ public class Menu implements Serializable {
                     }
                 }
                 case 4 -> {
-                    operation.getSearch().searchEmployeeDepartment();
+                    System.out.println("Введите название отдела");
+                    String department = scanner.nextLine();
+                    try {
+                        operation.getSearch().searchEmployeeDepartment(department);
+                    } catch (NullPointerException e) {
+                        System.out.println("Отдел: " + department + " не найден");
+                        searchEmployeeMenu();
+                    }
                 }
                 case 5 -> {
-                    operation.getSearch().searchEmployeeChief();
+                    System.out.println("Введите ФИО руководителя");
+                    String chief = scanner.nextLine();
+                    try {
+                        operation.getSearch().searchEmployeeChief(chief);
+                    } catch (NullPointerException e) {
+                        System.out.println("Руководитель: " + chief + " не найден");
+                        searchEmployeeMenu();
+                    }
                 }
                 case 6 -> employeeMenu();
                 default -> def();
             }
         }
     }
-
-
 }

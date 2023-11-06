@@ -3,7 +3,6 @@ package org.example.operations;
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
-import org.example.campaigns.Post;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -26,38 +25,52 @@ public class Search implements Serializable {
     }
 
     public HashSet<Employee> searchEmployeeFCs(String string) {
-        String[] strings = string.split(" ");
         HashSet<Employee> employees = new HashSet<>();
+        string = string.toLowerCase();
         for (int i = 0; i < campaign.data.getEmployee().size(); i++) {
-            for (String s : strings) {
-                if (s.equals(campaign.data.getEmployee().get(i).getName())
-                        || s.equals(campaign.data.getEmployee().get(i).getSurname())
-                        || s.equals(campaign.data.getEmployee().get(i).getPatronymic())) {
-                    employees.add(campaign.data.getEmployee().get(i));
-                }
+            if (campaign.data.getEmployee().get(i).getName().toLowerCase().contains(string)
+                    || campaign.data.getEmployee().get(i).getSurname().toLowerCase().contains(string)
+                    || campaign.data.getEmployee().get(i).getPatronymic().toLowerCase().contains(string)) {
+                employees.add(campaign.data.getEmployee().get(i));
             }
         }
         return employees;
     }
 
 
-
-    public HashSet<Post> searchEmployeePost(String postName) {
-        HashSet<Post> posts = new HashSet<>();
+    public HashSet<Employee> searchEmployeePost(String postName) {
+        HashSet<Employee> employees = new HashSet<>();
+        postName = postName.toLowerCase();
         for (int i = 0; i < campaign.data.getPosts().size(); i++) {
-            if (campaign.data.getPosts().get(i).getPostName().contains(postName)) {
-                posts.add(campaign.data.getPosts().get(i));
+            if (campaign.data.getEmployee().get(i).getPost().getPostName().toLowerCase().contains(postName)) {
+                employees.add(campaign.data.getEmployee().get(i));
             }
         }
-        return posts;
+        return employees;
     }
 
-    public void searchEmployeeDepartment() {
-
+    public HashSet<Employee> searchEmployeeDepartment(String departmentName) {
+        HashSet<Employee> employees = new HashSet<>();
+        departmentName = departmentName.toLowerCase();
+        for (int i = 0; i < campaign.data.getEmployee().size(); i++) {
+            if (campaign.data.getEmployee().get(i).getDepartment().getDepartmentName().toLowerCase().contains(departmentName)) {
+                employees.add(campaign.data.getEmployee().get(i));
+            }
+        }
+        return employees;
     }
 
-    public void searchEmployeeChief() {
-
+    public HashSet<Employee> searchEmployeeChief(String FCs) {
+        HashSet<Employee> employees = new HashSet<>();
+        FCs = FCs.toLowerCase();
+        for (int i = 0; i < campaign.data.getEmployee().size(); i++) {
+            if (campaign.data.getEmployee().get(i).getChief().getName().toLowerCase().contains(FCs)
+                    || campaign.data.getEmployee().get(i).getChief().getSurname().toLowerCase().contains(FCs)
+                    || campaign.data.getEmployee().get(i).getChief().getPatronymic().toLowerCase().contains(FCs)) {
+                employees.add(campaign.data.getEmployee().get(i));
+            }
+        }
+        return employees;
     }
 
     public Employee searchEmployeeID(int employeeID) {
