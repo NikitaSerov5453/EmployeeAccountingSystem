@@ -54,8 +54,8 @@ public class Report implements Serializable {
     }
 
     public void averageSalaryDepartments() {
-        String pattern = "%25s%25";
-        System.out.format(pattern, "Отдел", "Средняя зарплата");
+        String pattern = "%25s%25s";
+        System.out.printf(pattern, "Отдел", "Средняя зарплата\n");
         for (int i = 0; i < campaign.data.getDepartments().size(); i++) {
             System.out.printf(pattern, campaign.data.getDepartments().get(i).getDepartmentName(),
                     calculateAverageSalaryDepartment(campaign.data.getDepartments().get(i)));
@@ -64,31 +64,31 @@ public class Report implements Serializable {
 
     public void topExpensiveEmployee() {
         List<Employee> employees = new ArrayList<>(campaign.data.getEmployee());
-        Comparator.comparing(Employee::getSalary);
-        System.out.printf("%25s%25", "ФИО сотрдуника", "Зарплата");
-        for (int i = 0; i < 11; i++) {
-            System.out.printf("%25s%25s%25s%25", employees.get(i).getSurname(),
-                    employees.get(i).getName(),
+        employees.sort(Comparator.comparing(Employee::getSalary).reversed());
+        System.out.printf("%25s%25s", "ФИО сотрдуника", "Зарплата\n");
+        for (int i = 0; i < employees.size() && i < 11; i++) {
+            System.out.printf("%25s%25s%25s", employees.get(i).getSurname() + ' ' +
+                    employees.get(i).getName() + ' ' +
                     employees.get(i).getPatronymic(),
-                    employees.get(i).getSalary());
+                    employees.get(i).getSalary(), '\n');
         }
     }
 
     public void topDevoteesEmployee() {
         List<Employee> employees = new ArrayList<>(campaign.data.getEmployee());
-        Comparator.comparing(Employee::getDateOfEmployment);
-        System.out.printf("%25s%25", "ФИО", "Дата трудоустройства");
-        for (int i = 0; i < 11; i++) {
-            System.out.printf("%25s%25s%25s%25", employees.get(i).getSurname(),
-                    employees.get(i).getName(),
+        employees.sort(Comparator.comparing(Employee::getDateOfEmployment).reversed());
+        System.out.printf("%25s%25s", "ФИО", "Дата трудоустройства\n");
+        for (int i = 0; i < employees.size() && i < 11; i++) {
+            System.out.printf("%25s%25s%25s", employees.get(i).getSurname() + ' ' +
+                    employees.get(i).getName() + ' ' +
                     employees.get(i).getPatronymic(),
-                    employees.get(i).getDateOfEmployment());
+                    employees.get(i).getDateOfEmployment(), '\n');
         }
     }
 
     public void companyStructure() {
-        String pattern = "%25s%25";
-        System.out.format(pattern, "Отдел", "Руководитель");
+        String pattern = "%25s%25s";
+        System.out.format(pattern, "Отдел", "Руководитель\n");
         for (int i = 0; i < campaign.data.getDepartments().size(); i++) {
             System.out.format(pattern, campaign.data.getDepartments().get(i).getDepartmentName(),
                     campaign.data.getDepartments().get(i).getChief());

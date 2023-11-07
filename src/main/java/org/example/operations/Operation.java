@@ -106,7 +106,7 @@ public class Operation {
         this.department.setChief(department.getEmployee().get(newChiefEmployeeID));
     }
 
-    private void createEmployee(String surname, String name, String patronymic) {
+    public void createEmployee(String surname, String name, String patronymic) {
         Employee employee = new Employee(surname, name, patronymic);
         campaign.data.addEmployee(employee);
     }
@@ -159,7 +159,7 @@ public class Operation {
 
     }
 
-    private void createPost(String namePost) {
+    public void createPost(String namePost) {
         campaign.data.addPosts(new Post(namePost));
     }
 

@@ -13,6 +13,7 @@ public class Menu implements Serializable {
 
     private final Scanner scanner = new Scanner(System.in);
     private Operation operation = new Operation();
+    private View view = new View();
     private Campaign campaign;
 
     public Menu() {
@@ -37,27 +38,16 @@ public class Menu implements Serializable {
     }
 
     public void controlCompanyMenu() {
-        System.out.println("""
-                1: Создать кампанию
-                2: Редактировать кампанию
-                3: Загрузить кампанию""");
         while (true) {
+            view.printControlCompanyMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
                     this.campaign = operation.createCompany();
                     mainMenu();
                 }
-                case 2 -> {
-                    operation.editCampaign();
-                }
-                case 3 -> {
-                    operation.loadCampaign("1521645586");
-                    mainMenu();
-                }
-                default -> {
-                    def();
-                    controlCompanyMenu();
-                }
+                case 2 -> operation.editCampaign();
+                case 3 -> operation.loadCampaign("1521645586");
+                default -> def();
             }
         }
     }
@@ -65,341 +55,215 @@ public class Menu implements Serializable {
 
 
     public void editEmployeeMenu() {
-        System.out.println("""
-                1: Изменить ФИО
-                2: Изменить дату рождения
-                3: Изменить пол
-                4: Изменить номер телефона
-                5: Изменить отдел
-                6: Изменить должность
-                7: Изменить руководителя
-                8: Изменить зарплату
-                9: Удалить сотрудника""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printEditEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> editFCsMenu();
-                case 2 -> {
-                    operation.editDateOfBirth();
-                    editEmployeeMenu();
-                }
-                case 3 -> {
-                    operation.editGender();
-                    editEmployeeMenu();
-                }
-                case 4 -> {
-                    operation.editTelephoneNumber();
-                    editEmployeeMenu();
-                }
-                case 5 -> {
-                    operation.editDepartment();
-                    editEmployeeMenu();
-                }
-                case 6 -> {
-                    operation.editPost();
-                    editEmployeeMenu();
-                }
-                case 7 -> {
-                    operation.editChief();
-                    editEmployeeMenu();
-                }
-                case 8 -> {
-                    operation.editSalary();
-                    editEmployeeMenu();
-                }
+                case 2 -> operation.editDateOfBirth();
+                case 3 -> operation.editGender();
+                case 4 -> operation.editTelephoneNumber();
+                case 5 -> operation.editDepartment();
+                case 6 -> operation.editPost();
+                case 7 -> operation.editChief();
+                case 8 -> operation.editSalary();
                 case 9 -> {
                     operation.deleteEmployee();
                     employeeMenu();
                 }
+                case 0 -> a = false;
 
-                default -> {
-                    def();
-                    editEmployeeMenu();
-                }
+                default -> def();
             }
         }
     }
 
     private void editFCsMenu() {
-        System.out.println("""
-                1: Изменить фамилию
-                2: Изменить имя
-                3: Изменить отчество
-                4: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printEditFCsMenu();
             switch (scanner.nextInt()) {
-                case 1 -> {
-                    operation.editSurname();
-                    editFCsMenu();
-                }
-                case 2 -> {
-                    operation.editName();
-                    editFCsMenu();
-                }
-                case 3 -> {
-                    operation.editPatronymic();
-                    editFCsMenu();
-                }
-                case 4 -> editEmployeeMenu();
-                default -> {
-                    def();
-                    editFCsMenu();
-                }
+                case 1 -> operation.editSurname();
+                case 2 -> operation.editName();
+                case 3 -> operation.editPatronymic();
+                case 4 -> a = false;
+
+                default -> def();
             }
         }
     }
 
     private void mainMenu() {
-        System.out.println("""
-                1: Отделы
-                2: Должности
-                3: Сотрдуники
-                4: Отчеты
-                5: Закрыть программу""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printMainMenu();
             switch (scanner.nextInt()) {
                 case 1 -> departmentMenu();
                 case 2 -> postMenu();
                 case 3 -> employeeMenu();
                 case 4 -> reportMenu();
-                case 5 -> System.out.println("До свидания!");
-                default -> {
-                    def();
-                    mainMenu();
-                }
+                case 5 -> a = false;
+                default -> def();
             }
         }
     }
 
     private void departmentMenu() {
-        System.out.println("""
-                1: Список отделов
-                2: Создать отдел
-                3: Назад
-                """);
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printDepartmentMenu();
             switch (scanner.nextInt()) {
-                case 1 -> {
-                    operation.getReport().departments();
-                    departmentMenu();
-                }
+                case 1 -> operation.getReport().departments();
                 case 2 -> {
                     System.out.println("Введите название отдела");
                     scanner.nextLine();
                     operation.createDepartment(scanner.nextLine());
                     System.out.println("Отдел создан!");
-                    departmentMenu();
                 }
-                case 3 -> mainMenu();
-                default -> {
-                    def();
-                    departmentMenu();
-                }
+                case 3 -> a = false;
+                default -> def();
             }
         }
 
     }
 
     private void departmentEditMenu() {
-        System.out.println("""
-                1: Редактировать отдел
-                2: Удалить отдел
-                3: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printDepartmentEditMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
                     System.out.println("Введите id отдела который хотите отредактировать:");
                     operation.setDepartment(campaign.data.getDepartments().get(operation.getSearch().searchIndexDepartment(campaign.data.getDepartments(), scanner.nextInt())));
                     editDepartment();
                 }
-                case 2 -> {
-                    operation.deleteDepartment();
-                    departmentMenu();
-                }
-                case 3 -> departmentMenu();
-                default -> {
-                    def();
-                    departmentEditMenu();
-                }
+                case 2 -> operation.deleteDepartment();
+                case 3 -> a = false;
+                default -> def();
             }
         }
     }
 
     private void editDepartment() {
-        System.out.println("""
-                1: Изменить название отдела
-                2: Изменить руководителя отдела
-                3: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printEditDepartment();
             switch (scanner.nextInt()) {
                 case 1 -> {
                     System.out.println("Введите название отдела:");
                     operation.editDepartmentName(scanner.nextLine());
                     System.out.println("Название отдела изменено!");
-                    editDepartment();
                 }
                 case 2 -> {
                     System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:");
                     operation.editDepartmentChief(scanner.nextInt());
                     System.out.println("Новый руководитель назначен!");
-                    editDepartment();
                 }
-                case 3 -> departmentEditMenu();
-                default -> {
-                    def();
-                    editDepartment();
-                }
+                case 3 -> a = false;
+                default -> def();
             }
         }
 
     }
 
     private void postMenu() {
-        System.out.println("""
-                1: Список должностей
-                2: Создать должность
-                3: Назад
-                """);
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printPostMenu();
             switch (scanner.nextInt()) {
-                case 1 -> {
-                    operation.getReport().listPosts();
-                    postMenu();
-                }
+                case 1 -> operation.getReport().listPosts();
                 case 2 -> {
-
-                    postMenu();
+                    System.out.println("Введите название должности");
+                    operation.createPost(scanner.nextLine());
+                    System.out.println("Должность создана");
                 }
-                case 3 -> mainMenu();
-                default -> {
-                    def();
-                    postMenu();
-                }
+                case 3 -> a = false;
+                default -> def();
             }
         }
     }
 
     private void postEditMenu() {
-        System.out.println("""
-                1: Редактировать должность
-                2: Удалить должность
-                3: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printPostEditMenu();
             switch (scanner.nextInt()) {
-                case 1 -> {
-                    operation.editPost();
-                    postMenu();
-                }
-                case 2 -> {
-                    operation.deletePost();
-                    postMenu();
-                }
-                case 3 -> postMenu();
-                default -> {
-                    def();
-                    postEditMenu();
-                }
+                case 1 -> operation.editPost();
+                case 2 -> operation.deletePost();
+                case 3 -> a = false;
+                default -> def();
             }
         }
     }
 
     private void employeeMenu() {
-        System.out.println("""
-                1: Список сотрдуников
-                2: Поиск сотрдуника
-                3: Создать сотрдуника
-                4: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printEmployeeMenu();
             switch (scanner.nextInt()) {
-                case 1 -> {
-                    operation.getReport().listEmployees();
-                    employeeMenu();
-                }
-                case 2 -> {
-                    searchEmployeeMenu();
-                }
+                case 1 -> operation.getReport().listEmployees();
+                case 2 -> searchEmployeeMenu();
                 case 3 -> {
-
-                    employeeMenu();
+                    System.out.println("Введите фамилию");
+                    String surname = scanner.next();
+                    System.out.println("Введите имя");
+                    String name = scanner.next();
+                    System.out.println("Введите отчество");
+                    String patronymic = scanner.next();
+                    operation.createEmployee(surname, name, patronymic);
                 }
-                case 4 -> mainMenu();
-                default -> {
-                    def();
-                    employeeMenu();
-                }
+                case 4 -> a = false;
+                default -> def();
             }
         }
 
     }
 
     private void employeeEditMenu() {
-        System.out.println("""
-                1: Редактировать сотрдуника
-                2: Удалить сотрдуника
-                3: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printEmployeeEditMenu();
             switch (scanner.nextInt()) {
-                case 1 -> {
-                    operation.editEmployee();
-                    employeeMenu();
-                }
-                case 2 -> {
-                    operation.deleteEmployee();
-                    employeeMenu();
-                }
-                case 3 -> postMenu();
-                default -> {
-                    def();
-                    employeeEditMenu();
-                }
+                case 1 -> operation.editEmployee();
+                case 2 -> operation.deleteEmployee();
+                case 3 -> a = false;
+                default -> def();
             }
         }
     }
 
     private void reportMenu() {
-        System.out.println("""
-                1: Структура организации(Отдел|Руководитель)
-                2: Средняя зарплата(По органицации|По отделам)
-                3: Топ 10 самых дорогох сотрудников по ЗП
-                4: Топ 10 самых преданных сотрдуников по кол-ву лет в фирме
-                5: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printReportMenu();
             switch (scanner.nextInt()) {
-                case 1 -> {
-                    operation.getReport().companyStructure();
-                    break;
-                }
+                case 1 -> operation.getReport().companyStructure();
                 case 2 -> {
                     operation.getReport().averageSalaryCompany();
                     operation.getReport().averageSalaryDepartments();
-                    reportMenu();
                 }
-                case 3 -> {
-                    operation.getReport().topExpensiveEmployee();
-                    reportMenu();
-                }
+                case 3 -> operation.getReport().topExpensiveEmployee();
                 case 4 -> {
-                    operation.getReport().topDevoteesEmployee();
-                    reportMenu();
+                    try {
+                        operation.getReport().topDevoteesEmployee();
+
+                    } catch (NullPointerException e) {
+                        System.out.println("Не у всех сотрдуников указана дата трудоустройства");
+                    }
                 }
-                case 5 -> mainMenu();
-                default -> {
-                    def();
-                    reportMenu();
+                case 5 -> {
+                    a = false;
+                    scanner.nextLine();
                 }
+                default -> def();
             }
         }
     }
 
     private void searchEmployeeMenu() {
-        System.out.println("""
-                Поиск сотрдуника
-                1: Поиск по id
-                2: Поиск по ФИО
-                3: Поиск по должности
-                4: Поиск по отделу
-                5: Поиск по руководителю
-                6: Назад""");
-        while (true) {
+        boolean a = true;
+        while (a) {
+            view.printSearchEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
                     System.out.println("Введите id сотрдуника");
@@ -409,7 +273,6 @@ public class Menu implements Serializable {
                         employeeEditMenu();
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник с id: " + id + " не найден");
-                        searchEmployeeMenu();
                     }
                 }
                 case 2 -> {
@@ -420,7 +283,6 @@ public class Menu implements Serializable {
                         employeeEditMenu();
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник: " + FCs + " не найден");
-                        searchEmployeeMenu();
                     }
                 }
                 case 3 -> {
@@ -430,7 +292,6 @@ public class Menu implements Serializable {
                         operation.getSearch().searchEmployeePost(post);
                     } catch (NullPointerException e) {
                         System.out.println("Должность: " + post + " не найдена");
-                        searchEmployeeMenu();
                     }
                 }
                 case 4 -> {
@@ -440,7 +301,6 @@ public class Menu implements Serializable {
                         operation.getSearch().searchEmployeeDepartment(department);
                     } catch (NullPointerException e) {
                         System.out.println("Отдел: " + department + " не найден");
-                        searchEmployeeMenu();
                     }
                 }
                 case 5 -> {
@@ -453,7 +313,7 @@ public class Menu implements Serializable {
                         searchEmployeeMenu();
                     }
                 }
-                case 6 -> employeeMenu();
+                case 6 -> a = false;
                 default -> def();
             }
         }
