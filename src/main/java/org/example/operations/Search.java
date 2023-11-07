@@ -4,11 +4,15 @@ import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 
 public class Search implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private Campaign campaign;
 

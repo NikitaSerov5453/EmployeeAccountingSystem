@@ -4,11 +4,15 @@ import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
 import org.example.campaigns.Post;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Data implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private final List<Department> departments = new ArrayList<>();
     private final List<Employee> employees = new ArrayList<>();

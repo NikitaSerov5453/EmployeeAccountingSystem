@@ -12,11 +12,13 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class Operation {
+
+
     private final Scanner scanner = new Scanner(System.in);
     private Report report = new Report();
     private Search search = new Search();
 
-    private View view = new View();
+    private final View view = new View();
 
     private Department department;
     private Campaign campaign;
@@ -68,13 +70,18 @@ public class Operation {
         this.campaign = new Campaign(campaignName);
         report.setCampaign(campaign);
         search.setCampaign(campaign);
-        Serialized.serialized(campaign, campaignName + campaign.hashCode());
+        Serialized.serialized(campaign, campaignName);
         System.out.println("Ваша кампания: " + campaignName + " создана\n");
         return campaign;
     }
 
-    public void loadCampaign(String file) {
-        Serialized.deserialized(file);
+    public Campaign loadCampaign(String file) {
+        campaign = (Campaign) Serialized.deserialized(file);
+        report.setCampaign(campaign);
+        search.setCampaign(campaign);
+
+        System.out.println("Ваша кампания: " + campaign.getCampaignName() + " загружена\n");
+        return campaign;
     }
 
     public void editCampaign() {

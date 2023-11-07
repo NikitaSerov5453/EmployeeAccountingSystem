@@ -7,6 +7,9 @@ import java.util.Objects;
 
 public class File implements Serializable{
 
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private Campaign campaign;
     public int campaignFileName = 0;
     public File() {

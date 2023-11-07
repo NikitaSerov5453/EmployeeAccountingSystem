@@ -3,9 +3,13 @@ package org.example.campaigns;
 import org.example.data.Data;
 import org.example.operations.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Campaign implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private String campaignName;
 

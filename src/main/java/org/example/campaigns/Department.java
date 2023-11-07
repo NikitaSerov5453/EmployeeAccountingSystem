@@ -1,10 +1,14 @@
 package org.example.campaigns;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Department implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private final int departmentID;
     private static int numberCreation;

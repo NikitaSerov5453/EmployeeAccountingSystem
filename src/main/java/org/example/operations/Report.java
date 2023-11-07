@@ -4,12 +4,16 @@ import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class Report implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private Campaign campaign;
 
@@ -72,6 +76,7 @@ public class Report implements Serializable {
                     employees.get(i).getPatronymic(),
                     employees.get(i).getSalary(), '\n');
         }
+        System.out.println('\n');
     }
 
     public void topDevoteesEmployee() {
@@ -87,11 +92,10 @@ public class Report implements Serializable {
     }
 
     public void companyStructure() {
-        String pattern = "%25s%25s";
-        System.out.format(pattern, "Отдел", "Руководитель\n");
+        System.out.format("%25s%25s", "Отдел", "Руководитель\n");
         for (int i = 0; i < campaign.data.getDepartments().size(); i++) {
-            System.out.format(pattern, campaign.data.getDepartments().get(i).getDepartmentName(),
-                    campaign.data.getDepartments().get(i).getChief());
+            System.out.format("%25s%25s%25s", campaign.data.getDepartments().get(i).getDepartmentName(),
+                    campaign.data.getDepartments().get(i).getChief(), '\n');
         }
     }
 }

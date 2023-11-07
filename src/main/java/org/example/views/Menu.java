@@ -2,8 +2,10 @@ package org.example.views;
 
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Employee;
+import org.example.files.Serialized;
 import org.example.operations.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -11,9 +13,12 @@ import java.util.Scanner;
 
 public class Menu implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final Scanner scanner = new Scanner(System.in);
     private Operation operation = new Operation();
-    private View view = new View();
+    private final View view = new View();
     private Campaign campaign;
 
     public Menu() {
@@ -38,16 +43,20 @@ public class Menu implements Serializable {
     }
 
     public void controlCompanyMenu() {
-        while (true) {
-            view.printControlCompanyMenu();
-            switch (scanner.nextInt()) {
-                case 1 -> {
-                    this.campaign = operation.createCompany();
-                    mainMenu();
-                }
-                case 2 -> operation.editCampaign();
-                case 3 -> operation.loadCampaign("1521645586");
-                default -> def();
+        view.printControlCompanyMenu();
+        switch (scanner.nextInt()) {
+            case 1 -> {
+                this.campaign = operation.createCompany();
+                mainMenu();
+            }
+            case 2 -> operation.editCampaign();
+            case 3 -> {
+                this.campaign = operation.loadCampaign("123456");
+                mainMenu();
+            }
+            default -> {
+                def();
+                controlCompanyMenu();
             }
         }
     }
@@ -55,8 +64,7 @@ public class Menu implements Serializable {
 
 
     public void editEmployeeMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printEditEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> editFCsMenu();
@@ -71,7 +79,9 @@ public class Menu implements Serializable {
                     operation.deleteEmployee();
                     employeeMenu();
                 }
-                case 0 -> a = false;
+                case 0 -> {
+                    return;
+                }
 
                 default -> def();
             }
@@ -79,38 +89,39 @@ public class Menu implements Serializable {
     }
 
     private void editFCsMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printEditFCsMenu();
             switch (scanner.nextInt()) {
                 case 1 -> operation.editSurname();
                 case 2 -> operation.editName();
                 case 3 -> operation.editPatronymic();
-                case 4 -> a = false;
-
+                case 4 -> {
+                    return;
+                }
                 default -> def();
             }
         }
     }
 
     private void mainMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printMainMenu();
             switch (scanner.nextInt()) {
                 case 1 -> departmentMenu();
                 case 2 -> postMenu();
                 case 3 -> employeeMenu();
                 case 4 -> reportMenu();
-                case 5 -> a = false;
+                case 5 -> {
+                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignName());
+                    return;
+                }
                 default -> def();
             }
         }
     }
 
     private void departmentMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printDepartmentMenu();
             switch (scanner.nextInt()) {
                 case 1 -> operation.getReport().departments();
@@ -120,7 +131,9 @@ public class Menu implements Serializable {
                     operation.createDepartment(scanner.nextLine());
                     System.out.println("Отдел создан!");
                 }
-                case 3 -> a = false;
+                case 3 -> {
+                    return;
+                }
                 default -> def();
             }
         }
@@ -128,8 +141,7 @@ public class Menu implements Serializable {
     }
 
     private void departmentEditMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printDepartmentEditMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
@@ -138,15 +150,16 @@ public class Menu implements Serializable {
                     editDepartment();
                 }
                 case 2 -> operation.deleteDepartment();
-                case 3 -> a = false;
+                case 3 -> {
+                    return;
+                }
                 default -> def();
             }
         }
     }
 
     private void editDepartment() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printEditDepartment();
             switch (scanner.nextInt()) {
                 case 1 -> {
@@ -159,7 +172,9 @@ public class Menu implements Serializable {
                     operation.editDepartmentChief(scanner.nextInt());
                     System.out.println("Новый руководитель назначен!");
                 }
-                case 3 -> a = false;
+                case 3 -> {
+                    return;
+                }
                 default -> def();
             }
         }
@@ -167,8 +182,7 @@ public class Menu implements Serializable {
     }
 
     private void postMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printPostMenu();
             switch (scanner.nextInt()) {
                 case 1 -> operation.getReport().listPosts();
@@ -177,28 +191,30 @@ public class Menu implements Serializable {
                     operation.createPost(scanner.nextLine());
                     System.out.println("Должность создана");
                 }
-                case 3 -> a = false;
+                case 3 -> {
+                    return;
+                }
                 default -> def();
             }
         }
     }
 
     private void postEditMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printPostEditMenu();
             switch (scanner.nextInt()) {
                 case 1 -> operation.editPost();
                 case 2 -> operation.deletePost();
-                case 3 -> a = false;
+                case 3 -> {
+                    return;
+                }
                 default -> def();
             }
         }
     }
 
     private void employeeMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> operation.getReport().listEmployees();
@@ -212,7 +228,9 @@ public class Menu implements Serializable {
                     String patronymic = scanner.next();
                     operation.createEmployee(surname, name, patronymic);
                 }
-                case 4 -> a = false;
+                case 4 -> {
+                    return;
+                }
                 default -> def();
             }
         }
@@ -220,21 +238,21 @@ public class Menu implements Serializable {
     }
 
     private void employeeEditMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printEmployeeEditMenu();
             switch (scanner.nextInt()) {
                 case 1 -> operation.editEmployee();
                 case 2 -> operation.deleteEmployee();
-                case 3 -> a = false;
+                case 3 -> {
+                    return;
+                }
                 default -> def();
             }
         }
     }
 
     private void reportMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printReportMenu();
             switch (scanner.nextInt()) {
                 case 1 -> operation.getReport().companyStructure();
@@ -252,8 +270,7 @@ public class Menu implements Serializable {
                     }
                 }
                 case 5 -> {
-                    a = false;
-                    scanner.nextLine();
+                    return;
                 }
                 default -> def();
             }
@@ -261,8 +278,7 @@ public class Menu implements Serializable {
     }
 
     private void searchEmployeeMenu() {
-        boolean a = true;
-        while (a) {
+        while (true) {
             view.printSearchEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
@@ -313,7 +329,9 @@ public class Menu implements Serializable {
                         searchEmployeeMenu();
                     }
                 }
-                case 6 -> a = false;
+                case 6 -> {
+                    return;
+                }
                 default -> def();
             }
         }
