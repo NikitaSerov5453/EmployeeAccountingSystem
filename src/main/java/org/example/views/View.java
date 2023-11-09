@@ -76,15 +76,15 @@ public class View {
     public void printDepartmentEditMenu() {
         System.out.println("""
                 1: Редактировать отдел
-                2: Удалить отдел
-                3: Назад""");
+                2: Назад""");
     }
 
     public void printEditDepartment() {
         System.out.println("""
                 1: Изменить название отдела
                 2: Изменить руководителя отдела
-                3: Назад""");
+                3: Удалить отдел
+                4: Назад""");
     }
 
     public void printPostMenu() {
@@ -98,6 +98,12 @@ public class View {
     public void printPostEditMenu() {
         System.out.println("""
                 1: Редактировать должность
+                2: Назад""");
+    }
+
+    public void printEditPost() {
+        System.out.println("""
+                1: Изменить название должности
                 2: Удалить должность
                 3: Назад""");
     }

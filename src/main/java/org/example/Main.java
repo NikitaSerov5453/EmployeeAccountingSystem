@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.campaigns.*;
-import org.example.data.Data;
 import org.example.operations.Report;
 import org.example.operations.Search;
 import org.example.views.Menu;

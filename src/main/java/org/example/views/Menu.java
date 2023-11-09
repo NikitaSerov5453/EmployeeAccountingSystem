@@ -1,7 +1,9 @@
 package org.example.views;
 
 import org.example.campaigns.Campaign;
+import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
+import org.example.campaigns.Post;
 import org.example.files.Serialized;
 import org.example.operations.*;
 
@@ -18,6 +20,12 @@ public class Menu implements Serializable {
 
     private final Scanner scanner = new Scanner(System.in);
     private Operation operation = new Operation();
+    private OperationEmployee operationEmployee;
+    private OperationDepartment operationDepartment;
+    private OperationPost operationPost;
+    private Department department;
+    private Post post;
+
     private final View view = new View();
     private Campaign campaign;
 
@@ -51,7 +59,7 @@ public class Menu implements Serializable {
             }
             case 2 -> operation.editCampaign();
             case 3 -> {
-                this.campaign = operation.loadCampaign("123456");
+                this.campaign = operation.loadCampaign("123");
                 mainMenu();
             }
             default -> {
@@ -62,21 +70,20 @@ public class Menu implements Serializable {
     }
 
 
-
     public void editEmployeeMenu() {
         while (true) {
             view.printEditEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> editFCsMenu();
-                case 2 -> operation.editDateOfBirth();
-                case 3 -> operation.editGender();
-                case 4 -> operation.editTelephoneNumber();
-                case 5 -> operation.editDepartment();
-                case 6 -> operation.editPost();
-                case 7 -> operation.editChief();
-                case 8 -> operation.editSalary();
+                case 2 -> operationEmployee.editDateOfBirth();
+                case 3 -> operationEmployee.editGender();
+                case 4 -> operationEmployee.editTelephoneNumber();
+                case 5 -> operationEmployee.editDepartment();
+                case 6 -> operationEmployee.editPost();
+                case 7 -> operationEmployee.editChief();
+                case 8 -> operationEmployee.editSalary();
                 case 9 -> {
-                    operation.deleteEmployee();
+                    operationEmployee.deleteEmployee();
                     employeeMenu();
                 }
                 case 0 -> {
@@ -92,9 +99,9 @@ public class Menu implements Serializable {
         while (true) {
             view.printEditFCsMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operation.editSurname();
-                case 2 -> operation.editName();
-                case 3 -> operation.editPatronymic();
+                case 1 -> operationEmployee.editSurname();
+                case 2 -> operationEmployee.editName();
+                case 3 -> operationEmployee.editPatronymic();
                 case 4 -> {
                     return;
                 }
@@ -124,7 +131,10 @@ public class Menu implements Serializable {
         while (true) {
             view.printDepartmentMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operation.getReport().departments();
+                case 1 -> {
+                    operation.getReport().departments();
+                    departmentEditMenu();
+                }
                 case 2 -> {
                     System.out.println("Введите название отдела");
                     scanner.nextLine();
@@ -137,7 +147,6 @@ public class Menu implements Serializable {
                 default -> def();
             }
         }
-
     }
 
     private void departmentEditMenu() {
@@ -145,12 +154,18 @@ public class Menu implements Serializable {
             view.printDepartmentEditMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
-                    System.out.println("Введите id отдела который хотите отредактировать:");
-                    operation.setDepartment(campaign.data.getDepartments().get(operation.getSearch().searchIndexDepartment(campaign.data.getDepartments(), scanner.nextInt())));
+                    System.out.println("Введите id отдела который хотите редактировать:");
+                    try {
+                        this.department = campaign.getDepartments().get(scanner.nextInt() - 1);
+                        System.out.println(this.department);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Неверно указан id отдела");
+                        break;
+                    }
+                    System.out.println(this.department);
                     editDepartment();
                 }
-                case 2 -> operation.deleteDepartment();
-                case 3 -> {
+                case 2 -> {
                     return;
                 }
                 default -> def();
@@ -164,15 +179,31 @@ public class Menu implements Serializable {
             switch (scanner.nextInt()) {
                 case 1 -> {
                     System.out.println("Введите название отдела:");
-                    operation.editDepartmentName(scanner.nextLine());
+                    scanner.nextLine();
+                    if (this.department != null) {
+                        this.department.setDepartmentName(scanner.nextLine());
+                        System.out.println(this.department);
+                    } else {
+                        System.out.println("Отдел не выбран");
+                    }
                     System.out.println("Название отдела изменено!");
                 }
                 case 2 -> {
                     System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:");
-                    operation.editDepartmentChief(scanner.nextInt());
-                    System.out.println("Новый руководитель назначен!");
+                    int idEmployee = scanner.nextInt();
+                    try {
+                        if (this.department != null) {
+                            this.department.setChief(department.getEmployee().get(idEmployee));
+                            System.out.println("Новый руководитель назначен!");
+                        } else {
+                            System.out.println("Отдел не выбран");
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Неверно указан id сотрдуника");
+                    }
                 }
-                case 3 -> {
+                case 3 -> operationDepartment.deleteDepartment();
+                case 4 -> {
                     return;
                 }
                 default -> def();
@@ -185,10 +216,14 @@ public class Menu implements Serializable {
         while (true) {
             view.printPostMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operation.getReport().listPosts();
+                case 1 -> {
+                    operation.getReport().listPosts();
+                    postEditMenu();
+                }
                 case 2 -> {
                     System.out.println("Введите название должности");
-                    operation.createPost(scanner.nextLine());
+                    scanner.nextLine();
+                    operationPost.createPost(scanner.nextLine());
                     System.out.println("Должность создана");
                 }
                 case 3 -> {
@@ -203,8 +238,44 @@ public class Menu implements Serializable {
         while (true) {
             view.printPostEditMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operation.editPost();
-                case 2 -> operation.deletePost();
+                case 1 -> {
+                    System.out.println("Введите id должности, которую хотите редактировать");
+                    try {
+                        this.post = campaign.getPosts().get(scanner.nextInt() - 1);
+                        System.out.println(this.post);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Неверно указан id должности");
+                        break;
+                    }
+                    System.out.println(this.post);
+                    editPost();
+                }
+                case 2 -> {
+                    return;
+                }
+                default -> def();
+            }
+        }
+    }
+
+    private void editPost() {
+        while (true) {
+            view.printEditPost();
+            switch (scanner.nextInt()) {
+                case 1 -> {
+                    System.out.println("Введите навание должности:");
+                    scanner.nextLine();
+                    if (this.post != null) {
+                        this.post.setPostName(scanner.nextLine());
+                        System.out.println(this.post);
+                    } else {
+                        System.out.println("Должность не выбрана");
+                    }
+                    System.out.println("Название должности изменено");
+                }
+                case 2 -> {
+                    operationPost.deletePost();
+                }
                 case 3 -> {
                     return;
                 }
@@ -226,7 +297,7 @@ public class Menu implements Serializable {
                     String name = scanner.next();
                     System.out.println("Введите отчество");
                     String patronymic = scanner.next();
-                    operation.createEmployee(surname, name, patronymic);
+                    operationEmployee.createEmployee(surname, name, patronymic);
                 }
                 case 4 -> {
                     return;
@@ -241,8 +312,8 @@ public class Menu implements Serializable {
         while (true) {
             view.printEmployeeEditMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operation.editEmployee();
-                case 2 -> operation.deleteEmployee();
+                case 1 -> operationEmployee.editEmployee();
+                case 2 -> operationEmployee.deleteEmployee();
                 case 3 -> {
                     return;
                 }
@@ -285,7 +356,7 @@ public class Menu implements Serializable {
                     System.out.println("Введите id сотрдуника");
                     int id = scanner.nextInt();
                     try {
-                        operation.setEmployee(operation.getSearch().searchEmployeeID(id));
+                        operationEmployee.setEmployee(operation.getSearch().searchEmployeeID(id));
                         employeeEditMenu();
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник с id: " + id + " не найден");
@@ -295,7 +366,7 @@ public class Menu implements Serializable {
                     System.out.println("Введите ФИО сотрдуника");
                     String FCs = scanner.nextLine();
                     try {
-                        operation.setEmployee(operation.takeEmployee(operation.getSearch().searchEmployeeFCs(FCs)));
+                        operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeeChief(FCs)));
                         employeeEditMenu();
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник: " + FCs + " не найден");

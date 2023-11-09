@@ -10,7 +10,7 @@ public class Department implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private final int departmentID;
+    private int departmentID;
     private static int numberCreation;
     private String departmentName;
     private Employee chief;

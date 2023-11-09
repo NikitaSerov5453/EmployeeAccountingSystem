@@ -30,6 +30,10 @@ public class Post implements Serializable {
         this.postName = postName;
     }
 
+    public void createPost(String postName) {
+
+    }
+
     @Override
     public String toString() {
         return "\nID Должности: " + postID +

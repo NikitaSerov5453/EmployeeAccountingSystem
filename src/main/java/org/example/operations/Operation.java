@@ -20,9 +20,9 @@ public class Operation {
 
     private final View view = new View();
 
-    private Department department;
+
     private Campaign campaign;
-    private Employee employee;
+
 
     public Operation() {
 
@@ -30,14 +30,6 @@ public class Operation {
 
     public View getView() {
         return view;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public Search getSearch() {
@@ -88,105 +80,8 @@ public class Operation {
 
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
     public void createDepartment(String nameDepartment) {
         Department department = new Department(nameDepartment);
-        campaign.data.addDepartments(department);
+        campaign.addDepartments(department);
     }
-
-    public void deleteDepartment() {
-        campaign.data.deleteDepartment(this.department.getDepartmentID() - 1);
-    }
-
-    public void editDepartmentName(String name) {
-        this.department.setDepartmentName(name);
-    }
-
-    public void editDepartmentChief(int newChiefEmployeeID) {
-        this.department.setChief(department.getEmployee().get(newChiefEmployeeID));
-    }
-
-    public void createEmployee(String surname, String name, String patronymic) {
-        Employee employee = new Employee(surname, name, patronymic);
-        campaign.data.addEmployee(employee);
-    }
-
-    public void deleteEmployee() {
-
-    }
-
-    public void editEmployee() {
-
-    }
-
-    public void editSurname() {
-
-    }
-
-    public void editName() {
-
-    }
-
-    public void editPatronymic() {
-
-    }
-
-    public void editDateOfBirth() {
-
-    }
-
-    public void editGender() {
-
-    }
-
-    public void editTelephoneNumber() {
-
-    }
-
-    public void editDepartment() {
-
-    }
-
-    public void editPost() {
-
-    }
-
-    public void editChief() {
-
-    }
-
-    public void editSalary() {
-
-    }
-
-    public void createPost(String namePost) {
-        campaign.data.addPosts(new Post(namePost));
-    }
-
-    public void deletePost() {
-
-    }
-
-    public Employee takeEmployee(HashSet<Employee> employees) {
-        System.out.println("Выберете нужного сотрдуника:");
-        view.printHashSet(employees);
-        int id = scanner.nextInt();
-        int counter = 1;
-        for (Employee employee : employees) {
-            if (counter == id) {
-                return employee;
-            } else {
-                counter++;
-            }
-        }
-        return null;
-    }
-
 }
