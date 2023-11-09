@@ -5,24 +5,15 @@ import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
 import org.example.campaigns.Post;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 
-public class Search implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Search {
 
     private Campaign campaign;
 
     public Search() {
 
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
     }
 
     public void setCampaign(Campaign campaign) {

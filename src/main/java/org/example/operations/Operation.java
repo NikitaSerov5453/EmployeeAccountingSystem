@@ -110,8 +110,8 @@ public class Operation {
         campaign.addPosts(post);
     }
 
-    public void createEmployee(String surname, String name, String patronymic) {
-        Employee employee = new Employee(surname, name, patronymic);
+    public void createEmployee(String surname, String name, String patronymic, LocalDate dateOfBirth) {
+        Employee employee = new Employee(surname, name, patronymic, dateOfBirth);
         employee.setDateOfEmployment(LocalDate.now());
         campaign.addEmployee(employee);
     }

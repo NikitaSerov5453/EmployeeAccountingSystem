@@ -2,6 +2,7 @@ package org.example.campaigns;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Employee implements Externalizable {
 
@@ -22,10 +23,11 @@ public class Employee implements Externalizable {
     private int employeeID;
     private static int numberCreation;
 
-    public Employee(String surname, String name, String patronymic) {
+    public Employee(String surname, String name, String patronymic, LocalDate dateOfBirth) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
+        this.dateOfBirth = dateOfBirth;
         numberCreation++;
         this.employeeID = numberCreation;
     }
@@ -61,8 +63,9 @@ public class Employee implements Externalizable {
         this.patronymic = patronymic;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public String getDateOfBirth() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return dateOfBirth.format(dateTimeFormatter);
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
@@ -109,8 +112,9 @@ public class Employee implements Externalizable {
         this.chief = chief;
     }
 
-    public LocalDate getDateOfEmployment() {
-        return dateOfEmployment;
+    public String getDateOfEmployment() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return dateOfEmployment.format(dateTimeFormatter);
     }
 
     public void setDateOfEmployment(LocalDate dateOfEmployment) {
@@ -129,13 +133,13 @@ public class Employee implements Externalizable {
     public String toString() {
         return "\nСотрудник: " +
                 "\nФИО: " + surname + " " + name + " " + patronymic +
-                "\nДата рождения: " + dateOfBirth +
+                "\nДата рождения: " + getDateOfBirth() +
                 "\nПол: " + gender +
                 "\nНомер телефона: " + telephoneNumber +
                 "\nДолжность: " + post +
                 "\nОтдел: " + department +
                 "\nРуководитель: " + chief +
-                "\nДата трудоустройства: " + dateOfEmployment +
+                "\nДата трудоустройства: " + getDateOfEmployment() +
                 "\nЗаработная плата: " + salary +
                 "\nID Сотрдуника: " + employeeID +
                 "\n";

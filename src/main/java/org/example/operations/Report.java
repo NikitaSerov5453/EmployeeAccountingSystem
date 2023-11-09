@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Report implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Report {
 
     private Campaign campaign;
 

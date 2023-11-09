@@ -2,9 +2,12 @@ package org.example.operations;
 
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Employee;
+import org.example.campaigns.Gender;
 import org.example.campaigns.Post;
 import org.example.views.View;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -39,10 +42,6 @@ public class OperationEmployee {
         campaign.getEmployee().remove(index);
     }
 
-    public void editEmployee() {
-
-    }
-
     public void editSurname(String surname) {
         this.employee.setSurname(surname);
     }
@@ -55,16 +54,39 @@ public class OperationEmployee {
         this.employee.setPatronymic(patronymic);
     }
 
-    public void editDateOfBirth() {
-
+    public void editDateOfBirth(String dateOfBirth) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate localDate = LocalDate.parse(dateOfBirth, dateTimeFormatter);
+        this.employee.setDateOfBirth(localDate);
     }
 
-    public void editGender() {
-
+    public void editDateOfEmployment(String dateOfEmployment) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate localDate = LocalDate.parse(dateOfEmployment, dateTimeFormatter);
+        this.employee.setDateOfEmployment(localDate);
     }
 
-    public void editTelephoneNumber(int telephoneNumber) {
-        this.employee.setTelephoneNumber(String.valueOf(telephoneNumber));
+    public void editGender(int i) {
+        while (true) {
+            switch (i) {
+                case 1 -> {
+                    this.employee.setGender(Gender.MALE);
+                    return;
+                }
+                case 2 -> {
+                    this.employee.setGender(Gender.FEMALE);
+                    return;
+                }
+                case 3 -> {
+                    return;
+                }
+                default -> System.out.println("Неверно выбран пункт");
+            }
+        }
+    }
+
+    public void editTelephoneNumber(String telephoneNumber) {
+        this.employee.setTelephoneNumber(telephoneNumber);
     }
 
     public void editDepartment() {

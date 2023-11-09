@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fd20dbe1-f380-448a-9770-96bdb61e70e1" name="Changes" comment="2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Department.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/campaigns/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Operation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationDepartment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/OperationPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Report.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/Search.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/views/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/views/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/views/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/views/View.java" afterDir="false" />
@@ -193,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699518645564</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="2">
+      <created>1699522613856</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699522613856</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

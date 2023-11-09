@@ -1,23 +1,14 @@
 package org.example.views;
 
 import org.example.campaigns.Campaign;
-import org.example.campaigns.Department;
-import org.example.campaigns.Employee;
-import org.example.campaigns.Post;
 import org.example.files.Serialized;
 import org.example.operations.*;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Menu implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Menu  {
 
     private final Scanner scanner = new Scanner(System.in);
     private Operation operation = new Operation();
@@ -60,7 +51,7 @@ public class Menu implements Serializable {
             }
             case 2 -> operation.editCampaign();
             case 3 -> {
-                this.campaign = operation.loadCampaign("123");
+                this.campaign = operation.loadCampaign("1234");
                 mainMenu();
             }
             default -> {
@@ -77,14 +68,20 @@ public class Menu implements Serializable {
             switch (scanner.nextInt()) {
                 case 1 -> editFCsMenu();
                 case 2 -> {
-                    operationEmployee.editDateOfBirth();
+                    System.out.println("Введите дату рождения (формат ввода \"dd.MM.yyyy\"):");
+                    scanner.nextLine();
+                    operationEmployee.editDateOfBirth(scanner.nextLine());
                 }
                 case 3 -> {
-                    operationEmployee.editGender();
+                    System.out.println("""
+                            Выберете необходимый пол:
+                            1: Мужской
+                            2: Женский""");
+                    operationEmployee.editGender(scanner.nextInt());
                 }
                 case 4 -> {
                     System.out.println("Введите номер телефона:");
-                    operationEmployee.editTelephoneNumber(scanner.nextInt());
+                    operationEmployee.editTelephoneNumber(scanner.next());
                 }
                 case 5 -> {
                     System.out.println("Выберите депортамент из списка:");
@@ -95,11 +92,12 @@ public class Menu implements Serializable {
                     operationEmployee.editPost();
                 }
                 case 7 -> {
-                    operationEmployee.editChief();
-                }
-                case 8 -> {
                     System.out.println("Укажите зарплату:");
                     operationEmployee.editSalary(scanner.nextInt());
+                }
+                case 8 -> {
+                    System.out.println("Введите дату трудоустройства (формат ввода \"dd.MM.yyyy\"):");
+                    operationEmployee.editDateOfEmployment(scanner.nextLine());
                 }
                 case 9 -> {
                     int index = search.searchIndexEmployee(campaign.getEmployee(), operationEmployee.getEmployee().getEmployeeID());
@@ -349,7 +347,11 @@ public class Menu implements Serializable {
                     String name = scanner.next();
                     System.out.println("Введите отчество");
                     String patronymic = scanner.next();
-                    operation.createEmployee(surname, name, patronymic);
+                    System.out.println("Введите дату рождения (формат ввода \"dd.MM.yyyy\"):");
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                    scanner.nextLine();
+                    LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine(), dateTimeFormatter);
+                    operation.createEmployee(surname, name, patronymic, dateOfBirth);
                 }
                 case 4 -> {
                     return;

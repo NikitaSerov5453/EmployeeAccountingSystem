@@ -17,6 +17,7 @@ public class Department implements Externalizable {
 
 
     private List<Employee> employee = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     public Department(String departmentName) {
         numberCreation++;
@@ -25,6 +26,7 @@ public class Department implements Externalizable {
     }
 
     public Department() {
+
     }
 
     public int getDepartmentID() {
@@ -51,6 +53,11 @@ public class Department implements Externalizable {
         this.departmentName = departmentName;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+
     @Override
     public String toString() {
         return "\nНомер отдела: " + departmentID +
@@ -66,6 +73,7 @@ public class Department implements Externalizable {
         out.writeObject(this.departmentName);
         out.writeObject(this.employee);
         out.writeObject(this.departmentID);
+        out.writeObject(this.posts);
     }
 
     @Override
@@ -75,5 +83,6 @@ public class Department implements Externalizable {
         this.departmentName = (String) in.readObject();
         this.employee = Collections.unmodifiableList(this.employee); in.readObject();
         this.departmentID = (int) in.readObject();
+        this.posts = Collections.unmodifiableList(this.posts); in.readObject();
     }
 }
