@@ -1,14 +1,13 @@
 package org.example.campaigns;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 
-public class Post implements Serializable {
+public class Post implements Externalizable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private final int postID;
+    private int postID;
     private static int numberCreation;
     private String postName;
 
@@ -16,6 +15,9 @@ public class Post implements Serializable {
         numberCreation++;
         this.postName = postName;
         this.postID = numberCreation;
+    }
+
+    public Post() {
     }
 
     public int getNumberCreation() {
@@ -38,5 +40,19 @@ public class Post implements Serializable {
     public String toString() {
         return "\nID Должности: " + postID +
                 " Должность: " + postName;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(this.postName);
+        out.writeObject(numberCreation);
+        out.writeObject(this.postID);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        this.postName = (String) in.readObject();
+        numberCreation = (int) in.readObject();
+        this.postID = (int) in.readObject();
     }
 }

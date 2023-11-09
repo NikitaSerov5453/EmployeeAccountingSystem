@@ -1,11 +1,11 @@
 package org.example.campaigns;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Department implements Serializable {
+public class Department implements Externalizable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -16,12 +16,23 @@ public class Department implements Serializable {
     private Employee chief;
 
 
-    private final List<Employee> employee = new ArrayList<>();
+    private List<Employee> employee = new ArrayList<>();
 
     public Department(String departmentName) {
         numberCreation++;
         this.departmentName = departmentName;
         this.departmentID = numberCreation;
+    }
+
+    public Department() {
+    }
+
+    public static int getNumberCreation() {
+        return numberCreation;
+    }
+
+    public static void setNumberCreation(int numberCreation) {
+        Department.numberCreation = numberCreation;
     }
 
     public int getDepartmentID() {
@@ -58,5 +69,23 @@ public class Department implements Serializable {
                 " Отдел: " + departmentName +
                 " Руководитель: " + chief;
 
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(this.chief);
+        out.writeObject(numberCreation);
+        out.writeObject(this.departmentName);
+        out.writeObject(this.employee);
+        out.writeObject(this.departmentID);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        this.chief = (Employee) in.readObject();
+        numberCreation = (int) in.readObject();
+        this.departmentName = (String) in.readObject();
+        this.employee = Collections.unmodifiableList(this.employee); in.readObject();
+        this.departmentID = (int) in.readObject();
     }
 }

@@ -1,10 +1,9 @@
 package org.example.campaigns;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDate;
 
-public class Employee implements Serializable{
+public class Employee implements Externalizable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -20,7 +19,7 @@ public class Employee implements Serializable{
     private Employee chief;
     private LocalDate dateOfEmployment;
     private int salary;
-    private final int employeeID;
+    private int employeeID;
     private static int numberCreation;
 
     public Employee(String surname, String name, String patronymic) {
@@ -29,6 +28,9 @@ public class Employee implements Serializable{
         this.patronymic = patronymic;
         numberCreation++;
         this.employeeID = numberCreation;
+    }
+
+    public Employee() {
     }
 
     public int getEmployeeID() {
@@ -137,5 +139,39 @@ public class Employee implements Serializable{
                 "\nЗаработная плата: " + salary +
                 "\nID Сотрдуника: " + employeeID +
                 "\n";
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(this.surname);
+        out.writeObject(this.name);
+        out.writeObject(this.patronymic);
+        out.writeObject(this.dateOfBirth);
+        out.writeObject(this.gender);
+        out.writeObject(this.telephoneNumber);
+        out.writeObject(this.post);
+        out.writeObject(this.department);
+        out.writeObject(this.chief);
+        out.writeObject(this.dateOfEmployment);
+        out.writeObject(this.salary);
+        out.writeObject(numberCreation);
+        out.writeObject(this.employeeID);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        this.surname = (String) in.readObject();
+        this.name = (String) in.readObject();
+        this.patronymic = (String) in.readObject();
+        this.dateOfBirth = (LocalDate) in.readObject();
+        this.gender = (Gender) in.readObject();
+        this.telephoneNumber = (String) in.readObject();
+        this.post = (Post) in.readObject();
+        this.department = (Department) in.readObject();
+        this.chief = (Employee) in.readObject();
+        this.dateOfEmployment = (LocalDate) in.readObject();
+        this.salary = (int) in.readObject();
+        numberCreation = (int) in.readObject();
+        this.employeeID = (int) in.readObject();
     }
 }

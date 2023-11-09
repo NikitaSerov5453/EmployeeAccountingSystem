@@ -1,24 +1,26 @@
 package org.example.campaigns;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Campaign implements Serializable {
+public class Campaign implements Externalizable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private final List<Department> departments = new ArrayList<>();
-    private final List<Employee> employees = new ArrayList<>();
-    private final List<Post> posts = new ArrayList<>();
+    private List<Department> departments = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     private String campaignName;
 
 
     public Campaign(String campaignName) {
         this.campaignName = campaignName;
+    }
+
+    public Campaign() {
     }
 
 
@@ -66,5 +68,21 @@ public class Campaign implements Serializable {
 
     public List<Post> getPosts() {
         return posts;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(this.departments);
+        out.writeObject(this.employees);
+        out.writeObject(this.posts);
+        out.writeObject(this.campaignName);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        this.departments = (List<Department>) in.readObject();
+        this.employees = (List<Employee>) in.readObject();
+        this.posts = (List<Post>) in.readObject();
+        this.campaignName = (String) in.readObject();
     }
 }
