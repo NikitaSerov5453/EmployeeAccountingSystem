@@ -6,6 +6,7 @@ import org.example.operations.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu  {
@@ -68,9 +69,13 @@ public class Menu  {
             switch (scanner.nextInt()) {
                 case 1 -> editFCsMenu();
                 case 2 -> {
-                    System.out.println("Введите дату рождения (формат ввода \"dd.MM.yyyy\"):");
-                    scanner.nextLine();
-                    operationEmployee.editDateOfBirth(scanner.nextLine());
+                    try {
+                        System.out.println("Введите дату рождения (формат ввода \"dd.MM.yyyy\"):");
+                        scanner.nextLine();
+                        operationEmployee.editDateOfBirth(scanner.nextLine());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Неверный формат даты ");
+                    }
                 }
                 case 3 -> {
                     System.out.println("""
@@ -78,6 +83,7 @@ public class Menu  {
                             1: Мужской
                             2: Женский""");
                     operationEmployee.editGender(scanner.nextInt());
+
                 }
                 case 4 -> {
                     System.out.println("Введите номер телефона:");
@@ -96,8 +102,12 @@ public class Menu  {
                     operationEmployee.editSalary(scanner.nextInt());
                 }
                 case 8 -> {
-                    System.out.println("Введите дату трудоустройства (формат ввода \"dd.MM.yyyy\"):");
-                    operationEmployee.editDateOfEmployment(scanner.nextLine());
+                    try {
+                        System.out.println("Введите дату трудоустройства (формат ввода \"dd.MM.yyyy\"):");
+                        operationEmployee.editDateOfEmployment(scanner.nextLine());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Неверный формат даты ");
+                    }
                 }
                 case 9 -> {
                     int index = search.searchIndexEmployee(campaign.getEmployee(), operationEmployee.getEmployee().getEmployeeID());
