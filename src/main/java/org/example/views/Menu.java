@@ -4,6 +4,7 @@ import org.example.campaigns.Campaign;
 import org.example.files.Serialized;
 import org.example.operations.*;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -73,7 +74,7 @@ public class Menu  {
                         System.out.println("Введите дату рождения (формат ввода \"dd.MM.yyyy\"):");
                         scanner.nextLine();
                         operationEmployee.editDateOfBirth(scanner.nextLine());
-                    } catch (InputMismatchException e) {
+                    } catch (DateTimeException e) {
                         System.out.println("Неверный формат даты ");
                     }
                 }
@@ -105,7 +106,7 @@ public class Menu  {
                     try {
                         System.out.println("Введите дату трудоустройства (формат ввода \"dd.MM.yyyy\"):");
                         operationEmployee.editDateOfEmployment(scanner.nextLine());
-                    } catch (InputMismatchException e) {
+                    } catch (DateTimeException e) {
                         System.out.println("Неверный формат даты ");
                     }
                 }
