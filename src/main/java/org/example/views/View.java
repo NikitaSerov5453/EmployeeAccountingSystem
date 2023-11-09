@@ -83,8 +83,9 @@ public class View {
         System.out.println("""
                 1: Изменить название отдела
                 2: Изменить руководителя отдела
-                3: Удалить отдел
-                4: Назад""");
+                3: Удалить сотрдуника из отдела
+                4: Удалить отдел
+                5: Назад""");
     }
 
     public void printPostMenu() {
@@ -119,8 +120,7 @@ public class View {
     public void printEmployeeEditMenu() {
         System.out.println("""
                 1: Редактировать сотрдуника
-                2: Удалить сотрдуника
-                3: Назад""");
+                2: Назад""");
     }
 
     public void printSearchEmployeeMenu() {

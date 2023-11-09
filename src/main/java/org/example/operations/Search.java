@@ -109,4 +109,15 @@ public class Search implements Serializable {
         }
         return index;
     }
+
+    public int searchIndexEmployee(List<Employee> employees, int ID) {
+        int index = 0;
+        for (int i = 0; i < employees.size(); i++) {
+            if (ID == employees.get(i).getEmployeeID()) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 }

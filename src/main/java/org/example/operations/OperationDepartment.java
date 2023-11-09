@@ -19,10 +19,6 @@ public class OperationDepartment {
         this.department = department;
     }
 
-    public Campaign getCampaign() {
-        return campaign;
-    }
-
     public void setCampaign(Campaign campaign) {
         this.campaign = campaign;
     }

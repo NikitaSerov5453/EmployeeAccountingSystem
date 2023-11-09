@@ -6,6 +6,7 @@ import org.example.campaigns.Post;
 import org.example.views.View;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class OperationEmployee {
@@ -34,29 +35,24 @@ public class OperationEmployee {
         this.employee = employee;
     }
 
-    public void createEmployee(String surname, String name, String patronymic) {
-        Employee employee = new Employee(surname, name, patronymic);
-        campaign.addEmployee(employee);
-    }
-
-    public void deleteEmployee() {
-
+    public void deleteEmployee(int index) {
+        campaign.getEmployee().remove(index);
     }
 
     public void editEmployee() {
 
     }
 
-    public void editSurname() {
-
+    public void editSurname(String surname) {
+        this.employee.setSurname(surname);
     }
 
-    public void editName() {
-
+    public void editName(String name) {
+        this.employee.setName(name);
     }
 
-    public void editPatronymic() {
-
+    public void editPatronymic(String patronymic) {
+        this.employee.setPatronymic(patronymic);
     }
 
     public void editDateOfBirth() {
@@ -67,8 +63,8 @@ public class OperationEmployee {
 
     }
 
-    public void editTelephoneNumber() {
-
+    public void editTelephoneNumber(int telephoneNumber) {
+        this.employee.setTelephoneNumber(String.valueOf(telephoneNumber));
     }
 
     public void editDepartment() {
@@ -83,8 +79,8 @@ public class OperationEmployee {
 
     }
 
-    public void editSalary() {
-
+    public void editSalary(int salary) {
+        this.employee.setSalary(salary);
     }
 
 

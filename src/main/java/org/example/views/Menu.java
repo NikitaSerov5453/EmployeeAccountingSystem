@@ -76,16 +76,38 @@ public class Menu implements Serializable {
             view.printEditEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> editFCsMenu();
-                case 2 -> operationEmployee.editDateOfBirth();
-                case 3 -> operationEmployee.editGender();
-                case 4 -> operationEmployee.editTelephoneNumber();
-                case 5 -> operationEmployee.editDepartment();
-                case 6 -> operationEmployee.editPost();
-                case 7 -> operationEmployee.editChief();
-                case 8 -> operationEmployee.editSalary();
+                case 2 -> {
+                    operationEmployee.editDateOfBirth();
+                }
+                case 3 -> {
+                    operationEmployee.editGender();
+                }
+                case 4 -> {
+                    System.out.println("Введите номер телефона:");
+                    operationEmployee.editTelephoneNumber(scanner.nextInt());
+                }
+                case 5 -> {
+                    System.out.println("Выберите депортамент из списка:");
+                    operationEmployee.editDepartment();
+                }
+                case 6 -> {
+                    System.out.println("Выбирете должность из списка:");
+                    operationEmployee.editPost();
+                }
+                case 7 -> {
+                    operationEmployee.editChief();
+                }
+                case 8 -> {
+                    System.out.println("Укажите зарплату:");
+                    operationEmployee.editSalary(scanner.nextInt());
+                }
                 case 9 -> {
-                    operationEmployee.deleteEmployee();
-                    employeeMenu();
+                    int index = search.searchIndexEmployee(campaign.getEmployee(), operationEmployee.getEmployee().getEmployeeID());
+                    operationEmployee.deleteEmployee(index);
+                    operationEmployee.setEmployee(null);
+                    System.out.println("Сотрдуник удален");
+                    return;
+
                 }
                 case 0 -> {
                     return;
@@ -100,9 +122,21 @@ public class Menu implements Serializable {
         while (true) {
             view.printEditFCsMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operationEmployee.editSurname();
-                case 2 -> operationEmployee.editName();
-                case 3 -> operationEmployee.editPatronymic();
+                case 1 -> {
+                    System.out.println("Введите фамилию:");
+                    scanner.nextLine();
+                    operationEmployee.editSurname(scanner.nextLine());
+                }
+                case 2 -> {
+                    System.out.println("Введите имя:");
+                    scanner.nextLine();
+                    operationEmployee.editName(scanner.nextLine());
+                }
+                case 3 -> {
+                    System.out.println("Введите отчество:");
+                    scanner.nextLine();
+                    operationEmployee.editPatronymic(scanner.nextLine());
+                }
                 case 4 -> {
                     return;
                 }
@@ -204,13 +238,16 @@ public class Menu implements Serializable {
                     }
                 }
                 case 3 -> {
+                    //Удалить сотрдуника из отдела
+                }
+                case 4 -> {
                     int index = search.searchIndexDepartment(campaign.getDepartments(), operationDepartment.getDepartment().getDepartmentID());
                     operationDepartment.deleteDepartment(index);
                     operationDepartment.setDepartment(null);
                     System.out.println("Отдел удален");
                     return;
                 }
-                case 4 -> {
+                case 5 -> {
                     return;
                 }
                 default -> def();
@@ -282,7 +319,11 @@ public class Menu implements Serializable {
                     System.out.println("Название должности изменено");
                 }
                 case 2 -> {
-                    operationPost.deletePost();
+                    int index = search.searchIndexPost(campaign.getPosts(), operationPost.getPost().getPostID());
+                    operationPost.deletePost(index);
+                    operationPost.setPost(null);
+                    System.out.println("Должность удалена");
+                    return;
                 }
                 case 3 -> {
                     return;
@@ -296,7 +337,10 @@ public class Menu implements Serializable {
         while (true) {
             view.printEmployeeMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operation.getReport().listEmployees();
+                case 1 -> {
+                    operation.getReport().listEmployees();
+                    employeeEditMenu();
+                }
                 case 2 -> searchEmployeeMenu();
                 case 3 -> {
                     System.out.println("Введите фамилию");
@@ -305,7 +349,7 @@ public class Menu implements Serializable {
                     String name = scanner.next();
                     System.out.println("Введите отчество");
                     String patronymic = scanner.next();
-                    operationEmployee.createEmployee(surname, name, patronymic);
+                    operation.createEmployee(surname, name, patronymic);
                 }
                 case 4 -> {
                     return;
@@ -320,9 +364,19 @@ public class Menu implements Serializable {
         while (true) {
             view.printEmployeeEditMenu();
             switch (scanner.nextInt()) {
-                case 1 -> operationEmployee.editEmployee();
-                case 2 -> operationEmployee.deleteEmployee();
-                case 3 -> {
+                case 1 -> {
+                    System.out.println("Введите id сотрудника которого хотите редактировать:");
+                    try {
+                        int index = search.searchIndexEmployee(campaign.getEmployee(), scanner.nextInt());
+                        operationEmployee.setEmployee(campaign.getEmployee().get(index));
+                        System.out.println(operationEmployee.getEmployee());
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Неверно указан id сотрдуника");
+                        break;
+                    }
+                    editEmployeeMenu();
+                }
+                case 2 -> {
                     return;
                 }
                 default -> def();

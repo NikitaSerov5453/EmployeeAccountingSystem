@@ -29,7 +29,7 @@ public class OperationPost {
         this.campaign = campaign;
     }
 
-    public void deletePost() {
-
+    public void deletePost(int index) {
+        campaign.getPosts().remove(index);
     }
 }

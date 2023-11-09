@@ -8,6 +8,7 @@ import org.example.campaigns.Employee;
 import org.example.views.Menu;
 import org.example.views.View;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -107,5 +108,11 @@ public class Operation {
     public void createPost(String postName) {
         Post post = new Post(postName);
         campaign.addPosts(post);
+    }
+
+    public void createEmployee(String surname, String name, String patronymic) {
+        Employee employee = new Employee(surname, name, patronymic);
+        employee.setDateOfEmployment(LocalDate.now());
+        campaign.addEmployee(employee);
     }
 }
