@@ -32,9 +32,4 @@ public class OperationPost {
     public void deletePost() {
 
     }
-
-    public void createPost(String namePost) {
-        campaign.addPosts(new Post(namePost));
-    }
-
 }

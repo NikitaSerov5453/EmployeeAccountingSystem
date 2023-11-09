@@ -36,6 +36,10 @@ public class Post implements Externalizable {
 
     }
 
+    public int getPostID() {
+        return postID;
+    }
+
     @Override
     public String toString() {
         return "\nID Должности: " + postID +

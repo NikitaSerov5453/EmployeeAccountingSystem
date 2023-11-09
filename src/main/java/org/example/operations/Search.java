@@ -3,6 +3,7 @@ package org.example.operations;
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
+import org.example.campaigns.Post;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -91,6 +92,17 @@ public class Search implements Serializable {
         int index = 0;
         for (int i = 0; i < departments.size(); i++) {
             if (ID == departments.get(i).getDepartmentID()) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    public int searchIndexPost(List<Post> posts, int ID) {
+        int index = 0;
+        for (int i = 0; i < posts.size(); i++) {
+            if (ID == posts.get(i).getPostID()) {
                 index = i;
                 break;
             }

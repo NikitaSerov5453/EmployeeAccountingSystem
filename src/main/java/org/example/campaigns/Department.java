@@ -27,20 +27,8 @@ public class Department implements Externalizable {
     public Department() {
     }
 
-    public static int getNumberCreation() {
-        return numberCreation;
-    }
-
-    public static void setNumberCreation(int numberCreation) {
-        Department.numberCreation = numberCreation;
-    }
-
     public int getDepartmentID() {
         return departmentID;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee.add(employee);
     }
 
     public List<Employee> getEmployee() {

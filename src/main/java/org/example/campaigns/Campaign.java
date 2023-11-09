@@ -1,5 +1,9 @@
 package org.example.campaigns;
 
+import org.example.operations.OperationDepartment;
+import org.example.operations.OperationEmployee;
+import org.example.operations.OperationPost;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +12,6 @@ public class Campaign implements Externalizable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
     private List<Department> departments = new ArrayList<>();
     private List<Employee> employees = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();

@@ -27,8 +27,8 @@ public class OperationDepartment {
         this.campaign = campaign;
     }
 
-    public void deleteDepartment() {
-        campaign.deleteDepartment(this.department.getDepartmentID() - 1);
+    public void deleteDepartment(int index) {
+        campaign.getDepartments().remove(index);
     }
 
     public void editDepartmentName(String name) {
