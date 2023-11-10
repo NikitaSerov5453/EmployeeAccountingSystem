@@ -33,10 +33,6 @@ public class Department implements Externalizable {
         return departmentID;
     }
 
-    public List<Employee> getEmployee() {
-        return employee;
-    }
-
     public Employee getChief() {
         return chief;
     }
@@ -51,6 +47,18 @@ public class Department implements Externalizable {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    public void addEmployee(Employee employee) {
+        this.employee.add(employee);
+    }
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void addPosts(Post posts) {
+        this.posts.add(posts);
     }
 
     public List<Post> getPosts() {
@@ -81,8 +89,8 @@ public class Department implements Externalizable {
         this.chief = (Employee) in.readObject();
         numberCreation = (int) in.readObject();
         this.departmentName = (String) in.readObject();
-        this.employee = Collections.unmodifiableList(this.employee); in.readObject();
+        this.employee = (List<Employee>) in.readObject();
         this.departmentID = (int) in.readObject();
-        this.posts = Collections.unmodifiableList(this.posts); in.readObject();
+        this.posts = (List<Post>) in.readObject();
     }
 }

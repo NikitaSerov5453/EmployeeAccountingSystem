@@ -49,18 +49,18 @@ public class Report {
     private double calculateAverageSalaryDepartment(Department department) {
         double salary = 0;
         for (int i = 0; i < department.getEmployee().size(); i++) {
-            salary += department.getEmployee().get(i).getSalary();
+            salary += department.getEmployee().get(i).getSalary() + '\n';
         }
         return salary;
     }
 
     public void averageSalaryDepartments() {
-        String pattern = "%25s%25s";
-        System.out.printf(pattern, "Отдел", "Средняя зарплата\n");
+        System.out.printf("%25s%25s", "Отдел", "Средняя зарплата\n");
         for (int i = 0; i < campaign.getDepartments().size(); i++) {
-            System.out.printf(pattern, campaign.getDepartments().get(i).getDepartmentName(),
-                    calculateAverageSalaryDepartment(campaign.getDepartments().get(i)));
+            System.out.printf("%25s%25s%25s", campaign.getDepartments().get(i).getDepartmentName(),
+                    calculateAverageSalaryDepartment(campaign.getDepartments().get(i)), '\n');
         }
+        System.out.println();
     }
 
     public void topExpensiveEmployee() {
@@ -73,7 +73,7 @@ public class Report {
                     employees.get(i).getPatronymic(),
                     employees.get(i).getSalary(), '\n');
         }
-        System.out.println('\n');
+        System.out.println();
     }
 
     public void topDevoteesEmployee() {

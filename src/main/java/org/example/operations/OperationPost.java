@@ -1,6 +1,7 @@
 package org.example.operations;
 
 import org.example.campaigns.Campaign;
+import org.example.campaigns.Department;
 import org.example.campaigns.Post;
 
 public class OperationPost {
@@ -9,8 +10,18 @@ public class OperationPost {
 
     private Campaign campaign;
 
+    private Department department;
+
     public OperationPost() {
 
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public Post getPost() {
@@ -29,7 +40,16 @@ public class OperationPost {
         this.campaign = campaign;
     }
 
-    public void deletePost(int index) {
-        campaign.getPosts().remove(index);
+    public void createPost(String postName) {
+        Post post = new Post(postName);
+        department.addPosts(post);
+        campaign.addPosts(post);
+    }
+
+    public void deletePostInDepartment(int indexDep) {
+        department.getPosts().remove(indexDep);
+    }
+    public void deletePost(int indexCamp) {
+        campaign.getPosts().remove(indexCamp);
     }
 }

@@ -17,7 +17,6 @@ public class Employee implements Externalizable {
     private String telephoneNumber;
     private Post post;
     private Department department;
-    private Employee chief;
     private LocalDate dateOfEmployment;
     private int salary;
     private int employeeID;
@@ -104,14 +103,6 @@ public class Employee implements Externalizable {
         this.department = department;
     }
 
-    public Employee getChief() {
-        return chief;
-    }
-
-    public void setChief(Employee chief) {
-        this.chief = chief;
-    }
-
     public String getDateOfEmployment() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return dateOfEmployment.format(dateTimeFormatter);
@@ -129,6 +120,13 @@ public class Employee implements Externalizable {
         this.salary = salary;
     }
 
+    public Employee getChief() {
+        if (department != null) {
+            return department.getChief();
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "\nСотрудник: " +
@@ -138,7 +136,7 @@ public class Employee implements Externalizable {
                 "\nНомер телефона: " + telephoneNumber +
                 "\nДолжность: " + post +
                 "\nОтдел: " + department +
-                "\nРуководитель: " + chief +
+                "\nРуководитель: " + getChief() +
                 "\nДата трудоустройства: " + getDateOfEmployment() +
                 "\nЗаработная плата: " + salary +
                 "\nID Сотрдуника: " + employeeID +
@@ -155,7 +153,7 @@ public class Employee implements Externalizable {
         out.writeObject(this.telephoneNumber);
         out.writeObject(this.post);
         out.writeObject(this.department);
-        out.writeObject(this.chief);
+
         out.writeObject(this.dateOfEmployment);
         out.writeObject(this.salary);
         out.writeObject(numberCreation);
@@ -172,7 +170,7 @@ public class Employee implements Externalizable {
         this.telephoneNumber = (String) in.readObject();
         this.post = (Post) in.readObject();
         this.department = (Department) in.readObject();
-        this.chief = (Employee) in.readObject();
+
         this.dateOfEmployment = (LocalDate) in.readObject();
         this.salary = (int) in.readObject();
         numberCreation = (int) in.readObject();

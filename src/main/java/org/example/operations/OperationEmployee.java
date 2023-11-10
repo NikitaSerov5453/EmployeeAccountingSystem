@@ -1,9 +1,6 @@
 package org.example.operations;
 
-import org.example.campaigns.Campaign;
-import org.example.campaigns.Employee;
-import org.example.campaigns.Gender;
-import org.example.campaigns.Post;
+import org.example.campaigns.*;
 import org.example.views.View;
 
 import java.time.LocalDate;
@@ -14,7 +11,8 @@ import java.util.Scanner;
 
 public class OperationEmployee {
     private final Scanner scanner = new Scanner(System.in);
-    private View view = new View();
+    private final View view = new View();
+    private final Search search = new Search();
     private Employee employee;
     private Campaign campaign;
 
@@ -89,20 +87,31 @@ public class OperationEmployee {
         this.employee.setTelephoneNumber(telephoneNumber);
     }
 
-    public void editDepartment() {
-
+    public void editDepartment(Department department) {
+        employee.setDepartment(department);
     }
 
-    public void editPost() {
-
+    public void editPost(Post post) {
+        employee.setPost(post);
     }
 
     public void editChief() {
 
     }
 
+    public void createEmployee(String surname, String name, String patronymic, LocalDate dateOfBirth) {
+        Employee employee = new Employee(surname, name, patronymic, dateOfBirth);
+        employee.setDateOfEmployment(LocalDate.now());
+        campaign.addEmployee(employee);
+    }
+
     public void editSalary(int salary) {
         this.employee.setSalary(salary);
+    }
+
+    public void cleanDepartmentAndPost() {
+        employee.setPost(null);
+        employee.setDepartment(null);
     }
 
 

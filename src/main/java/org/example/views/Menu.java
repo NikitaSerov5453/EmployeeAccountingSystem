@@ -1,12 +1,14 @@
 package org.example.views;
 
 import org.example.campaigns.Campaign;
+import org.example.campaigns.Employee;
 import org.example.files.Serialized;
 import org.example.operations.*;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -44,7 +46,7 @@ public class Menu  {
         System.out.println("Неверно введен номер");
     }
 
-    public void controlCompanyMenu() {
+    public void controlCompanyMenu() {//Создание кампании
         view.printControlCompanyMenu();
         switch (scanner.nextInt()) {
             case 1 -> {
@@ -53,7 +55,7 @@ public class Menu  {
             }
             case 2 -> operation.editCampaign();
             case 3 -> {
-                this.campaign = operation.loadCampaign("1234");
+                this.campaign = operation.loadCampaign("123");
                 mainMenu();
             }
             default -> {
@@ -64,7 +66,7 @@ public class Menu  {
     }
 
 
-    public void editEmployeeMenu() {
+    public void editEmployeeMenu() {//Редактирование сотрдуника
         while (true) {
             view.printEditEmployeeMenu();
             switch (scanner.nextInt()) {
@@ -91,12 +93,35 @@ public class Menu  {
                     operationEmployee.editTelephoneNumber(scanner.next());
                 }
                 case 5 -> {
-                    System.out.println("Выберите депортамент из списка:");
-                    operationEmployee.editDepartment();
+                    if (campaign.getDepartments().size() != 0) {
+
+                        System.out.println("Выберите отдел из списка:\n\n" +
+                                campaign.getDepartments() +
+                                "\n\nВведите id отдела:");
+                        int index = search.searchIndexDepartment(campaign.getDepartments(), scanner.nextInt());
+                        if (operationEmployee.getEmployee().getDepartment() != null) {
+                            operationEmployee.cleanDepartmentAndPost();
+                        }
+                        operationEmployee.editDepartment(campaign.getDepartments().get(index));
+                        campaign.getDepartments().get(index).getEmployee().add(operationEmployee.getEmployee());
+
+                    } else {
+                        System.out.println("Нет доступных отделов");
+                    }
                 }
                 case 6 -> {
-                    System.out.println("Выбирете должность из списка:");
-                    operationEmployee.editPost();
+                    if (operationEmployee.getEmployee().getDepartment() == null) {
+                        System.out.println("Не указан отдел");
+                    } else if (operationEmployee.getEmployee().getDepartment().getPosts().size() == 0) {
+                        System.out.println("Нет доступных должностей");
+                    } else {
+                        System.out.println("Выбирете должность из списка:\n\n" +
+                                operationEmployee.getEmployee().getDepartment().getPosts() +
+                                "\n\nВведите id должности");
+                        int index = search.searchIndexPost(operationEmployee.getEmployee().getDepartment().getPosts(), scanner.nextInt());
+                        operationEmployee.editPost(operationEmployee.getEmployee().getDepartment().getPosts().get(index));
+                    }
+
                 }
                 case 7 -> {
                     System.out.println("Укажите зарплату:");
@@ -127,7 +152,7 @@ public class Menu  {
         }
     }
 
-    private void editFCsMenu() {
+    private void editFCsMenu() {//Редактирование ФИО
         while (true) {
             view.printEditFCsMenu();
             switch (scanner.nextInt()) {
@@ -146,7 +171,7 @@ public class Menu  {
                     scanner.nextLine();
                     operationEmployee.editPatronymic(scanner.nextLine());
                 }
-                case 4 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -154,7 +179,7 @@ public class Menu  {
         }
     }
 
-    private void mainMenu() {
+    private void mainMenu() {//Главное меню
         while (true) {
             view.printMainMenu();
             switch (scanner.nextInt()) {
@@ -162,7 +187,7 @@ public class Menu  {
                 case 2 -> postMenu();
                 case 3 -> employeeMenu();
                 case 4 -> reportMenu();
-                case 5 -> {
+                case 0 -> {
                     Serialized.serialized(operation.getCampaign(), campaign.getCampaignName());
                     return;
                 }
@@ -171,7 +196,7 @@ public class Menu  {
         }
     }
 
-    private void departmentMenu() {
+    private void departmentMenu() {//Меню отделов
         while (true) {
             view.printDepartmentMenu();
             switch (scanner.nextInt()) {
@@ -182,10 +207,10 @@ public class Menu  {
                 case 2 -> {
                     System.out.println("Введите название отдела");
                     scanner.nextLine();
-                    operation.createDepartment(scanner.nextLine());
+                    operationDepartment.createDepartment(scanner.nextLine());
                     System.out.println("Отдел создан!");
                 }
-                case 3 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -193,7 +218,7 @@ public class Menu  {
         }
     }
 
-    private void departmentEditMenu() {
+    private void departmentEditMenu() {//выбор отдела для редактирования
         while (true) {
             view.printDepartmentEditMenu();
             switch (scanner.nextInt()) {
@@ -209,7 +234,7 @@ public class Menu  {
                     }
                     editDepartment();
                 }
-                case 2 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -217,7 +242,7 @@ public class Menu  {
         }
     }
 
-    private void editDepartment() {
+    private void editDepartment() { //Редактирование отдела
         while (true) {
             view.printEditDepartment();
             switch (scanner.nextInt()) {
@@ -233,11 +258,13 @@ public class Menu  {
                     System.out.println("Название отдела изменено!");
                 }
                 case 2 -> {
-                    System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:");
-                    int idEmployee = scanner.nextInt();
+                    System.out.println("Ведите id сотрдуника отдела, которго хотите назначить руководителем:\n" +
+                            operationDepartment.getDepartment().getEmployee() + '\n');
                     try {
                         if (operationDepartment.getDepartment() != null) {
-                            operationDepartment.getDepartment().setChief(operationDepartment.getDepartment().getEmployee().get(idEmployee));
+                            int index = search.searchIndexEmployee(operationDepartment.getDepartment().getEmployee(), scanner.nextInt());
+                            System.out.println(index);
+                            operationDepartment.editDepartmentChief(operationDepartment.getDepartment().getEmployee().get(index));
                             System.out.println("Новый руководитель назначен!");
                         } else {
                             System.out.println("Отдел не выбран");
@@ -247,16 +274,33 @@ public class Menu  {
                     }
                 }
                 case 3 -> {
-                    //Удалить сотрдуника из отдела
+                    System.out.println("Введите название должности которую хотите добавить:");
+                    operationPost.setDepartment(operationDepartment.getDepartment());
+                    scanner.nextLine();
+                    operationPost.createPost(scanner.nextLine());
+                    System.out.println("Должность создана");
                 }
                 case 4 -> {
-                    int index = search.searchIndexDepartment(campaign.getDepartments(), operationDepartment.getDepartment().getDepartmentID());
+                    System.out.println("Введите id должности которую хотите удалить");
+                    int postID = scanner.nextInt();
+                    int indexDep = search.searchIndexPost(operationDepartment.getDepartment().getPosts(), postID);
+                    int indexCam = search.searchIndexPost(campaign.getPosts(), postID);
+                    operationPost.deletePostInDepartment(indexDep);
+                    operationPost.deletePost(indexCam);
+                    System.out.println("Должность удалена");
+                }
+                case 5 -> {
+                    //Удалить сотрдуника из отдела
+                }
+                case 6 -> {
+                    int index = search.searchIndexDepartment(campaign.getDepartments(),
+                            operationDepartment.getDepartment().getDepartmentID());
                     operationDepartment.deleteDepartment(index);
                     operationDepartment.setDepartment(null);
                     System.out.println("Отдел удален");
                     return;
                 }
-                case 5 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -273,13 +317,7 @@ public class Menu  {
                     operation.getReport().listPosts();
                     postEditMenu();
                 }
-                case 2 -> {
-                    System.out.println("Введите название должности");
-                    scanner.nextLine();
-                    operation.createPost(scanner.nextLine());
-                    System.out.println("Должность создана");
-                }
-                case 3 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -294,7 +332,7 @@ public class Menu  {
                 case 1 -> {
                     System.out.println("Введите id должности, которую хотите редактировать");
                     try {
-                        int index = search.searchIndexPost(campaign.getPosts(), operationPost.getPost().getPostID());
+                        int index = search.searchIndexPost(campaign.getPosts(), scanner.nextInt());
                         operationPost.setPost(campaign.getPosts().get(index));
                         System.out.println(operationPost.getPost());
                     } catch (IndexOutOfBoundsException e) {
@@ -304,7 +342,7 @@ public class Menu  {
 
                     editPost();
                 }
-                case 2 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -328,13 +366,17 @@ public class Menu  {
                     System.out.println("Название должности изменено");
                 }
                 case 2 -> {
-                    int index = search.searchIndexPost(campaign.getPosts(), operationPost.getPost().getPostID());
-                    operationPost.deletePost(index);
+                    int indexDep = search.searchIndexPost(operationDepartment.getDepartment().getPosts(),
+                            operationPost.getPost().getPostID());
+                    int indexCam = search.searchIndexPost(campaign.getPosts(),
+                            operationPost.getPost().getPostID());
+                    operationPost.deletePostInDepartment(indexDep);
+                    operationPost.deletePost(indexCam);
                     operationPost.setPost(null);
                     System.out.println("Должность удалена");
                     return;
                 }
-                case 3 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -362,9 +404,9 @@ public class Menu  {
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                     scanner.nextLine();
                     LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine(), dateTimeFormatter);
-                    operation.createEmployee(surname, name, patronymic, dateOfBirth);
+                    operationEmployee.createEmployee(surname, name, patronymic, dateOfBirth);
                 }
-                case 4 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -389,7 +431,7 @@ public class Menu  {
                     }
                     editEmployeeMenu();
                 }
-                case 2 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -415,7 +457,7 @@ public class Menu  {
                         System.out.println("Не у всех сотрдуников указана дата трудоустройства");
                     }
                 }
-                case 5 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();
@@ -475,7 +517,7 @@ public class Menu  {
                         searchEmployeeMenu();
                     }
                 }
-                case 6 -> {
+                case 0 -> {
                     return;
                 }
                 default -> def();

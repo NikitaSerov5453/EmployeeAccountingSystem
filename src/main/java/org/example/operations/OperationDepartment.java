@@ -2,6 +2,7 @@ package org.example.operations;
 
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
+import org.example.campaigns.Employee;
 
 public class OperationDepartment {
     private Department department;
@@ -23,6 +24,11 @@ public class OperationDepartment {
         this.campaign = campaign;
     }
 
+    public void createDepartment(String nameDepartment) {
+        Department department = new Department(nameDepartment);
+        campaign.addDepartments(department);
+    }
+
     public void deleteDepartment(int index) {
         campaign.getDepartments().remove(index);
     }
@@ -31,7 +37,7 @@ public class OperationDepartment {
         this.department.setDepartmentName(name);
     }
 
-    public void editDepartmentChief(int newChiefEmployeeID) {
-        this.department.setChief(department.getEmployee().get(newChiefEmployeeID));
+    public void editDepartmentChief(Employee employee) {
+        this.department.setChief(employee);
     }
 }

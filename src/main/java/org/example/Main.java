@@ -2,9 +2,7 @@ package org.example;
 
 import org.example.views.Menu;
 
-import java.io.Serializable;
-
-public class Main implements Serializable {
+public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.start();

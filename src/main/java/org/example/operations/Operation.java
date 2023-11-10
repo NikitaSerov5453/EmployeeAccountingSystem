@@ -99,20 +99,4 @@ public class Operation {
     public void editCampaign() {
 
     }
-
-    public void createDepartment(String nameDepartment) {
-        Department department = new Department(nameDepartment);
-        campaign.addDepartments(department);
-    }
-
-    public void createPost(String postName) {
-        Post post = new Post(postName);
-        campaign.addPosts(post);
-    }
-
-    public void createEmployee(String surname, String name, String patronymic, LocalDate dateOfBirth) {
-        Employee employee = new Employee(surname, name, patronymic, dateOfBirth);
-        employee.setDateOfEmployment(LocalDate.now());
-        campaign.addEmployee(employee);
-    }
 }
