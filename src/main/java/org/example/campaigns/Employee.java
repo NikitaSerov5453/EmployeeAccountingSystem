@@ -1,5 +1,7 @@
 package org.example.campaigns;
 
+import org.example.views.View;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +22,7 @@ public class Employee implements Externalizable {
     private LocalDate dateOfEmployment;
     private int salary;
     private int employeeID;
+    private final View view = new View();
     private static int numberCreation;
 
     public Employee(String surname, String name, String patronymic, LocalDate dateOfBirth) {
@@ -127,6 +130,8 @@ public class Employee implements Externalizable {
         return null;
     }
 
+
+
     @Override
     public String toString() {
         return "\nСотрудник: " +
@@ -136,7 +141,7 @@ public class Employee implements Externalizable {
                 "\nНомер телефона: " + telephoneNumber +
                 "\nДолжность: " + post +
                 "\nОтдел: " + department +
-                "\nРуководитель: " + getChief() +
+                "\nРуководитель: " + view.printChief(getChief()) +
                 "\nДата трудоустройства: " + getDateOfEmployment() +
                 "\nЗаработная плата: " + salary +
                 "\nID Сотрдуника: " + employeeID +

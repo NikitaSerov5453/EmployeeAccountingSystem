@@ -3,6 +3,7 @@ package org.example.operations;
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
+import org.example.views.View;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,7 +13,9 @@ import java.util.List;
 
 public class Report {
 
+    private final View view = new View();
     private Campaign campaign;
+
 
     public Report() {
 
@@ -44,12 +47,13 @@ public class Report {
             salary += campaign.getEmployee().get(i).getSalary();
         }
         System.out.println("Средняя зарплата по кампании: " + salary);
+        System.out.println();
     }
 
     private double calculateAverageSalaryDepartment(Department department) {
         double salary = 0;
         for (int i = 0; i < department.getEmployee().size(); i++) {
-            salary += department.getEmployee().get(i).getSalary() + '\n';
+            salary += department.getEmployee().get(i).getSalary();
         }
         return salary;
     }
@@ -86,13 +90,21 @@ public class Report {
                     employees.get(i).getPatronymic(),
                     employees.get(i).getDateOfEmployment(), '\n');
         }
+        System.out.println();
     }
 
     public void companyStructure() {
         System.out.format("%25s%25s", "Отдел", "Руководитель\n");
         for (int i = 0; i < campaign.getDepartments().size(); i++) {
             System.out.format("%25s%25s%25s", campaign.getDepartments().get(i).getDepartmentName(),
-                    campaign.getDepartments().get(i).getChief(), '\n');
+                    view.printChief(campaign.getDepartments().get(i).getChief()), '\n');
         }
+        System.out.println();
     }
+
+    /**
+     * public void departments() {
+     *     System.out.println(this.campaign.getDepartments());
+     *}
+     */
 }

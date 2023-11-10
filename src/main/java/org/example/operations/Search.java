@@ -80,35 +80,30 @@ public class Search {
     }
 
     public int searchIndexDepartment(List<Department> departments, int ID) {
-        int index = 0;
         for (int i = 0; i < departments.size(); i++) {
             if (ID == departments.get(i).getDepartmentID()) {
-                index = i;
-                break;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 
     public int searchIndexPost(List<Post> posts, int ID) {
-        int index = 0;
         for (int i = 0; i < posts.size(); i++) {
             if (ID == posts.get(i).getPostID()) {
-                index = i;
-                break;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 
     public int searchIndexEmployee(List<Employee> employees, int ID) {
-        int index = 0;
         for (int i = 0; i < employees.size(); i++) {
             if (ID == employees.get(i).getEmployeeID()) {
-                index = i;
-                break;
+                return i;
             }
         }
-        return index;
+
+        return -1;
     }
 }

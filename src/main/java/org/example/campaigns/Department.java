@@ -1,5 +1,7 @@
 package org.example.campaigns;
 
+import org.example.views.View;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +16,7 @@ public class Department implements Externalizable {
     private static int numberCreation;
     private String departmentName;
     private Employee chief;
+    private final View view = new View();
 
 
     private List<Employee> employee = new ArrayList<>();
@@ -65,12 +68,11 @@ public class Department implements Externalizable {
         return posts;
     }
 
-
     @Override
     public String toString() {
         return "\nНомер отдела: " + departmentID +
                 " Отдел: " + departmentName +
-                " Руководитель: " + chief;
+                " Руководитель: " + view.printChief(chief);
 
     }
 

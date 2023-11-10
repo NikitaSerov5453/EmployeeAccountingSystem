@@ -135,4 +135,12 @@ public class View {
                 0: Назад""");
     }
 
+    public String printChief(Employee chief) {
+        if (chief != null) {
+            return chief.getSurname() + " " + chief.getName();
+        } else {
+            return null;
+        }
+    }
+
 }

@@ -263,7 +263,6 @@ public class Menu  {
                     try {
                         if (operationDepartment.getDepartment() != null) {
                             int index = search.searchIndexEmployee(operationDepartment.getDepartment().getEmployee(), scanner.nextInt());
-                            System.out.println(index);
                             operationDepartment.editDepartmentChief(operationDepartment.getDepartment().getEmployee().get(index));
                             System.out.println("Новый руководитель назначен!");
                         } else {
@@ -281,16 +280,38 @@ public class Menu  {
                     System.out.println("Должность создана");
                 }
                 case 4 -> {
+                    System.out.println(operationDepartment.getDepartment().getPosts());
                     System.out.println("Введите id должности которую хотите удалить");
                     int postID = scanner.nextInt();
-                    int indexDep = search.searchIndexPost(operationDepartment.getDepartment().getPosts(), postID);
-                    int indexCam = search.searchIndexPost(campaign.getPosts(), postID);
-                    operationPost.deletePostInDepartment(indexDep);
-                    operationPost.deletePost(indexCam);
-                    System.out.println("Должность удалена");
+                    if (operationDepartment.getDepartment().getPosts().size() != 0) {
+                        int index = search.searchIndexPost(operationDepartment.getDepartment().getPosts(), postID);
+                        if (index != -1) {
+                            operationDepartment.getDepartment().getPosts().remove(index);
+                            System.out.println("Должность удалена");
+                        } else {
+                            System.out.println("Должность с таким id не найдена");
+                        }
+                    } else {
+                        System.out.println("Нет доступных должностей");
+                    }
                 }
                 case 5 -> {
-                    //Удалить сотрдуника из отдела
+                    System.out.println(operationDepartment.getDepartment().getEmployee());
+                    System.out.println("Введите id сотрдуника которого хотите удалить");
+                    int employeeID = scanner.nextInt();
+                    if (operationDepartment.getDepartment().getEmployee().size() != 0) {
+                        int index = search.searchIndexEmployee(operationDepartment.getDepartment().getEmployee(), employeeID);
+                        if (index != -1) {
+                            operationDepartment.getDepartment().getEmployee().get(index).setDepartment(null);
+                            operationDepartment.getDepartment().getEmployee().get(index).setPost(null);
+                            operationDepartment.getDepartment().getEmployee().remove(index);
+                            System.out.println("Сотрудник удален");
+                        } else {
+                            System.out.println("Сотрудник с таким id не найден");
+                        }
+                    } else {
+                        System.out.println("Нет доступных сотрудников");
+                    }
                 }
                 case 6 -> {
                     int index = search.searchIndexDepartment(campaign.getDepartments(),
@@ -473,6 +494,7 @@ public class Menu  {
                     System.out.println("Введите id сотрдуника");
                     int id = scanner.nextInt();
                     try {
+
                         operationEmployee.setEmployee(operation.getSearch().searchEmployeeID(id));
                         employeeEditMenu();
                     } catch (NullPointerException e) {
