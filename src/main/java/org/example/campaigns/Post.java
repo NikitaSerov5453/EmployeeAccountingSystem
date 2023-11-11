@@ -11,8 +11,6 @@ public class Post implements Externalizable {
     private static int numberCreation;
     private String postName;
 
-    private Department department;
-
     public Post(String postName) {
         numberCreation++;
         this.postName = postName;
@@ -22,17 +20,6 @@ public class Post implements Externalizable {
     public Post() {
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public int getNumberCreation() {
-        return numberCreation;
-    }
 
     public String getPostName() {
         return postName;
@@ -42,9 +29,6 @@ public class Post implements Externalizable {
         this.postName = postName;
     }
 
-    public void createPost(String postName) {
-
-    }
 
     public int getPostID() {
         return postID;
@@ -61,7 +45,6 @@ public class Post implements Externalizable {
         out.writeObject(this.postName);
         out.writeObject(numberCreation);
         out.writeObject(this.postID);
-        out.writeObject(this.department);
     }
 
     @Override
@@ -69,6 +52,5 @@ public class Post implements Externalizable {
         this.postName = (String) in.readObject();
         numberCreation = (int) in.readObject();
         this.postID = (int) in.readObject();
-        this.department = (Department) in.readObject();
     }
 }

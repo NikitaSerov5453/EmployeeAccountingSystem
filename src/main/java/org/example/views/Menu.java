@@ -250,7 +250,7 @@ public class Menu  {
                     System.out.println("Введите название отдела:");
                     scanner.nextLine();
                     if (operationDepartment.getDepartment() != null) {
-                        operationDepartment.getDepartment().setDepartmentName(scanner.nextLine());
+                        operationDepartment.editDepartmentName(scanner.nextLine());
                         System.out.println(operationDepartment.getDepartment());
                     } else {
                         System.out.println("Отдел не выбран");
@@ -390,15 +390,21 @@ public class Menu  {
                     System.out.println("Название должности изменено");
                 }
                 case 2 -> {
-                    int indexDep = search.searchIndexPost(operationDepartment.getDepartment().getPosts(),
-                            operationPost.getPost().getPostID());
-                    int indexCam = search.searchIndexPost(campaign.getPosts(),
-                            operationPost.getPost().getPostID());
-                    operationPost.deletePostInDepartment(indexDep);
-                    operationPost.deletePost(indexCam);
-                    operationPost.setPost(null);
-                    System.out.println("Должность удалена");
-                    return;
+                    System.out.println(campaign.getPosts());
+                    System.out.println("Введите id должности которую хотите удалить");
+                    int postID = scanner.nextInt();
+                    if (campaign.getPosts().size() != 0) {
+                        int indexCam = search.searchIndexPost(campaign.getPosts(), postID);
+                        if (indexCam != -1) {
+                            campaign.deletePost(indexCam);
+                            operationPost.deletePostInDepartment(campaign.getDepartments(), postID);
+                            System.out.println("Должность удалена");
+                        } else {
+                            System.out.println("Должность с таким id не найдена");
+                        }
+                    } else {
+                        System.out.println("Нет доступных должностей");
+                    }
                 }
                 case 0 -> {
                     return;

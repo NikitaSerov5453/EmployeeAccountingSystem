@@ -30,6 +30,7 @@ public class Search {
                 employees.add(campaign.getEmployee().get(i));
             }
         }
+
         return employees;
     }
 
@@ -42,6 +43,7 @@ public class Search {
                 employees.add(campaign.getEmployee().get(i));
             }
         }
+
         return employees;
     }
 
@@ -53,6 +55,7 @@ public class Search {
                 employees.add(campaign.getEmployee().get(i));
             }
         }
+
         return employees;
     }
 
@@ -85,6 +88,7 @@ public class Search {
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -94,6 +98,7 @@ public class Search {
                 return i;
             }
         }
+
         return -1;
     }
 

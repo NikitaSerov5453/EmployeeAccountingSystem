@@ -5,8 +5,6 @@ import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
 import org.example.views.View;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -19,10 +17,6 @@ public class Report {
 
     public Report() {
 
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
     }
 
     public void setCampaign(Campaign campaign) {
@@ -73,8 +67,8 @@ public class Report {
         System.out.printf("%25s%25s", "ФИО сотрдуника", "Зарплата\n");
         for (int i = 0; i < employees.size() && i < 11; i++) {
             System.out.printf("%25s%25s%25s", employees.get(i).getSurname() + ' ' +
-                    employees.get(i).getName() + ' ' +
-                    employees.get(i).getPatronymic(),
+                            employees.get(i).getName() + ' ' +
+                            employees.get(i).getPatronymic(),
                     employees.get(i).getSalary(), '\n');
         }
         System.out.println();
@@ -86,8 +80,8 @@ public class Report {
         System.out.printf("%25s%25s", "ФИО", "Дата трудоустройства\n");
         for (int i = 0; i < employees.size() && i < 11; i++) {
             System.out.printf("%25s%25s%25s", employees.get(i).getSurname() + ' ' +
-                    employees.get(i).getName() + ' ' +
-                    employees.get(i).getPatronymic(),
+                            employees.get(i).getName() + ' ' +
+                            employees.get(i).getPatronymic(),
                     employees.get(i).getDateOfEmployment(), '\n');
         }
         System.out.println();
@@ -101,10 +95,4 @@ public class Report {
         }
         System.out.println();
     }
-
-    /**
-     * public void departments() {
-     *     System.out.println(this.campaign.getDepartments());
-     *}
-     */
 }

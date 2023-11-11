@@ -69,6 +69,10 @@ public class Campaign implements Externalizable {
         this.posts.add(posts);
     }
 
+    public void deletePost(int index) {
+        this.posts.remove(index);
+    }
+
     public List<Post> getPosts() {
         return posts;
     }

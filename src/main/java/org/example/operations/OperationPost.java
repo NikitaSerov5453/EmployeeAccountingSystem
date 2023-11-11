@@ -4,6 +4,8 @@ import org.example.campaigns.Campaign;
 import org.example.campaigns.Department;
 import org.example.campaigns.Post;
 
+import java.util.List;
+
 public class OperationPost {
 
     private Post post;
@@ -46,10 +48,14 @@ public class OperationPost {
         campaign.addPosts(post);
     }
 
-    public void deletePostInDepartment(int indexDep) {
-        department.getPosts().remove(indexDep);
+    public void deletePostInDepartment(List<Department> departments, int postID) {
+        for (Department value : departments) {
+            for (int j = 0; j < value.getPosts().size(); j++) {
+                if (postID == value.getPosts().get(j).getPostID()) {
+                    value.getPosts().remove(j);
+                }
+            }
+        }
     }
-    public void deletePost(int indexCamp) {
-        campaign.getPosts().remove(indexCamp);
-    }
+
 }
