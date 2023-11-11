@@ -80,7 +80,7 @@ public class Operation {
         operationDepartment.setCampaign(campaign);
         operationEmployee.setCampaign(campaign);
         operationPost.setCampaign(campaign);
-        Serialized.serialized(campaign, campaignName);
+        Serialized.serialized(campaign, campaignName, view.MAIN_SAVE);
         System.out.println("Ваша кампания: " + campaignName + " создана\n");
         return campaign;
     }
@@ -96,7 +96,4 @@ public class Operation {
         return campaign;
     }
 
-    public void editCampaign() {
-
-    }
 }

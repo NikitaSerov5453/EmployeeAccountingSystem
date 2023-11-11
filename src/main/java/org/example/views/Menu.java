@@ -2,6 +2,7 @@ package org.example.views;
 
 import org.example.campaigns.Campaign;
 import org.example.campaigns.Employee;
+import org.example.files.File;
 import org.example.files.Serialized;
 import org.example.operations.*;
 
@@ -21,6 +22,7 @@ public class Menu  {
     private final OperationEmployee operationEmployee = operation.getOperationEmployee();
     private final OperationDepartment operationDepartment = operation.getOperationDepartment();
     private final OperationPost operationPost = operation.getOperationPost();
+    public File file = new File();
 
     private final View view = new View();
     private Campaign campaign;
@@ -53,9 +55,8 @@ public class Menu  {
                 this.campaign = operation.createCompany();
                 mainMenu();
             }
-            case 2 -> operation.editCampaign();
-            case 3 -> {
-                this.campaign = operation.loadCampaign("123");
+            case 2 -> {
+                this.campaign = operation.loadCampaign(file.loadFile());
                 mainMenu();
             }
             default -> {
@@ -188,7 +189,8 @@ public class Menu  {
                 case 3 -> employeeMenu();
                 case 4 -> reportMenu();
                 case 0 -> {
-                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignName());
+                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignName(), view.MAIN_SAVE);
+                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignID() + "." + campaign.getCampaignName(), view.BACK_UP);
                     return;
                 }
                 default -> def();

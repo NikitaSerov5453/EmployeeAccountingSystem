@@ -6,9 +6,14 @@ import java.util.HashSet;
 
 public class View {
 
+    public String BACK_UP = "C:\\Users\\dante5453\\Downloads\\EmployeeAccountingSystem\\Capmain\\BackUP\\";
+    public String MAIN_SAVE = "C:\\Users\\dante5453\\Downloads\\EmployeeAccountingSystem\\Capmain\\";
+
     public View() {
 
     }
+
+
 
     public void printHashSet(HashSet<Employee> hashSet) {
         int counter = 1;
@@ -30,8 +35,7 @@ public class View {
     public void printControlCompanyMenu() {
         System.out.println("""
                 1: Создать кампанию
-                2: Редактировать кампанию
-                3: Загрузить кампанию""");
+                2: Загрузить кампанию""");
     }
 
     public void printEditEmployeeMenu() {

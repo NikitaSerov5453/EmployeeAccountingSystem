@@ -8,8 +8,8 @@ public class Serialized implements Serializable{
 
     }
 
-    public static void serialized(Object obj, String fileName){
-        try(FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+    public static void serialized(Object obj, String fileName, String path){
+        try(FileOutputStream fileOutputStream = new FileOutputStream(path + fileName);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(obj);
         } catch (IOException e) {

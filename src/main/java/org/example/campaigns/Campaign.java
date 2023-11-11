@@ -12,6 +12,9 @@ public class Campaign implements Externalizable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    private int campaignID;
+    private static int numberCreation;
     private List<Department> departments = new ArrayList<>();
     private List<Employee> employees = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
@@ -20,12 +23,17 @@ public class Campaign implements Externalizable {
 
 
     public Campaign(String campaignName) {
+        numberCreation++;
+        this.campaignID = numberCreation;
         this.campaignName = campaignName;
     }
 
     public Campaign() {
     }
 
+    public int getCampaignID() {
+        return campaignID;
+    }
 
     public String getCampaignName() {
         return campaignName;
@@ -83,6 +91,7 @@ public class Campaign implements Externalizable {
         out.writeObject(this.employees);
         out.writeObject(this.posts);
         out.writeObject(this.campaignName);
+        out.writeObject(this.campaignID);
     }
 
     @Override
@@ -91,5 +100,6 @@ public class Campaign implements Externalizable {
         this.employees = (List<Employee>) in.readObject();
         this.posts = (List<Post>) in.readObject();
         this.campaignName = (String) in.readObject();
+        this.campaignID = (int) in.readObject();
     }
 }
