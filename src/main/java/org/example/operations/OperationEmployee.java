@@ -129,4 +129,12 @@ public class OperationEmployee {
         }
         return null;
     }
+
+    public void deletePostFromEmployee(List<Employee> employees, int postID) {
+        for (Employee employee : employees) {
+            if (postID == employee.getPost().getPostID()) {
+                employee.setPost(null);
+            }
+        }
+    }
 }

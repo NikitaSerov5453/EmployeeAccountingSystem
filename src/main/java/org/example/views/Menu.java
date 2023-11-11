@@ -286,6 +286,7 @@ public class Menu  {
                     if (operationDepartment.getDepartment().getPosts().size() != 0) {
                         int index = search.searchIndexPost(operationDepartment.getDepartment().getPosts(), postID);
                         if (index != -1) {
+                            operationEmployee.deletePostFromEmployee(campaign.getEmployee(), postID);
                             operationDepartment.getDepartment().getPosts().remove(index);
                             System.out.println("Должность удалена");
                         } else {
@@ -314,8 +315,10 @@ public class Menu  {
                     }
                 }
                 case 6 -> {
+                    int departmentID = operationDepartment.getDepartment().getDepartmentID();
                     int index = search.searchIndexDepartment(campaign.getDepartments(),
-                            operationDepartment.getDepartment().getDepartmentID());
+                            departmentID);
+                    operationDepartment.deleteDepartmentFromEmployee(campaign.getEmployee(), departmentID);
                     operationDepartment.deleteDepartment(index);
                     operationDepartment.setDepartment(null);
                     System.out.println("Отдел удален");
@@ -505,7 +508,7 @@ public class Menu  {
                     System.out.println("Введите ФИО сотрдуника");
                     String FCs = scanner.nextLine();
                     try {
-                        operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeeChief(FCs)));
+                        operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeeFCs(FCs)));
                         employeeEditMenu();
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник: " + FCs + " не найден");

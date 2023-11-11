@@ -82,7 +82,7 @@ public class Report {
 
     public void topDevoteesEmployee() {
         List<Employee> employees = new ArrayList<>(campaign.getEmployee());
-        employees.sort(Comparator.comparing(Employee::getDateOfEmployment).reversed());
+        employees.sort(Comparator.comparing(Employee::getDateOfEmployment));
         System.out.printf("%25s%25s", "ФИО", "Дата трудоустройства\n");
         for (int i = 0; i < employees.size() && i < 11; i++) {
             System.out.printf("%25s%25s%25s", employees.get(i).getSurname() + ' ' +
