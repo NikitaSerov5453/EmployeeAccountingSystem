@@ -6,8 +6,8 @@ import java.util.HashSet;
 
 public class View {
 
-    public String BACK_UP = "C:\\Users\\dante5453\\Downloads\\EmployeeAccountingSystem\\Capmain\\BackUP\\";
-    public String MAIN_SAVE = "C:\\Users\\dante5453\\Downloads\\EmployeeAccountingSystem\\Capmain\\";
+    public String BACK_UP = "\\Capmain\\BackUP\\";
+    public String MAIN_SAVE = "\\Capmain\\";
 
     public View() {
 

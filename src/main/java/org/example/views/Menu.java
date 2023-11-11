@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Menu  {
+public class Menu {
 
     private final Scanner scanner = new Scanner(System.in);
     private Operation operation = new Operation();
@@ -87,7 +87,6 @@ public class Menu  {
                             1: Мужской
                             2: Женский""");
                     operationEmployee.editGender(scanner.nextInt());
-
                 }
                 case 4 -> {
                     System.out.println("Введите номер телефона:");
