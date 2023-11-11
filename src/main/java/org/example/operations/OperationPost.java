@@ -18,10 +18,6 @@ public class OperationPost {
 
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
     public void setDepartment(Department department) {
         this.department = department;
     }
@@ -32,10 +28,6 @@ public class OperationPost {
 
     public void setPost(Post post) {
         this.post = post;
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
     }
 
     public void setCampaign(Campaign campaign) {

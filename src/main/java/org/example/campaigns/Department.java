@@ -4,7 +4,6 @@ import org.example.views.View;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Department implements Externalizable {

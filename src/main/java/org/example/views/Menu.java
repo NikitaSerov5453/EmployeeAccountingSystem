@@ -1,7 +1,6 @@
 package org.example.views;
 
 import org.example.campaigns.Campaign;
-import org.example.campaigns.Employee;
 import org.example.files.File;
 import org.example.files.Serialized;
 import org.example.operations.*;
@@ -9,36 +8,23 @@ import org.example.operations.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
 
     private final Scanner scanner = new Scanner(System.in);
-    private Operation operation = new Operation();
-
+    private final Operation operation = new Operation();
     private final Search search = new Search();
     private final OperationEmployee operationEmployee = operation.getOperationEmployee();
     private final OperationDepartment operationDepartment = operation.getOperationDepartment();
     private final OperationPost operationPost = operation.getOperationPost();
     public File file = new File();
-
     private final View view = new View();
     private Campaign campaign;
 
     public Menu() {
 
     }
-
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
-    public Operation getOperation() {
-        return operation;
-    }
-
 
     public void start() {
         controlCompanyMenu();
@@ -48,7 +34,7 @@ public class Menu {
         System.out.println("Неверно введен номер");
     }
 
-    public void controlCompanyMenu() {//Создание кампании
+    public void controlCompanyMenu() {//Создание кампании/Загрузка кампании
         view.printControlCompanyMenu();
         switch (scanner.nextInt()) {
             case 1 -> {
@@ -74,22 +60,19 @@ public class Menu {
                 case 1 -> editFCsMenu();
                 case 2 -> {
                     try {
-                        System.out.println("Введите дату рождения (формат ввода \"dd.MM.yyyy\"):");
+                        view.printSetBirthday();
                         scanner.nextLine();
                         operationEmployee.editDateOfBirth(scanner.nextLine());
                     } catch (DateTimeException e) {
-                        System.out.println("Неверный формат даты ");
+                        view.printErrDataFormat();
                     }
                 }
                 case 3 -> {
-                    System.out.println("""
-                            Выберете необходимый пол:
-                            1: Мужской
-                            2: Женский""");
+                    view.printChooseGender();
                     operationEmployee.editGender(scanner.nextInt());
                 }
                 case 4 -> {
-                    System.out.println("Введите номер телефона:");
+                    view.printSetTelephoneNumber();
                     operationEmployee.editTelephoneNumber(scanner.next());
                 }
                 case 5 -> {
@@ -106,14 +89,14 @@ public class Menu {
                         campaign.getDepartments().get(index).getEmployee().add(operationEmployee.getEmployee());
 
                     } else {
-                        System.out.println("Нет доступных отделов");
+                        view.printErrDepartmentAvailable();
                     }
                 }
                 case 6 -> {
                     if (operationEmployee.getEmployee().getDepartment() == null) {
-                        System.out.println("Не указан отдел");
+                        view.printErrDepartmentSpecified();
                     } else if (operationEmployee.getEmployee().getDepartment().getPosts().size() == 0) {
-                        System.out.println("Нет доступных должностей");
+                        view.printErrPostsAvailable();
                     } else {
                         System.out.println("Выбирете должность из списка:\n\n" +
                                 operationEmployee.getEmployee().getDepartment().getPosts() +
@@ -124,22 +107,22 @@ public class Menu {
 
                 }
                 case 7 -> {
-                    System.out.println("Укажите зарплату:");
+                    view.printSetSalary();
                     operationEmployee.editSalary(scanner.nextInt());
                 }
                 case 8 -> {
                     try {
-                        System.out.println("Введите дату трудоустройства (формат ввода \"dd.MM.yyyy\"):");
+                        view.setDateOfEmployment();
                         operationEmployee.editDateOfEmployment(scanner.nextLine());
                     } catch (DateTimeException e) {
-                        System.out.println("Неверный формат даты ");
+                        view.printErrDataFormat();
                     }
                 }
                 case 9 -> {
                     int index = search.searchIndexEmployee(campaign.getEmployee(), operationEmployee.getEmployee().getEmployeeID());
                     operationEmployee.deleteEmployee(index);
                     operationEmployee.setEmployee(null);
-                    System.out.println("Сотрдуник удален");
+                    view.printEmployeeDeleted();
                     return;
 
                 }
@@ -157,17 +140,17 @@ public class Menu {
             view.printEditFCsMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
-                    System.out.println("Введите фамилию:");
+                    view.printSetSurname();
                     scanner.nextLine();
                     operationEmployee.editSurname(scanner.nextLine());
                 }
                 case 2 -> {
-                    System.out.println("Введите имя:");
+                    view.printSetName();
                     scanner.nextLine();
                     operationEmployee.editName(scanner.nextLine());
                 }
                 case 3 -> {
-                    System.out.println("Введите отчество:");
+                    view.printSetPatronymic();
                     scanner.nextLine();
                     operationEmployee.editPatronymic(scanner.nextLine());
                 }
@@ -188,8 +171,8 @@ public class Menu {
                 case 3 -> employeeMenu();
                 case 4 -> reportMenu();
                 case 0 -> {
-                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignName(), view.MAIN_SAVE);
-                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignID() + "." + campaign.getCampaignName(), view.BACK_UP);
+                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignName(), view.mainSavePath());
+                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignID() + "." + campaign.getCampaignName() + "." + campaign.hashCode(), view.backUpPath());
                     return;
                 }
                 default -> def();
@@ -206,10 +189,10 @@ public class Menu {
                     departmentEditMenu();
                 }
                 case 2 -> {
-                    System.out.println("Введите название отдела");
+                    view.printSetPostName();
                     scanner.nextLine();
                     operationDepartment.createDepartment(scanner.nextLine());
-                    System.out.println("Отдел создан!");
+                    view.printPostCreated();
                 }
                 case 0 -> {
                     return;
@@ -224,13 +207,13 @@ public class Menu {
             view.printDepartmentEditMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
-                    System.out.println("Введите id отдела который хотите редактировать:");
+                    view.printSetIDDepartmentFromEdit();
                     try {
                         int index = search.searchIndexDepartment(campaign.getDepartments(), scanner.nextInt());
                         operationDepartment.setDepartment(campaign.getDepartments().get(index));
                         System.out.println(operationDepartment.getDepartment());
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Неверно указан id отдела");
+                        view.printErrIDDepartment();
                         break;
                     }
                     editDepartment();
@@ -501,28 +484,37 @@ public class Menu {
             view.printSearchEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
+                    view.printAllEmployees(campaign.getEmployee());
                     System.out.println("Введите id сотрдуника");
                     int id = scanner.nextInt();
                     try {
-
-                        operationEmployee.setEmployee(operation.getSearch().searchEmployeeID(id));
-                        employeeEditMenu();
+                        operationEmployee.setEmployee(search.searchEmployeeID(id));
+                        view.printEmployee(operationEmployee.getEmployee());
+                        editEmployeeMenu();
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник с id: " + id + " не найден");
                     }
                 }
                 case 2 -> {
+                    view.printAllEmployees(campaign.getEmployee());
                     System.out.println("Введите ФИО сотрдуника");
+                    scanner.nextLine();
                     String FCs = scanner.nextLine();
                     try {
                         operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeeFCs(FCs)));
-                        employeeEditMenu();
+                        if(operationEmployee.getEmployee() != null) {
+                            view.printEmployee(operationEmployee.getEmployee());
+                            editEmployeeMenu();
+                        } else {
+                            System.out.println("Не верно введен номер");
+                        }
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник: " + FCs + " не найден");
                     }
                 }
                 case 3 -> {
                     System.out.println("Введите должность сотрдуника");
+                    scanner.nextLine();
                     String post = scanner.nextLine();
                     try {
                         operation.getSearch().searchEmployeePost(post);

@@ -3,22 +3,22 @@ package org.example.views;
 import org.example.campaigns.Employee;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class View {
 
-    public String BACK_UP = "\\Capmain\\BackUP\\";
-    public String MAIN_SAVE = "\\Capmain\\";
 
     public View() {
 
     }
 
-
-
     public void printHashSet(HashSet<Employee> hashSet) {
         int counter = 1;
         for (Employee employee : hashSet) {
-            System.out.println(counter + ": " + employee);
+            System.out.println(counter + ": " +
+                    employee.getSurname() + " " +
+                    employee.getName() + " " +
+                    employee.getPatronymic());
             counter++;
         }
     }
@@ -147,6 +147,96 @@ public class View {
         }
     }
 
+    public void printChooseGender() {
+        System.out.println("""
+                Выберете необходимый пол:
+                1: Мужской
+                2: Женский""");
+    }
 
+    public void printAllEmployees(List<Employee> employees) {
+        for (Employee employee : employees) {
+            System.out.println("ID " + employee.getEmployeeID() + " " +
+                    employee.getSurname() + " " +
+                    employee.getName() + " " +
+                    employee.getPatronymic());
+        }
+    }
+
+    public void printEmployee(Employee employee) {
+        System.out.println(employee);
+    }
+
+    public void printSetBirthday() {
+        System.out.println(Constants.SET_BIRTHDAY);
+    }
+
+    public void printErrDataFormat() {
+        System.out.println(Constants.ERR_DATA_FORMAT);
+    }
+
+    public String backUpPath() {
+        return Constants.BACK_UP_PATH;
+    }
+
+    public String mainSavePath() {
+        return Constants.MAIN_SAVE_PATH;
+    }
+
+    public void printSetTelephoneNumber() {
+        System.out.println(Constants.SET_TELEPHONE_NUMBER);
+    }
+
+    public void printErrDepartmentAvailable() {
+        System.out.println(Constants.ERR_DEPARTMENTS_AVAILABLE);
+    }
+
+    public void printErrDepartmentSpecified() {
+        System.out.println(Constants.ERR_DEPARTMENTS_SPECIFIED);
+    }
+
+    public void printErrPostsAvailable() {
+        System.out.println(Constants.ERR_POSTS_AVAILABLE);
+    }
+
+    public void printSetSalary() {
+        System.out.println(Constants.SET_SALARY);
+    }
+
+    public void setDateOfEmployment() {
+        System.out.println(Constants.SET_DATE_OF_EMPLOYMENT);
+    }
+
+    public void printEmployeeDeleted() {
+        System.out.println(Constants.EMPLOYEE_DELETED);
+    }
+
+    public void printSetSurname() {
+        System.out.println(Constants.SET_SURNAME);
+    }
+
+    public void printSetName() {
+        System.out.println(Constants.SET_NAME);
+    }
+
+    public void printSetPatronymic() {
+        System.out.println(Constants.SET_PATRONYMIC);
+    }
+
+    public void printSetPostName() {
+        System.out.println(Constants.SET_POST_NAME);
+    }
+
+    public void printPostCreated() {
+        System.out.println(Constants.POST_CREATED);
+    }
+
+    public void printSetIDDepartmentFromEdit() {
+        System.out.println(Constants.SET_ID_DEPARTMENT_FROM_EDIT);
+    }
+
+    public void printErrIDDepartment() {
+        System.out.println(Constants.ERR_ID_DEPARTMENT);
+    }
 
 }

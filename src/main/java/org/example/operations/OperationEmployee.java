@@ -12,16 +12,11 @@ import java.util.Scanner;
 public class OperationEmployee {
     private final Scanner scanner = new Scanner(System.in);
     private final View view = new View();
-    private final Search search = new Search();
     private Employee employee;
     private Campaign campaign;
 
     public OperationEmployee() {
 
-    }
-
-    public Campaign getCampaign() {
-        return campaign;
     }
 
     public void setCampaign(Campaign campaign) {
@@ -93,10 +88,6 @@ public class OperationEmployee {
 
     public void editPost(Post post) {
         employee.setPost(post);
-    }
-
-    public void editChief() {
-
     }
 
     public void createEmployee(String surname, String name, String patronymic, LocalDate dateOfBirth) {

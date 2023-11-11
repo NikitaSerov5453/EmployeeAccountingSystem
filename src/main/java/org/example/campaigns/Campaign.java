@@ -1,9 +1,5 @@
 package org.example.campaigns;
 
-import org.example.operations.OperationDepartment;
-import org.example.operations.OperationEmployee;
-import org.example.operations.OperationPost;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +45,6 @@ public class Campaign implements Externalizable {
                 "campaignName='" + campaignName + '\'' +
                 '}';
     }
-
-
-
 
     public void addDepartments(Department department) {
         this.departments.add(department);

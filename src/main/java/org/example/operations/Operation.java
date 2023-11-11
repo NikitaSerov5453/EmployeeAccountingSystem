@@ -1,15 +1,9 @@
 package org.example.operations;
 
-import org.example.campaigns.Department;
-import org.example.campaigns.Post;
 import org.example.campaigns.Campaign;
 import org.example.files.Serialized;
-import org.example.campaigns.Employee;
-import org.example.views.Menu;
 import org.example.views.View;
 
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Operation {
@@ -31,32 +25,16 @@ public class Operation {
 
     }
 
-    public View getView() {
-        return view;
-    }
-
     public Search getSearch() {
         return search;
-    }
-
-    public void setSearch(Search search) {
-        this.search = search;
     }
 
     public Report getReport() {
         return report;
     }
 
-    public void setReport(Report report) {
-        this.report = report;
-    }
-
     public Campaign getCampaign() {
         return campaign;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
     }
 
     public OperationDepartment getOperationDepartment() {
@@ -80,7 +58,7 @@ public class Operation {
         operationDepartment.setCampaign(campaign);
         operationEmployee.setCampaign(campaign);
         operationPost.setCampaign(campaign);
-        Serialized.serialized(campaign, campaignName, view.MAIN_SAVE);
+        Serialized.serialized(campaign, campaignName, view.mainSavePath());
         System.out.println("Ваша кампания: " + campaignName + " создана\n");
         return campaign;
     }
