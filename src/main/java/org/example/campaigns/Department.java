@@ -15,8 +15,6 @@ public class Department implements Externalizable {
     private static int numberCreation;
     private String departmentName;
     private Employee chief;
-    private final View view = new View();
-
 
     private List<Employee> employee = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
@@ -71,7 +69,7 @@ public class Department implements Externalizable {
     public String toString() {
         return "\nНомер отдела: " + departmentID +
                 " Отдел: " + departmentName +
-                " Руководитель: " + view.printChief(chief);
+                " Руководитель: " + View.printChief(chief);
 
     }
 

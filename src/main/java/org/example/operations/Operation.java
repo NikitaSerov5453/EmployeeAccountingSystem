@@ -10,12 +10,12 @@ public class Operation {
 
 
     private final Scanner scanner = new Scanner(System.in);
-    private Report report = new Report();
-    private Search search = new Search();
+    private final Report report = new Report();
+    private final Search search = new Search();
     private final View view = new View();
-    private OperationDepartment operationDepartment = new OperationDepartment();
-    private OperationPost operationPost = new OperationPost();
-    private OperationEmployee operationEmployee = new OperationEmployee();
+    private final OperationDepartment operationDepartment = new OperationDepartment();
+    private final OperationPost operationPost = new OperationPost();
+    private final OperationEmployee operationEmployee = new OperationEmployee();
 
 
     private Campaign campaign;

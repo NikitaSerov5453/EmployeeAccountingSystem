@@ -172,7 +172,9 @@ public class Menu {
                 case 4 -> reportMenu();
                 case 0 -> {
                     Serialized.serialized(operation.getCampaign(), campaign.getCampaignName(), view.mainSavePath());
-                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignID() + "." + campaign.getCampaignName() + "." + campaign.hashCode(), view.backUpPath());
+                    Serialized.serialized(operation.getCampaign(), campaign.getCampaignID() + "." +
+                            campaign.getCampaignName() + "." +
+                            campaign.hashCode(), view.backUpPath());
                     return;
                 }
                 default -> def();
@@ -502,7 +504,7 @@ public class Menu {
                     String FCs = scanner.nextLine();
                     try {
                         operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeeFCs(FCs)));
-                        if(operationEmployee.getEmployee() != null) {
+                        if (operationEmployee.getEmployee() != null) {
                             view.printEmployee(operationEmployee.getEmployee());
                             editEmployeeMenu();
                         } else {

@@ -73,9 +73,9 @@ public class Search {
     }
 
     public Employee searchEmployeeID(int employeeID) {
-        for (int i = 0; i < campaign.getEmployee().size(); i++) {
-            if (employeeID == campaign.getEmployee().get(i).getEmployeeID()) {
-                return campaign.getEmployee().get(i);
+        for (Employee employee : campaign.getEmployee()) {
+            if (employeeID == employee.getEmployeeID()) {
+                return employee;
             }
         }
 

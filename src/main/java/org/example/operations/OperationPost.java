@@ -45,6 +45,7 @@ public class OperationPost {
             for (int j = 0; j < value.getPosts().size(); j++) {
                 if (postID == value.getPosts().get(j).getPostID()) {
                     value.getPosts().remove(j);
+                    return;
                 }
             }
         }
