@@ -486,7 +486,6 @@ public class Menu {
             view.printSearchEmployeeMenu();
             switch (scanner.nextInt()) {
                 case 1 -> {
-                    view.printAllEmployees(campaign.getEmployee());
                     System.out.println("Введите id сотрдуника");
                     int id = scanner.nextInt();
                     try {
@@ -519,28 +518,47 @@ public class Menu {
                     scanner.nextLine();
                     String post = scanner.nextLine();
                     try {
-                        operation.getSearch().searchEmployeePost(post);
+                        operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeePost(post)));
+                        if (operationEmployee.getEmployee() != null) {
+                            view.printEmployee(operationEmployee.getEmployee());
+                            editEmployeeMenu();
+                        } else {
+                            System.out.println("Не верно введен номер");
+                        }
                     } catch (NullPointerException e) {
                         System.out.println("Должность: " + post + " не найдена");
                     }
                 }
                 case 4 -> {
                     System.out.println("Введите название отдела");
+                    scanner.nextLine();
                     String department = scanner.nextLine();
                     try {
-                        operation.getSearch().searchEmployeeDepartment(department);
+                        operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeeDepartment(department)));
+                        if (operationEmployee.getEmployee() != null) {
+                            view.printEmployee(operationEmployee.getEmployee());
+                            editEmployeeMenu();
+                        } else {
+                            System.out.println("Не верно введен номер");
+                        }
                     } catch (NullPointerException e) {
                         System.out.println("Отдел: " + department + " не найден");
                     }
                 }
                 case 5 -> {
                     System.out.println("Введите ФИО руководителя");
+                    scanner.nextLine();
                     String chief = scanner.nextLine();
                     try {
-                        operation.getSearch().searchEmployeeChief(chief);
+                        operationEmployee.setEmployee(operationEmployee.takeEmployee(operation.getSearch().searchEmployeeChief(chief)));
+                        if (operationEmployee.getEmployee() != null) {
+                            view.printEmployee(operationEmployee.getEmployee());
+                            editEmployeeMenu();
+                        } else {
+                            System.out.println("Не верно введен номер");
+                        }
                     } catch (NullPointerException e) {
                         System.out.println("Руководитель: " + chief + " не найден");
-                        searchEmployeeMenu();
                     }
                 }
                 case 0 -> {

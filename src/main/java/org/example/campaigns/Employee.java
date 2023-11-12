@@ -157,7 +157,6 @@ public class Employee implements Externalizable {
         out.writeObject(this.telephoneNumber);
         out.writeObject(this.post);
         out.writeObject(this.department);
-
         out.writeObject(this.dateOfEmployment);
         out.writeObject(this.salary);
         out.writeObject(numberCreation);
@@ -174,7 +173,6 @@ public class Employee implements Externalizable {
         this.telephoneNumber = (String) in.readObject();
         this.post = (Post) in.readObject();
         this.department = (Department) in.readObject();
-
         this.dateOfEmployment = (LocalDate) in.readObject();
         this.salary = (int) in.readObject();
         numberCreation = (int) in.readObject();
