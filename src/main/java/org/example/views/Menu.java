@@ -489,9 +489,14 @@ public class Menu {
                     System.out.println("Введите id сотрдуника");
                     int id = scanner.nextInt();
                     try {
-                        operationEmployee.setEmployee(search.searchEmployeeID(id));
-                        view.printEmployee(operationEmployee.getEmployee());
-                        editEmployeeMenu();
+                        int index = search.searchIndexEmployee(campaign.getEmployee(), id);
+                        operationEmployee.setEmployee(campaign.getEmployee().get(index));
+                        if (operationEmployee.getEmployee() != null) {
+                            view.printEmployee(operationEmployee.getEmployee());
+                            editEmployeeMenu();
+                        } else {
+                            System.out.println("Не верно введен номер");
+                        }
                     } catch (NullPointerException e) {
                         System.out.println("Сотрдуник с id: " + id + " не найден");
                     }
