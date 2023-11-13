@@ -68,8 +68,9 @@ public class Search {
         HashSet<Employee> employees = new HashSet<>();
         FCs = FCs.toLowerCase();
         for (int i = 0; i < campaign.getEmployee().size(); i++) {
-            if (campaign.getEmployee().get(i).getChief() != null
-                    && campaign.getEmployee().get(i).getChief().getName().toLowerCase().contains(FCs)
+            if (campaign.getEmployee().get(i).getChief() == null) {
+                continue;
+            } else if (campaign.getEmployee().get(i).getChief().getName().toLowerCase().contains(FCs)
                     || campaign.getEmployee().get(i).getChief().getSurname().toLowerCase().contains(FCs)
                     || campaign.getEmployee().get(i).getChief().getPatronymic().toLowerCase().contains(FCs)) {
                 employees.add(campaign.getEmployee().get(i));
@@ -107,6 +108,4 @@ public class Search {
 
         return -1;
     }
-
-
 }
