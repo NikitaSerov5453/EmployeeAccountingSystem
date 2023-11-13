@@ -1,12 +1,13 @@
 package org.example.views;
 
+import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
+import org.example.campaigns.Post;
 
 import java.util.HashSet;
 import java.util.List;
 
 public class View {
-
 
     public View() {
 
@@ -330,5 +331,48 @@ public class View {
     public void printSetFCsChief() {
         System.out.println(Constants.SET_FCs_CHIEF);
     }
+
+    public void printSetCampaignName() {
+        System.out.println(Constants.SET_CAMPAIGN_NAME);
+    }
+
+    public void printYourCampaignCreated(String s) {
+        System.out.print(Constants.YOUR_CAMPAIGN + s + Constants.CREATED);
+    }
+
+    public void printYourCampaignLoaded(String s) {
+        System.out.print(Constants.YOUR_CAMPAIGN + s + Constants.LOADED);
+    }
+
+    public void printSelectPostFromList(List<Post> posts) {
+        System.out.println(Constants.SELECT_POST_FROM_LIST + posts + Constants.SET_ID_POST);
+    }
+
+    public void printSelectDepartmentFromList(List<Department> departments) {
+        System.out.println(Constants.SELECT_DEPARTMENT_FROM_LIST + departments + Constants.SET_ID_DEPARTMENT);
+    }
+
+    public void printErrEmployeeID(int id) {
+        System.out.print(Constants.ERR_EMPLOYEE_ID + id + Constants.ERR_NOT_SEARCH);
+    }
+
+    public void printErrEmployee(String s) {
+        System.out.println(Constants.ERR_EMPLOYEE + s + Constants.ERR_NOT_SEARCH);
+    }
+
+    public void printErrPost(String s) {
+        System.out.println(Constants.ERR_POST + s + Constants.ERR_NOT_SEARCH + "a");
+    }
+
+    public void printErrDepartment(String s) {
+        System.out.println(Constants.ERR_DEPARTMENT + s + Constants.ERR_NOT_SEARCH);
+    }
+
+    public void printErrChief(String s) {
+        System.out.println(Constants.ERR_CHIEF + s + Constants.ERR_NOT_SEARCH);
+    }
+
+
+
 
 }

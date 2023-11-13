@@ -51,4 +51,14 @@ public class OperationDepartment {
             }
         }
     }
+
+    public int searchIndexDepartment(List<Department> departments, int ID) {
+        for (int i = 0; i < departments.size(); i++) {
+            if (ID == departments.get(i).getDepartmentID()) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

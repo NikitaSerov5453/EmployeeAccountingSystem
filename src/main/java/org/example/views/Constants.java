@@ -42,6 +42,20 @@ public class Constants {
     protected static final String ERR_SET_NUMBER = "Не верно введен номер";
     protected static final String SET_FCs_EMPLOYEE = "Введите ФИО сотрдуника";
     protected static final String SET_FCs_CHIEF = "Введите ФИО руководителя";
+    protected static final String SET_CAMPAIGN_NAME = "Введите название кампании:";
+    protected static final String YOUR_CAMPAIGN = "Ваша кампания: ";
+    protected static final String CREATED = " создана";
+    protected static final String LOADED = " загружена";
+    protected static final String SELECT_POST_FROM_LIST = "Выбирете должность из списка:\n";
+    protected static final String SET_ID_POST = "\nВведите id должности";
+    protected static final String SELECT_DEPARTMENT_FROM_LIST = "Выбирете отдел из списка:\n";
+    protected static final String SET_ID_DEPARTMENT = "\nВведите id отдела";
+    protected static final String ERR_EMPLOYEE_ID = "Сотрдуник с id: ";
+    protected static final String ERR_NOT_SEARCH = " не найден";
+    protected static final String ERR_EMPLOYEE = "Сотрдуник: ";
+    protected static final String ERR_POST = "Должность: ";
+    protected static final String ERR_DEPARTMENT = "Отдел: ";
+    protected static final String ERR_CHIEF = "Руководитель: ";
 
     public Constants() {
 

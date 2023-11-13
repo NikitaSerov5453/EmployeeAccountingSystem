@@ -50,7 +50,7 @@ public class Operation {
     }
 
     public Campaign createCompany() {
-        System.out.println("Введите название кампании:");
+        view.printSetCampaignName();
         String campaignName = scanner.nextLine();
         this.campaign = new Campaign(campaignName);
         report.setCampaign(campaign);
@@ -59,7 +59,7 @@ public class Operation {
         operationEmployee.setCampaign(campaign);
         operationPost.setCampaign(campaign);
         Serialized.serialized(campaign, campaignName, view.mainSavePath());
-        System.out.println("Ваша кампания: " + campaignName + " создана\n");
+        view.printYourCampaignCreated(campaignName);
         return campaign;
     }
 
@@ -70,7 +70,7 @@ public class Operation {
         operationDepartment.setCampaign(campaign);
         operationEmployee.setCampaign(campaign);
         operationPost.setCampaign(campaign);
-        System.out.println("Ваша кампания: " + campaign.getCampaignName() + " загружена\n");
+        view.printYourCampaignLoaded(campaign.getCampaignName());
         return campaign;
     }
 

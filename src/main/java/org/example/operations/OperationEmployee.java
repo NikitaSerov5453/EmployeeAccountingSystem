@@ -128,4 +128,14 @@ public class OperationEmployee {
             }
         }
     }
+
+    public int searchIndexEmployee(List<Employee> employees, int ID) {
+        for (int i = 0; i < employees.size(); i++) {
+            if (ID == employees.get(i).getEmployeeID()) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

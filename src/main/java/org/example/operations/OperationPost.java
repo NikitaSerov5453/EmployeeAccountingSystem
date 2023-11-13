@@ -51,4 +51,14 @@ public class OperationPost {
         }
     }
 
+    public int searchIndexPost(List<Post> posts, int ID) {
+        for (int i = 0; i < posts.size(); i++) {
+            if (ID == posts.get(i).getPostID()) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 }

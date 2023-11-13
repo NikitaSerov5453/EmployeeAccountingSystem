@@ -14,7 +14,6 @@ public class Menu {
 
     private final Scanner scanner = new Scanner(System.in);
     private final Operation operation = new Operation();
-    private final Search search = new Search();
     private final OperationEmployee operationEmployee = operation.getOperationEmployee();
     private final OperationDepartment operationDepartment = operation.getOperationDepartment();
     private final OperationPost operationPost = operation.getOperationPost();
@@ -30,10 +29,6 @@ public class Menu {
         controlCompanyMenu();
     }
 
-    private void def() {
-        System.out.println("Неверно введен номер");
-    }
-
     public void controlCompanyMenu() {//Создание кампании/Загрузка кампании
         view.printControlCompanyMenu();
         switch (scanner.nextInt()) {
@@ -46,7 +41,7 @@ public class Menu {
                 mainMenu();
             }
             default -> {
-                def();
+                view.printErrSetNumber();
                 controlCompanyMenu();
             }
         }
@@ -77,11 +72,8 @@ public class Menu {
                 }
                 case 5 -> {
                     if (campaign.getDepartments().size() != 0) {
-
-                        System.out.println("Выберите отдел из списка:\n\n" +
-                                campaign.getDepartments() +
-                                "\n\nВведите id отдела:");
-                        int index = search.searchIndexDepartment(campaign.getDepartments(), scanner.nextInt());
+                        view.printSelectDepartmentFromList(campaign.getDepartments());
+                        int index = operationDepartment.searchIndexDepartment(campaign.getDepartments(), scanner.nextInt());
                         if (operationEmployee.getEmployee().getDepartment() != null) {
                             operationEmployee.cleanDepartmentAndPost();
                         }
@@ -98,10 +90,8 @@ public class Menu {
                     } else if (operationEmployee.getEmployee().getDepartment().getPosts().size() == 0) {
                         view.printErrPostsAvailable();
                     } else {
-                        System.out.println("Выбирете должность из списка:\n\n" +
-                                operationEmployee.getEmployee().getDepartment().getPosts() +
-                                "\n\nВведите id должности");
-                        int index = search.searchIndexPost(operationEmployee.getEmployee().getDepartment().getPosts(), scanner.nextInt());
+                        view.printSelectPostFromList(operationEmployee.getEmployee().getDepartment().getPosts());
+                        int index = operationPost.searchIndexPost(operationEmployee.getEmployee().getDepartment().getPosts(), scanner.nextInt());
                         operationEmployee.editPost(operationEmployee.getEmployee().getDepartment().getPosts().get(index));
                     }
 
@@ -122,7 +112,7 @@ public class Menu {
                     }
                 }
                 case 9 -> {
-                    int index = search.searchIndexEmployee(campaign.getEmployee(), operationEmployee.getEmployee().getEmployeeID());
+                    int index = operationEmployee.searchIndexEmployee(campaign.getEmployee(), operationEmployee.getEmployee().getEmployeeID());
                     operationEmployee.deleteEmployee(index);
                     operationEmployee.setEmployee(null);
                     view.printEmployeeDeleted();
@@ -133,7 +123,7 @@ public class Menu {
                     return;
                 }
 
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -160,7 +150,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -180,7 +170,7 @@ public class Menu {
                             campaign.hashCode(), view.backUpPath());
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -202,7 +192,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -214,7 +204,7 @@ public class Menu {
                 case 1 -> {
                     view.printSetIDDepartmentFromEdit();
                     try {
-                        int index = search.searchIndexDepartment(campaign.getDepartments(), scanner.nextInt());
+                        int index = operationDepartment.searchIndexDepartment(campaign.getDepartments(), scanner.nextInt());
                         operationDepartment.setDepartment(campaign.getDepartments().get(index));
                         System.out.println(operationDepartment.getDepartment());
                     } catch (IndexOutOfBoundsException e) {
@@ -226,7 +216,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -251,7 +241,7 @@ public class Menu {
                     System.out.println(operationDepartment.getDepartment().getEmployee());
                     try {
                         if (operationDepartment.getDepartment() != null) {
-                            int index = search.searchIndexEmployee(operationDepartment.getDepartment().getEmployee(), scanner.nextInt());
+                            int index = operationEmployee.searchIndexEmployee(operationDepartment.getDepartment().getEmployee(), scanner.nextInt());
                             operationDepartment.editDepartmentChief(operationDepartment.getDepartment().getEmployee().get(index));
                             view.printNewChiefAppointed();
                         } else {
@@ -273,7 +263,7 @@ public class Menu {
                     view.printSetIDPostYouWantDelete();
                     int postID = scanner.nextInt();
                     if (operationDepartment.getDepartment().getPosts().size() != 0) {
-                        int index = search.searchIndexPost(operationDepartment.getDepartment().getPosts(), postID);
+                        int index = operationPost.searchIndexPost(operationDepartment.getDepartment().getPosts(), postID);
                         if (index != -1) {
                             operationEmployee.deletePostFromEmployee(campaign.getEmployee(), postID);
                             operationDepartment.getDepartment().getPosts().remove(index);
@@ -290,7 +280,7 @@ public class Menu {
                     view.printSetIDEmployeeYouWantDeleted();
                     int employeeID = scanner.nextInt();
                     if (operationDepartment.getDepartment().getEmployee().size() != 0) {
-                        int index = search.searchIndexEmployee(operationDepartment.getDepartment().getEmployee(), employeeID);
+                        int index = operationEmployee.searchIndexEmployee(operationDepartment.getDepartment().getEmployee(), employeeID);
                         if (index != -1) {
                             operationDepartment.getDepartment().getEmployee().get(index).setDepartment(null);
                             operationDepartment.getDepartment().getEmployee().get(index).setPost(null);
@@ -305,7 +295,7 @@ public class Menu {
                 }
                 case 6 -> {
                     int departmentID = operationDepartment.getDepartment().getDepartmentID();
-                    int index = search.searchIndexDepartment(campaign.getDepartments(),
+                    int index = operationDepartment.searchIndexDepartment(campaign.getDepartments(),
                             departmentID);
                     operationDepartment.deleteDepartmentFromEmployee(campaign.getEmployee(), departmentID);
                     operationDepartment.deleteDepartment(index);
@@ -316,7 +306,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
 
@@ -333,7 +323,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -345,7 +335,7 @@ public class Menu {
                 case 1 -> {
                     view.printSetIDPostFromEdit();
                     try {
-                        int index = search.searchIndexPost(campaign.getPosts(), scanner.nextInt());
+                        int index = operationPost.searchIndexPost(campaign.getPosts(), scanner.nextInt());
                         operationPost.setPost(campaign.getPosts().get(index));
                         System.out.println(operationPost.getPost());
                         editPost();
@@ -356,7 +346,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -381,7 +371,7 @@ public class Menu {
                     view.printSetIDPostYouWantDelete();
                     int postID = scanner.nextInt();
                     if (campaign.getPosts().size() != 0) {
-                        int indexCam = search.searchIndexPost(campaign.getPosts(), postID);
+                        int indexCam = operationPost.searchIndexPost(campaign.getPosts(), postID);
                         if (indexCam != -1) {
                             campaign.deletePost(indexCam);
                             operationPost.deletePostInDepartment(campaign.getDepartments(), postID);
@@ -396,7 +386,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -433,7 +423,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
 
@@ -446,7 +436,7 @@ public class Menu {
                 case 1 -> {
                     view.printSetIDEmployeeFromEdit();
                     try {
-                        int index = search.searchIndexEmployee(campaign.getEmployee(), scanner.nextInt());
+                        int index = operationEmployee.searchIndexEmployee(campaign.getEmployee(), scanner.nextInt());
                         operationEmployee.setEmployee(campaign.getEmployee().get(index));
                         System.out.println(operationEmployee.getEmployee());
                     } catch (IndexOutOfBoundsException e) {
@@ -458,7 +448,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -483,7 +473,7 @@ public class Menu {
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -496,7 +486,7 @@ public class Menu {
                     view.printSetIDEmployee();
                     int id = scanner.nextInt();
                     try {
-                        int index = search.searchIndexEmployee(campaign.getEmployee(), id);
+                        int index = operationEmployee.searchIndexEmployee(campaign.getEmployee(), id);
                         operationEmployee.setEmployee(campaign.getEmployee().get(index));
                         if (operationEmployee.getEmployee() != null) {
                             view.printEmployee(operationEmployee.getEmployee());
@@ -505,7 +495,7 @@ public class Menu {
                             view.printErrSetNumber();
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("Сотрдуник с id: " + id + " не найден");
+                        view.printErrEmployeeID(id);
                     }
                 }
                 case 2 -> {
@@ -522,7 +512,7 @@ public class Menu {
                             view.printErrSetNumber();
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("Сотрдуник: " + FCs + " не найден");
+                        view.printErrEmployee(FCs);
                     }
                 }
                 case 3 -> {
@@ -538,7 +528,7 @@ public class Menu {
                             view.printErrSetNumber();
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("Должность: " + post + " не найдена");
+                        view.printErrPost(post);
                     }
                 }
                 case 4 -> {
@@ -554,7 +544,7 @@ public class Menu {
                             view.printErrSetNumber();
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("Отдел: " + department + " не найден");
+                        view.printErrDepartment(department);
                     }
                 }
                 case 5 -> {
@@ -570,13 +560,13 @@ public class Menu {
                             view.printErrSetNumber();
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("Руководитель: " + chief + " не найден");
+                        view.printErrChief(chief);
                     }
                 }
                 case 0 -> {
                     return;
                 }
-                default -> def();
+                default -> view.printErrSetNumber();
             }
         }
     }
