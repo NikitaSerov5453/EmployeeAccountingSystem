@@ -73,16 +73,8 @@ public class Employee implements Externalizable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
     }
 
     public void setTelephoneNumber(String telephoneNumber) {

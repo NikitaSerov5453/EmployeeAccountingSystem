@@ -35,10 +35,6 @@ public class Campaign implements Externalizable {
         return campaignName;
     }
 
-    public void setCampaignName(String campaignName) {
-        this.campaignName = campaignName;
-    }
-
     @Override
     public String toString() {
         return "Campaign{" +
@@ -48,10 +44,6 @@ public class Campaign implements Externalizable {
 
     public void addDepartments(Department department) {
         this.departments.add(department);
-    }
-
-    public void deleteDepartment(int index) {
-        this.departments.remove(index);
     }
 
     public List<Department> getDepartments() {

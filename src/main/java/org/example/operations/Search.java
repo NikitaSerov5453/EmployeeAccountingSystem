@@ -78,16 +78,6 @@ public class Search {
         return employees;
     }
 
-    public Employee searchEmployeeID(int employeeID) {
-        for (Employee employee : campaign.getEmployee()) {
-            if (employeeID == employee.getEmployeeID()) {
-                return employee;
-            }
-        }
-
-        return null;
-    }
-
     public int searchIndexDepartment(List<Department> departments, int ID) {
         for (int i = 0; i < departments.size(); i++) {
             if (ID == departments.get(i).getDepartmentID()) {

@@ -11,9 +11,7 @@ import java.util.List;
 
 public class Report {
 
-    private final View view = new View();
     private Campaign campaign;
-
 
     public Report() {
 
@@ -91,7 +89,7 @@ public class Report {
         System.out.format("%25s%25s", "Отдел", "Руководитель\n");
         for (int i = 0; i < campaign.getDepartments().size(); i++) {
             System.out.format("%25s%25s%25s", campaign.getDepartments().get(i).getDepartmentName(),
-                    view.printChief(campaign.getDepartments().get(i).getChief()), '\n');
+                    View.printChief(campaign.getDepartments().get(i).getChief()), '\n');
         }
         System.out.println();
     }

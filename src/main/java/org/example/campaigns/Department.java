@@ -49,10 +49,6 @@ public class Department implements Externalizable {
         this.departmentName = departmentName;
     }
 
-    public void addEmployee(Employee employee) {
-        this.employee.add(employee);
-    }
-
     public List<Employee> getEmployee() {
         return employee;
     }
