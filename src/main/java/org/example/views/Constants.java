@@ -45,7 +45,7 @@ public class Constants {
     protected static final String SET_CAMPAIGN_NAME = "Введите название кампании:";
     protected static final String YOUR_CAMPAIGN = "Ваша кампания: ";
     protected static final String CREATED = " создана";
-    protected static final String LOADED = " загружена";
+    protected static final String LOADED = " загружена\n";
     protected static final String SELECT_POST_FROM_LIST = "Выбирете должность из списка:\n";
     protected static final String SET_ID_POST = "\nВведите id должности";
     protected static final String SELECT_DEPARTMENT_FROM_LIST = "Выбирете отдел из списка:\n";

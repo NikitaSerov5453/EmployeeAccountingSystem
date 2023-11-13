@@ -407,17 +407,18 @@ public class Menu {
                     String name = scanner.next();
                     view.printSetPatronymic();
                     String patronymic = scanner.next();
-                    while (true) {
-                        view.printSetBirthday();
-                        try {
-                            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                            scanner.nextLine();
-                            LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine(), dateTimeFormatter);
+                    view.printSetBirthday();
+                    scanner.nextLine();
+                    try {
+                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                        LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine(), dateTimeFormatter);
+                        if (dateOfBirth.getYear() > 1923 && dateOfBirth.getYear() < LocalDate.now().minusYears(18).getYear()) {
                             operationEmployee.createEmployee(surname, name, patronymic, dateOfBirth);
-                            break;
-                        } catch (DateTimeException e) {
+                        } else {
                             view.printErrDataFormat();
                         }
+                    } catch (DateTimeException e) {
+                        view.printErrDataFormat();
                     }
                 }
                 case 0 -> {
