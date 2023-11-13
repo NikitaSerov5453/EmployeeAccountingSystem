@@ -38,8 +38,7 @@ public class Report {
         for (int i = 0; i < campaign.getEmployee().size(); i++) {
             salary += campaign.getEmployee().get(i).getSalary();
         }
-        System.out.println("Средняя зарплата по кампании: " + salary / campaign.getEmployee().size());
-        System.out.println();
+        View.printAverageSalaryCompany(salary / campaign.getEmployee().size());
     }
 
     private double calculateAverageSalaryDepartment(Department department) {

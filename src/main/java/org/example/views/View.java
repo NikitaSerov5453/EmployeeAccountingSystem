@@ -14,6 +14,7 @@ public class View {
     }
 
     public void printHashSet(HashSet<Employee> hashSet) {
+        System.out.println("Выберете нужного сотрдуника:");
         int counter = 1;
         for (Employee employee : hashSet) {
             System.out.println(counter + ": " +
@@ -372,6 +373,9 @@ public class View {
         System.out.println(Constants.ERR_CHIEF + s + Constants.ERR_NOT_SEARCH);
     }
 
+    public static void printAverageSalaryCompany(double d) {
+        System.out.println(Constants.AVERAGE_SALARY_COMPANY + d + '\n');
+    }
 
 
 

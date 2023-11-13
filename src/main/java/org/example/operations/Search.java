@@ -1,12 +1,9 @@
 package org.example.operations;
 
 import org.example.campaigns.Campaign;
-import org.example.campaigns.Department;
 import org.example.campaigns.Employee;
-import org.example.campaigns.Post;
 
 import java.util.HashSet;
-import java.util.List;
 
 public class Search {
 

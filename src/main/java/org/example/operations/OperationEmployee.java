@@ -73,7 +73,7 @@ public class OperationEmployee {
                 case 3 -> {
                     return;
                 }
-                default -> System.out.println("Неверно выбран пункт");
+                default -> view.printErrSetNumber();
             }
         }
     }
@@ -107,7 +107,6 @@ public class OperationEmployee {
 
 
     public Employee takeEmployee(HashSet<Employee> employees) {
-        System.out.println("Выберете нужного сотрдуника:");
         view.printHashSet(employees);
         int id = scanner.nextInt();
         int counter = 1;

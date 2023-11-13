@@ -56,6 +56,9 @@ public class Constants {
     protected static final String ERR_POST = "Должность: ";
     protected static final String ERR_DEPARTMENT = "Отдел: ";
     protected static final String ERR_CHIEF = "Руководитель: ";
+    protected static final String AVERAGE_SALARY_COMPANY = "Средняя зарплата по кампании: ";
+
+
 
     public Constants() {
 
